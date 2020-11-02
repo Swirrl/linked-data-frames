@@ -82,8 +82,9 @@ curie <- function(resource, prefixes=default_prefixes()) {
   }
 }
 
-format.ldf_resource <- function(resource) {
+format.ldf_resource <- function(resource, ...) {
   suppressWarnings(
-    label(resource) %||% curie(resource)
+    label <- label(resource) %||% curie(resource)
   )
+  format(label)
 }

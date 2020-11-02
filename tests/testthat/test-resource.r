@@ -94,13 +94,13 @@ describe("formatter", {
 
   test_that("defaults to curie", {
     r <- resource(uris)
-    expect_equal(format(r), uris)
+    expect_equal(format(r), format(uris))
   })
 
   test_that("uses label if available", {
     labels <- c("Apple","Banana","Carrot")
     r <- resource(uris, data=data.frame(uri=uris, label=labels, stringsAsFactors = F))
-    expect_equal(format(r), labels)
+    expect_equal(format(r), format(labels))
   })
 })
 
