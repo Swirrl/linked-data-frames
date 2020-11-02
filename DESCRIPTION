@@ -1,0 +1,22 @@
+Package: ldf
+Title: Linked-Data-Frames
+Version: 0.0.0.9000
+Authors@R:
+    person(given = "Robin",
+           family = "Gower",
+           role = c("aut", "cre"),
+           email = "ldf@infonomics.ltd.uk")
+Description: Use RDF resources in data frames.
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.1
+Suggests:
+    testthat,
+    withr
+Imports:
+    stats,
+    vctrs,
+    rlang,
+    stringr
