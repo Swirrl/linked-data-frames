@@ -14,9 +14,12 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
 Suggests:
     testthat,
-    withr
+    withr,
+    knitr,
+    rmarkdown
 Imports:
     stats,
     vctrs,
     rlang,
     stringr
+VignetteBuilder: knitr

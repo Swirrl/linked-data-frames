@@ -51,6 +51,10 @@ uri <- function(resource) {
 }
 
 label <- function(resource) {
+  UseMethod("label")
+}
+
+label.ldf_resource <- function(resource) {
   property(resource, "label")
 }
 
