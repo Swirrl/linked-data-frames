@@ -21,5 +21,6 @@ Imports:
     stats,
     vctrs,
     rlang,
-    stringr
+    stringr,
+    methods
 VignetteBuilder: knitr

@@ -8,17 +8,36 @@
 #' @importFrom rlang %||%
 NULL
 
-resource <- function(uri, data=NULL) {
+#' `resource` vector
+#'
+#' This represents an RDF resource with the data held in an orthogonal table.
+#'
+#' @param uri A character vector of URIs
+#' @return An S3 vector of class `ldf_resource`.
+#' @export
+#' @examples
+#' resource("http://example.net")
+#'
+#' uris <- c("http://example.net/id/apple",
+#'           "http://example.net/id/banana",
+#'           "http://example.net/id/carrot")
+#' labels <- c("Apple","Banana","Carrot")
+#' data <- data.frame(uri=uris, label=labels)
+#' r <- resource(uris, data)
+resource <- function(uri=character(), data=NULL) {
   uri <- vec_cast(uri, character())
   validate_resource(new_resource(uri, data))
 }
 
-new_resource <- function(uri, data) {
+new_resource <- function(uri=character(), data=data.frame(uri=uri)) {
   vec_assert(uri, character())
   if(!is.null(data)) { stopifnot(inherits(data, "data.frame")) }
-  new_vctr(uri, data=data, class = "ldf_resource")
+  new_vctr(uri, data=data, class = "ldf_resource", inherit_base_type=F)
 }
+# for compatibility with the S4 system
+methods::setOldClass(c("ldf_resource", "vctrs_vctr"))
 
+#' @export
 validate_resource <- function(resource) {
   if(!is.null(attr(resource, "data"))) {
     if(!("uri" %in% colnames(attr(resource, "data")))) {
@@ -29,14 +48,23 @@ validate_resource <- function(resource) {
     if(anyDuplicated(uris) != 0) {
       stop("Data must not include duplicate uris")
     }
-    if(!all(uri(resource) %in% uris)) {
-      stop("Data must include all uris")
+    target_uri <- uri(resource) %>% purrr::discard(is.na)
+    missing_uri <- target_uri[!target_uri %in% uris]
+    if(length(missing_uri)>0) {
+      stop("Data must include all uris. Missing e.g. ", missing_uri[1])
     }
   }
 
   resource
 }
 
+#' @export
+#' @rdname resource
+is_resource <- function(x) {
+  inherits(x, "ldf_resource")
+}
+
+#' @export
 property <- function(resource, p) {
   data <- attr(resource, "data")
   if(!(p %in% colnames(data))) {
@@ -46,18 +74,25 @@ property <- function(resource, p) {
   data[index, p]
 }
 
+#' @export
 uri <- function(resource) {
   vec_data(resource)
 }
 
+#' @export
 label <- function(resource) {
   UseMethod("label")
 }
 
+#' @export
 label.ldf_resource <- function(resource) {
   property(resource, "label")
 }
 
+#' @export
+label.default <- label.ldf_resource
+
+#' @export
 sort_priority <- function(resource) {
   property(resource, "sort_priority")
 }
@@ -77,6 +112,7 @@ default_prefixes <- function() {
   )
 }
 
+#' @export
 curie <- function(resource, prefixes=default_prefixes()) {
   if(length(prefixes)>0) { # ought to check for names
     prefix_to_ns <- stats::setNames(paste0(names(prefixes),":"), unname(prefixes))
@@ -86,9 +122,55 @@ curie <- function(resource, prefixes=default_prefixes()) {
   }
 }
 
-format.ldf_resource <- function(resource, ...) {
+#' @export
+format.ldf_resource <- function(x, ...) {
   suppressWarnings(
-    label <- label(resource) %||% curie(resource)
+    output <- label(x) %||% curie(x)
   )
-  format(label)
+  format(output)
+}
+
+#' @export
+vec_ptype_abbr.ldf_resource <- function(x, ...) {
+  "ldf_rsrc"
+}
+
+# TODO: check
+
+#' @export
+vec_ptype2.ldf_resource.ldf_resource <- function(x, y, ...) new_resource()
+
+# TODO: should this actually allow char to be lifted to resource?
+# or change the next to achieve this?
+#' @export
+vec_ptype2.ldf_resource.character <- function(x, y, ...) character()
+
+#' @export
+vec_ptype2.character.ldf_resource <- function(x, y, ...) character()
+
+#' @export
+vec_cast.ldf_resource.ldf_resource <- function(x, to, ...) x
+
+# Cast from character -> resource
+#' @export
+vec_cast.ldf_resource.character <- function(x, to, ...) resource(x)
+
+# Cast from resource -> character
+# Should this extract the URI instead?
+#' @export
+vec_cast.character.ldf_resource <- function(x, to, ...) vec_data(x)
+
+
+#' @export
+levels.ldf_resource <- function(...) { return(NULL) }
+
+# escape hatch TODO: write-up
+df_of_labels <- function(d, ...) {
+  data.frame(lapply(d, function(x) {
+    if(is_resource(x) | is_interval(x)) {
+      label(x)
+    } else {
+      x
+    }
+  }), ...)
 }
