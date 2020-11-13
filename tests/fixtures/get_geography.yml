@@ -1,0 +1,44 @@
+http_interactions:
+- request:
+    method: post
+    uri: http://statistics.data.gov.uk/sparql?query=SELECT%20%2A%20WHERE%20%7B%0A%20%20VALUES%20%3Furi%20%7B%20%3Chttp%3A%2F%2Fstatistics.data.gov.uk%2Fid%2Fstatistical-geography%2FK02000001%3E%20%7D%0A%0A%20%20%3Furi%0A%20%20%20%20%3Chttp%3A%2F%2Fstatistics.data.gov.uk%2Fdef%2Fstatistical-geography%23officialname%3E%20%3Flabel%3B%0A%20%20%20%20%3Chttp%3A%2F%2Fwww.w3.org%2F2004%2F02%2Fskos%2Fcore%23notation%3E%20%3Fnotation%3B%0A%20%20%20%20.%0A%0A%20%20%0A%0A%20%20OPTIONAL%20%7B%0A%20%20%20%20%3Furi%20%3Chttp%3A%2F%2Fstatistics.data.gov.uk%2Fdef%2Fstatistical-geography%23parentcode%3E%20%3Fparent%3B%0A%20%20%7D%0A%7D
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Content-Type: ''
+      Accept: text/csv
+  response:
+    status:
+      status_code: 200
+      category: Success
+      reason: OK
+      message: 'Success: (200) OK'
+    headers:
+      server: nginx
+      date: Fri, 13 Nov 2020 16:07:14 GMT
+      content-type: text/csv
+      transfer-encoding: chunked
+      connection: keep-alive
+      status: 200 OK
+      x-frame-options: SAMEORIGIN
+      x-xss-protection: 1; mode=block
+      x-content-type-options: nosniff
+      content-disposition: attachment; filename=sparql.csv
+      content-transfer-encoding: binary
+      cache-control: no-cache
+      etag: W/"730fd982d43bdbdb0abdd6008d6bd668"
+      x-request-id: f4a5a8fb-58c1-4f85-a57f-cdf5810426e0
+      x-runtime: '0.028333'
+      expires: Fri, 13 Nov 2020 16:07:13 GMT
+      access-control-allow-origin: '*'
+      access-control-allow-methods: GET, POST, OPTIONS
+      access-control-allow-headers: DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type
+      content-encoding: gzip
+    body:
+      encoding: UTF-8
+      file: no
+      string: "uri,label,notation,parent\r\nhttp://statistics.data.gov.uk/id/statistical-geography/K02000001,United
+        Kingdom,K02000001,\r\n"
+  recorded_at: 2020-11-13 16:07:15 GMT
+  recorded_with: vcr/0.5.4, webmockr/0.7.0

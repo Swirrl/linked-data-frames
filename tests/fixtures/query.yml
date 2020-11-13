@@ -1,0 +1,31 @@
+http_interactions:
+- request:
+    method: post
+    uri: https://staging.gss-data.org.uk/sparql?query=SELECT%20%2A%20WHERE%20%7B%20%3Fs%20%3Fp%20%3Fo%20%7D%20LIMIT%202
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Content-Type: ''
+      Accept: text/csv
+  response:
+    status:
+      status_code: 200
+      category: Success
+      reason: OK
+      message: 'Success: (200) OK'
+    headers:
+      server: nginx
+      date: Fri, 13 Nov 2020 14:56:56 GMT
+      content-type: text/csv
+      vary: Accept-Encoding
+      content-encoding: gzip
+      via: 1.1 google
+      alt-svc: clear
+      transfer-encoding: chunked
+    body:
+      encoding: UTF-8
+      file: no
+      string: "s,p,o\r\nhttp://purl.org/dc/terms/modified,http://www.w3.org/2000/01/rdf-schema#isDefinedBy,http://purl.org/dc/terms/\r\nhttp://purl.org/dc/terms/modified,http://www.w3.org/2000/01/rdf-schema#isDefinedBy,http://purl.org/dc/terms/\r\n"
+  recorded_at: 2020-11-13 14:56:56 GMT
+  recorded_with: vcr/0.5.4, webmockr/0.7.0

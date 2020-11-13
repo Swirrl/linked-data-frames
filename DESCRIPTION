@@ -16,11 +16,13 @@ Suggests:
     testthat,
     withr,
     knitr,
-    rmarkdown
+    rmarkdown,
+    vcr
 Imports:
-    stats,
-    vctrs,
+    methods,
+    httr,
     rlang,
+    stats,
     stringr,
-    methods
+    vctrs
 VignetteBuilder: knitr

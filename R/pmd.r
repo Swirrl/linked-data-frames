@@ -1,14 +1,34 @@
-#library(SPARQL)
-
-#'
 #' @importFrom magrittr %>%
 NULL
 
-query <- function(query_string, endpoint="https://staging.gss-data.org.uk/sparql") {
-  SPARQL::SPARQL(url="https://staging.gss-data.org.uk/sparql",
-                 query=query_string,
-                 format="csv",
-                 parser_args = list(stringsAsFactors=F, na.strings=""))$results
+#' Execute SPARQL select query and parse results
+#'
+#' @param query_string A string with the select query
+#' @param endpoint A string defining the endpoint
+#' @param format A string defining the format, either `"csv"` or `"json"`
+#' @return A data frame with a column for each variable binding, and a row per result
+#' @examples
+#' \dontrun{
+#' query("SELECT * WHERE { ?s ?p ?o } LIMIT 10", "https://statistics.data.gov.uk/sparql")
+#' }
+query <- function(query_string, endpoint="https://staging.gss-data.org.uk/sparql", format="csv") {
+  mime <- switch(format,
+                 csv="text/csv",
+                 json="application/json",
+                 "text/csv")
+
+  response <- httr::POST(url=endpoint,
+                         httr::accept(mime),
+                         query=list(query=query_string),
+                         encode="form")
+
+  if(format=="csv") {
+    httr::content(response, encoding="UTF-8", col_types=readr::cols())
+  } else if (format=="json") {
+    # TODO: use the binding type to parse the value - currently returns two columns for each binding
+    parsed <- jsonlite::fromJSON(httr::content(response, encoding="UTF-8", "text"), simplifyVector = T)
+    parsed$results$bindings
+  }
 }
 
 as_variable_names <- function(x) {
@@ -138,6 +158,16 @@ get_codelist <- function(codelist_uri) {
   query(q)
 }
 
+#' Download a Resource's label
+#'
+#' Provides for a very generic description, just requesting the `rdfs:label`.
+#'
+#' @param uri A character vector of URIs.
+#' @return A data frame with column's for the `uri` and `label`
+#' @examples
+#' \dontrun{
+#' get_label("http://purl.org/linked-data/cube#measureType")
+#' }
 get_label <- function(uri) {
   uri_binding <- glue::glue_collapse(glue::glue_data(list(uri=uri), "<{uri}>"), " ")
 
@@ -162,13 +192,21 @@ get_label <- function(uri) {
 #' WKT geometry (if it exists).
 #'
 #' @param geography_uri A character vector of URIs
+#' @param include_geometry A boolean indicating whether the geometries should be downloaded (defaults to `FALSE`).
 #' @return A data frame of geography descriptions
 #' @examples
 #' \dontrun{
 #' get_geography("http://statistics.data.gov.uk/id/statistical-geography/K02000001")
 #' }
-get_geography <- function(geography_uri) {
+get_geography <- function(geography_uri, include_geometry=FALSE) {
   geo_binding <- glue::glue_collapse(glue::glue_data(list(uri=unique(geography_uri)), "<{uri}>"), " ")
+  geometry_clause <- if(include_geometry) {
+    "OPTIONAL {
+      ?uri <http://www.opengis.net/ont/geosparql#hasGeometry>/<http://www.opengis.net/ont/geosparql#asWKT> ?boundary;
+    }"
+  } else {
+    ""
+  }
 
   boundaries <- glue::glue("
 SELECT * WHERE {
@@ -179,9 +217,7 @@ SELECT * WHERE {
     <http://www.w3.org/2004/02/skos/core#notation> ?notation;
     .
 
-  OPTIONAL {
-    ?uri <http://www.opengis.net/ont/geosparql#hasGeometry>/<http://www.opengis.net/ont/geosparql#asWKT> ?boundary;
-  }
+  `geometry_clause`
 
   OPTIONAL {
     ?uri <http://statistics.data.gov.uk/def/statistical-geography#parentcode> ?parent;
@@ -193,15 +229,21 @@ SELECT * WHERE {
 
 #' Download a DataCube
 #'
-#' Returns a data frame with one observation per row and a column per component.
+#' Returns a data frame with one observation per row and one column per component.
 #' Components may be dimensions, measures or attributes.
 #'
 #' Where the column represents an RDF Resource, it will have the type `ldf_resource` vector.
+#' If the cube uses the `sdmx:refArea` dimension, it's values will be described using `get_geography`.
+#' If the cube users the `sdmx:refPeriod` dimension, it's values will be described using `interval`s.
 #'
 #' @param dataset_uri A string
+#' @param include_geometry A boolean indicating whether the geometries should be downloaded (defaults to `FALSE`).
 #' @return A data frame
 #' @export
-get_cube <- function(dataset_uri) {
+#' \dontrun{
+#' get_cube("http://gss-data.org.uk/data/gss_data/covid-19/ons-online-price-changes-for-high-demand-products#dataset")
+#' }
+get_cube <- function(dataset_uri, include_geometry=FALSE) {
   d <- get_dimensions(dataset_uri)
   m <- get_measures(dataset_uri)
   a <- get_attributes(dataset_uri)
@@ -215,23 +257,25 @@ get_cube <- function(dataset_uri) {
 
   for (dimension in names(codelists)) {
     codelist <- codelists[[dimension]] %>% dplyr::distinct(uri, .keep_all=T)
-    observations[,dimension] <- resource(observations[,dimension], codelist)
+    observations[,dimension] <- resource(dplyr::pull(observations,dimension), codelist)
   }
 
   # create intervals for reference period dimension
   ref_period <- as_variable_names(d[d$uri=="http://purl.org/linked-data/sdmx/2009/dimension#refPeriod", "label"])
-  observations[,ref_period] <- interval(observations[,ref_period])
+  observations[,ref_period] <- interval(dplyr::pull(observations,ref_period))
 
-  ref_area <- as_variable_names(d[d$uri=="http://purl.org/linked-data/sdmx/2009/dimension#refArea", "label"])
+  ref_area <- as_variable_names(d[d$uri=="http://purl.org/linked-data/sdmx/2009/dimension#refArea", ] %>% dplyr::pull("label"))
   if(length(ref_area)==1) {
-    observations[,ref_area] <- resource(observations[,ref_area], get_geography(observations[,ref_area]))
+    areas <- dplyr::pull(observations,ref_area)
+    observations[,ref_area] <- resource(areas, get_geography(areas, include_geometry))
   }
 
   # attributes and any remaining dimensions should just have their values labelled if possible
   remaining_d <- dplyr::filter(d, is.na(codelist) & !(uri %in% c("http://purl.org/linked-data/sdmx/2009/dimension#refPeriod", "http://purl.org/linked-data/sdmx/2009/dimension#refArea")))
   for (component in as_variable_names(c(a$label, remaining_d$label))) {
-    description <- get_label(unique(observations[, component]))
-    observations[, component] <- resource(observations[, component], description)
+    component_values <- dplyr::pull(observations, component)
+    description <- get_label(unique(component_values))
+    observations[, component] <- resource(component_values, description)
   }
 
   observations %>% dplyr::select(!uri)
