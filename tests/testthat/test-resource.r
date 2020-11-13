@@ -181,3 +181,10 @@ describe("works with other functions", {
 # sorts by sort priority
 # ensure merges via uri - and that data is merged
 # subset data when uri is subset
+# vec_proxy/ vec_restore should update data
+# if character gets cast to resource (as the richer type) and the data for that URI is missing, what should happen?
+#   raise a warning? allow it to happen (to be cleaned up later) or require that the character be cast explicitly
+#   (with appropriate data) and not allow coercion.
+# Printing with `str`, need to do `str(x, max.level=1)`.
+# Can we use `property` function with tidy-select? `?tidyr_tidy_select` e.g. `select(x, label(column))`
+
