@@ -11,7 +11,7 @@ NULL
 #' \dontrun{
 #' query("SELECT * WHERE { ?s ?p ?o } LIMIT 10", "https://statistics.data.gov.uk/sparql")
 #' }
-query <- function(query_string, endpoint="https://staging.gss-data.org.uk/sparql", format="csv") {
+query <- function(query_string, endpoint=default_endpoint(), format="csv") {
   mime <- switch(format,
                  csv="text/csv",
                  json="application/json",
@@ -29,6 +29,10 @@ query <- function(query_string, endpoint="https://staging.gss-data.org.uk/sparql
     parsed <- jsonlite::fromJSON(httr::content(response, encoding="UTF-8", "text"), simplifyVector = T)
     parsed$results$bindings
   }
+}
+
+default_endpoint <- function() {
+  getOption("ldf.default_endpoint", "https://staging.gss-data.org.uk/sparql")
 }
 
 as_variable_names <- function(x) {
@@ -72,7 +76,7 @@ subpredobj_binding <- function(subject, properties, optional=F) {
   ))
 }
 
-get_dimensions <- function(dataset_uri) {
+get_dimensions <- function(dataset_uri, endpoint=default_endpoint()) {
   q <- stringr::str_interp(c(
     "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>",
     "PREFIX qb: <http://purl.org/linked-data/cube#>",
@@ -83,10 +87,10 @@ get_dimensions <- function(dataset_uri) {
     "  OPTIONAL { ?uri qb:codeList ?codelist }",
     "}"
   ))
-  query(q)
+  query(q, endpoint)
 }
 
-get_measures <- function(dataset_uri) {
+get_measures <- function(dataset_uri, endpoint=default_endpoint()) {
   q <- stringr::str_interp(c(
     "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>",
     "PREFIX qb: <http://purl.org/linked-data/cube#>",
@@ -96,10 +100,10 @@ get_measures <- function(dataset_uri) {
     "  ?uri rdfs:label ?label .",
     "}"
   ))
-  query(q)
+  query(q, endpoint)
 }
 
-get_attributes <- function(dataset_uri) {
+get_attributes <- function(dataset_uri, endpoint=default_endpoint()) {
   q <- stringr::str_interp(c(
     "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>",
     "PREFIX qb: <http://purl.org/linked-data/cube#>",
@@ -109,17 +113,18 @@ get_attributes <- function(dataset_uri) {
     "  ?uri rdfs:label ?label .",
     "}"
   ))
-  query(q)
+  query(q, endpoint)
 }
 
-get_components <- function(dataset_uri) {
-  d <- get_dimensions(dataset_uri) %>% select(uri, label)
-  m <- get_measures(dataset_uri)
-  a <- get_attributes(dataset_uri)
+get_components <- function(dataset_uri, endpoint=default_endpoint()) {
+  d <- get_dimensions(dataset_uri, endpoint) %>% dplyr::select(uri, label)
+  m <- get_measures(dataset_uri, endpoint)
+  a <- get_attributes(dataset_uri, endpoint)
   rbind(d,m,a)
 }
 
 get_observations <- function(dataset_uri,
+                             endpoint=default_endpoint(),
                              dimensions=get_dimensions(dataset_uri),
                              measures=get_measures(dataset_uri),
                              attributes=get_attributes(dataset_uri)) {
@@ -139,10 +144,10 @@ get_observations <- function(dataset_uri,
     "}"
   ))
 
-  query(q)
+  query(q, endpoint)
 }
 
-get_codelist <- function(codelist_uri) {
+get_codelist <- function(codelist_uri, endpoint=default_endpoint()) {
   q <- stringr::str_interp(c(
     "PREFIX skos: <http://www.w3.org/2004/02/skos/core#>",
     "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>",
@@ -155,7 +160,7 @@ get_codelist <- function(codelist_uri) {
     "  OPTIONAL { ?uri <http://www.w3.org/ns/ui#sortPriority> ?sort_priority }",
     "}"
   ))
-  query(q)
+  query(q, endpoint)
 }
 
 #' Download a Resource's label
@@ -168,7 +173,7 @@ get_codelist <- function(codelist_uri) {
 #' \dontrun{
 #' get_label("http://purl.org/linked-data/cube#measureType")
 #' }
-get_label <- function(uri) {
+get_label <- function(uri, endpoint=default_endpoint()) {
   uri_binding <- glue::glue_collapse(glue::glue_data(list(uri=uri), "<{uri}>"), " ")
 
   q <- stringr::str_interp(c(
@@ -180,7 +185,7 @@ get_label <- function(uri) {
     "  ?uri rdfs:label ?label .",
     "}"
   ))
-  query(q)
+  query(q, endpoint)
 }
 
 #' Download Statistical Geographies
@@ -198,7 +203,7 @@ get_label <- function(uri) {
 #' \dontrun{
 #' get_geography("http://statistics.data.gov.uk/id/statistical-geography/K02000001")
 #' }
-get_geography <- function(geography_uri, include_geometry=FALSE) {
+get_geography <- function(geography_uri, endpoint="http://statistics.data.gov.uk/sparql", include_geometry=FALSE) {
   geo_binding <- glue::glue_collapse(glue::glue_data(list(uri=unique(geography_uri)), "<{uri}>"), " ")
   geometry_clause <- if(include_geometry) {
     "OPTIONAL {
@@ -223,7 +228,7 @@ SELECT * WHERE {
     ?uri <http://statistics.data.gov.uk/def/statistical-geography#parentcode> ?parent;
   }
 }", .open="`", .close="`")
-  geo <- query(boundaries, "http://statistics.data.gov.uk/sparql")
+  geo <- query(boundaries, endpoint)
   geo %>% dplyr::distinct(uri, .keep_all=T)
 }
 
@@ -233,48 +238,53 @@ SELECT * WHERE {
 #' Components may be dimensions, measures or attributes.
 #'
 #' Where the column represents an RDF Resource, it will have the type `ldf_resource` vector.
+#'
 #' If the cube uses the `sdmx:refArea` dimension, it's values will be described using `get_geography`.
+#' The descriptions will be retreived from [statistics.data.gov.uk](http://statistics.data.gov.uk/sparql)
+#' instead of the specified endpoint.
+#'
 #' If the cube users the `sdmx:refPeriod` dimension, it's values will be described using `interval`s.
 #'
 #' @param dataset_uri A string
 #' @param include_geometry A boolean indicating whether the geometries should be downloaded (defaults to `FALSE`).
 #' @return A data frame
 #' @export
+#' @examples
 #' \dontrun{
 #' get_cube("http://gss-data.org.uk/data/gss_data/covid-19/ons-online-price-changes-for-high-demand-products#dataset")
 #' }
-get_cube <- function(dataset_uri, include_geometry=FALSE) {
-  d <- get_dimensions(dataset_uri)
-  m <- get_measures(dataset_uri)
-  a <- get_attributes(dataset_uri)
+get_cube <- function(dataset_uri, endpoint=default_endpoint(), include_geometry=FALSE) {
+  d <- get_dimensions(dataset_uri, endpoint)
+  m <- get_measures(dataset_uri, endpoint)
+  a <- get_attributes(dataset_uri, endpoint)
 
-  observations <- get_observations(dataset_uri, d, m, a)
+  observations <- get_observations(dataset_uri, endpoint, d, m, a)
 
   # apply codelists to coded properties (dimensions only atm)
-  codelists <- setNames(d$codelist, as_variable_names(d$label)) %>%
+  codelists <- stats::setNames(d$codelist, as_variable_names(d$label)) %>%
     purrr::discard(is.na) %>%
-    lapply(get_codelist)
+    lapply(get_codelist, endpoint=endpoint)
 
   for (dimension in names(codelists)) {
     codelist <- codelists[[dimension]] %>% dplyr::distinct(uri, .keep_all=T)
-    observations[,dimension] <- resource(dplyr::pull(observations,dimension), codelist)
+    observations[,dimension] <- resource(dplyr::pull(observations, dimension), codelist)
   }
 
   # create intervals for reference period dimension
-  ref_period <- as_variable_names(d[d$uri=="http://purl.org/linked-data/sdmx/2009/dimension#refPeriod", "label"])
+  ref_period <- as_variable_names(d[d$uri=="http://purl.org/linked-data/sdmx/2009/dimension#refPeriod", ] %>% dplyr::pull("label"))
   observations[,ref_period] <- interval(dplyr::pull(observations,ref_period))
 
   ref_area <- as_variable_names(d[d$uri=="http://purl.org/linked-data/sdmx/2009/dimension#refArea", ] %>% dplyr::pull("label"))
   if(length(ref_area)==1) {
     areas <- dplyr::pull(observations,ref_area)
-    observations[,ref_area] <- resource(areas, get_geography(areas, include_geometry))
+    observations[,ref_area] <- resource(areas, get_geography(areas, "http://statistics.data.gov.uk/sparql", include_geometry))
   }
 
   # attributes and any remaining dimensions should just have their values labelled if possible
   remaining_d <- dplyr::filter(d, is.na(codelist) & !(uri %in% c("http://purl.org/linked-data/sdmx/2009/dimension#refPeriod", "http://purl.org/linked-data/sdmx/2009/dimension#refArea")))
   for (component in as_variable_names(c(a$label, remaining_d$label))) {
     component_values <- dplyr::pull(observations, component)
-    description <- get_label(unique(component_values))
+    description <- get_label(unique(component_values), endpoint)
     observations[, component] <- resource(component_values, description)
   }
 
