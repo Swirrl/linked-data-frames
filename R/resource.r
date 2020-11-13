@@ -71,7 +71,12 @@ property <- function(resource, p) {
     warning("Column missing from data=", p)
   }
   index <- match(resource, data$uri)
-  data[index, p]
+
+  if(inherits(data, "tbl")) {
+    data[index,] %>% dplyr::pull(p)
+  } else {
+    data[index, p]
+  }
 }
 
 #' @export

@@ -51,6 +51,11 @@ describe("resources can have arbitrary descriptions", {
     r <- resource(NA, data=data.frame(uri=uris[1:2]))
     expect_equal(uri(r), NA_character_) # i.e. no error raised
   })
+
+  test_that("data can be a tibble", {
+    r <- resource("a", tibble::tibble(uri="a",label="A"))
+    expect_equal(label(r), "A")
+  })
 })
 
 describe("accessors", {
