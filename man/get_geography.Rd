@@ -4,10 +4,18 @@
 \alias{get_geography}
 \title{Download Statistical Geographies}
 \usage{
-get_geography(geography_uri)
+get_geography(
+  geography_uri,
+  endpoint = "http://statistics.data.gov.uk/sparql",
+  include_geometry = FALSE
+)
 }
 \arguments{
 \item{geography_uri}{A character vector of URIs}
+
+\item{endpoint}{A string for the sparql endpoint}
+
+\item{include_geometry}{A boolean indicating whether the geometries should be downloaded (defaults to \code{FALSE}).}
 }
 \value{
 A data frame of geography descriptions

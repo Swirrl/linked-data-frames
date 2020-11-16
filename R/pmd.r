@@ -168,6 +168,7 @@ get_codelist <- function(codelist_uri, endpoint=default_endpoint()) {
 #' Provides for a very generic description, just requesting the `rdfs:label`.
 #'
 #' @param uri A character vector of URIs.
+#' @param endpoint A string for the sparql endpoint
 #' @return A data frame with column's for the `uri` and `label`
 #' @examples
 #' \dontrun{
@@ -197,6 +198,7 @@ get_label <- function(uri, endpoint=default_endpoint()) {
 #' WKT geometry (if it exists).
 #'
 #' @param geography_uri A character vector of URIs
+#' @param endpoint A string for the sparql endpoint
 #' @param include_geometry A boolean indicating whether the geometries should be downloaded (defaults to `FALSE`).
 #' @return A data frame of geography descriptions
 #' @examples
@@ -246,6 +248,7 @@ SELECT * WHERE {
 #' If the cube users the `sdmx:refPeriod` dimension, it's values will be described using `interval`s.
 #'
 #' @param dataset_uri A string
+#' @param endpoint A string for the sparql endpoint
 #' @param include_geometry A boolean indicating whether the geometries should be downloaded (defaults to `FALSE`).
 #' @return A data frame
 #' @export
@@ -267,7 +270,14 @@ get_cube <- function(dataset_uri, endpoint=default_endpoint(), include_geometry=
 
   for (dimension in names(codelists)) {
     codelist <- codelists[[dimension]] %>% dplyr::distinct(uri, .keep_all=T)
-    observations[,dimension] <- resource(dplyr::pull(observations, dimension), codelist)
+    if(nrow(codelist)==0) {
+      codelist_uri <- d %>%
+        dplyr::filter(as_variable_names(label)==dimension) %>%
+        dplyr::select(codelist)
+      warning("Codelist empty or not found: ", codelist_uri)
+    } else {
+      observations[,dimension] <- resource(dplyr::pull(observations, dimension), codelist)
+    }
   }
 
   # create intervals for reference period dimension

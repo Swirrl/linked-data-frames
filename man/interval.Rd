@@ -11,16 +11,22 @@ is_interval(x)
 }
 \arguments{
 \item{uri}{A character vector of URIs}
+
+\item{x}{An interval}
 }
 \value{
 An S3 vector of class \code{ldf_interval}.
 }
 \description{
-This represents an interval from the
-\href{http://reference.data.gov.uk/def/intervals}{reference.data.gov.uk intervals ontology}
+This represents an interval from the UK Government
+\href{http://reference.data.gov.uk/def/intervals}{intervals ontology}.
+}
+\details{
+\code{is_interval} returns \code{TRUE} if \code{x} is an interval and \code{FALSE} otherwise.
 }
 \examples{
 year <- interval("http://reference.data.gov.uk/id/year/2020")
+is_interval(year)
 month <- interval("http://reference.data.gov.uk/id/month/2020-07")
 day <- interval("http://reference.data.gov.uk/id/day/2020-04-22")
 p7d <- interval("http://reference.data.gov.uk/id/gregorian-interval/2020-04-27T00:00:00/P7D")

@@ -17,12 +17,23 @@ Suggests:
     withr,
     knitr,
     rmarkdown,
-    vcr
+    vcr,
+    tibble,
+    kableExtra,
+    scales,
+    tidyr
 Imports:
-    methods,
+    dplyr,
+    glue,
     httr,
+    jsonlite,
+    magrittr,
+    methods,
+    purrr,
+    readr,
     rlang,
     stats,
     stringr,
-    vctrs
+    vctrs,
+    zeallot
 VignetteBuilder: knitr

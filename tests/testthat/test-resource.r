@@ -193,3 +193,7 @@ describe("works with other functions", {
 # Printing with `str`, need to do `str(x, max.level=1)`.
 # Can we use `property` function with tidy-select? `?tidyr_tidy_select` e.g. `select(x, label(column))`
 
+# extract geo? demonstrate that...
+# can show code or label
+# can find parent
+# can find geometry

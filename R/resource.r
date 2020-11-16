@@ -13,6 +13,8 @@ NULL
 #' This represents an RDF resource with the data held in an orthogonal table.
 #'
 #' @param uri A character vector of URIs
+#' @param data A data frame of descriptions (must have a `uri` column)
+#' @param x Any vector
 #' @return An S3 vector of class `ldf_resource`.
 #' @export
 #' @examples
@@ -37,6 +39,15 @@ new_resource <- function(uri=character(), data=data.frame(uri=uri)) {
 # for compatibility with the S4 system
 methods::setOldClass(c("ldf_resource", "vctrs_vctr"))
 
+#' Validate a resource
+#'
+#' Checks whether a URI column is present in the data descriptions and that it includes a value
+#' for every resource with no duplicates.
+#'
+#' Violations `stop` execution and report the error message.
+#'
+#' @param resource A vector of `ldf_resource`s
+#' @return The resource (fluent interface for chaining)
 #' @export
 validate_resource <- function(resource) {
   if(!is.null(attr(resource, "data"))) {
@@ -64,6 +75,11 @@ is_resource <- function(x) {
   inherits(x, "ldf_resource")
 }
 
+#' Extract a property value from a description
+#'
+#' @param resource A vector of `ldf_resource`s
+#' @param p A property (column name from the description)
+#' @return A vector with the values of the property that apply to each resource
 #' @export
 property <- function(resource, p) {
   data <- attr(resource, "data")
@@ -79,24 +95,37 @@ property <- function(resource, p) {
   }
 }
 
+#' Extract the URI from a resource vector
+#'
+#' @param resource A vector of `ldf_resource`s
 #' @export
 uri <- function(resource) {
   vec_data(resource)
 }
 
+#' Extract resource labels
+#'
+#' @param x A vector of `ldf_resource`s
+#' @return A character vector of labels
 #' @export
-label <- function(resource) {
+label <- function(x) {
   UseMethod("label")
 }
 
 #' @export
-label.ldf_resource <- function(resource) {
-  property(resource, "label")
+label.ldf_resource <- function(x) {
+  property(x, "label")
 }
 
 #' @export
 label.default <- label.ldf_resource
 
+#' Extract resource sort priority
+#'
+#' Sort priority can be used to determine how to order resources
+#'
+#' @param resource A vector of `ldf_resource`s
+#' @return A vector of sort prorities (typically numeric)
 #' @export
 sort_priority <- function(resource) {
   property(resource, "sort_priority")
@@ -117,6 +146,15 @@ default_prefixes <- function() {
   )
 }
 
+#' Extract Compact URI from resources
+#'
+#' The URI is compacted using the specified prefixes.
+#' If no prefixes are specified the defaults are taken from `default_prefixes` which can be
+#' overriden by setting the global option "ldf_prefixes".
+#'
+#' @param resource A vector of `ldf_resource`s
+#' @param prefixes A named character vector mapping from prefix to namespace
+#' @return A character vector of compact URIs.
 #' @export
 curie <- function(resource, prefixes=default_prefixes()) {
   if(length(prefixes)>0) { # ought to check for names

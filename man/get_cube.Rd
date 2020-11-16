@@ -4,18 +4,33 @@
 \alias{get_cube}
 \title{Download a DataCube}
 \usage{
-get_cube(dataset_uri)
+get_cube(dataset_uri, endpoint = default_endpoint(), include_geometry = FALSE)
 }
 \arguments{
 \item{dataset_uri}{A string}
+
+\item{endpoint}{A string for the sparql endpoint}
+
+\item{include_geometry}{A boolean indicating whether the geometries should be downloaded (defaults to \code{FALSE}).}
 }
 \value{
 A data frame
 }
 \description{
-Returns a data frame with one observation per row and a column per component.
+Returns a data frame with one observation per row and one column per component.
 Components may be dimensions, measures or attributes.
 }
 \details{
 Where the column represents an RDF Resource, it will have the type \code{ldf_resource} vector.
+
+If the cube uses the \code{sdmx:refArea} dimension, it's values will be described using \code{get_geography}.
+The descriptions will be retreived from \href{http://statistics.data.gov.uk/sparql}{statistics.data.gov.uk}
+instead of the specified endpoint.
+
+If the cube users the \code{sdmx:refPeriod} dimension, it's values will be described using \code{interval}s.
+}
+\examples{
+\dontrun{
+get_cube("http://gss-data.org.uk/data/gss_data/covid-19/ons-online-price-changes-for-high-demand-products#dataset")
+}
 }

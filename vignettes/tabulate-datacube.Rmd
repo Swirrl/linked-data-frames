@@ -21,7 +21,7 @@ Our target is the [UK Sea Fisheries Statistics](https://www.gov.uk/government/co
 The data is provided as a spreadsheet. The first table looks like this:
 
 ```{r upstream-table, fig.align = 'center', out.width = "80%", fig.cap = "Fisheries Statistics as they in the upstream release", echo=F}
-knitr::include_graphics(here::here("vignettes/images", "fish-spreadsheet.png"))
+knitr::include_graphics("images/fish-spreadsheet.png")
 ```
 
 This is a cross-tabulation with row grouping and stacked column headers. The rows show three variables, with fishing activity grouped by Country, Vessel Length, and Species Group. The columns distinguish two measures - quantity and value, within this we have columns for years and a calculation of the change between 2019 and 2020.
@@ -29,7 +29,7 @@ This is a cross-tabulation with row grouping and stacked column headers. The row
 This [dataset is available as a DataCube](https://staging.gss-data.org.uk/cube/explore?uri=http%3A%2F%2Fgss-data.org.uk%2Fdata%2Fgss_data%2Fcovid-19%2Fmmo-ad-hoc-statistical-release-uk-sea-fisheries-statistics-catalog-entry) on the COGS website. Here's a screenshot:
 
 ```{r cogs-table, fig.align = 'center', out.width = "80%", fig.cap = "Fisheries Statistics as they appear on COGS", echo=F}
-knitr::include_graphics(here::here("vignettes/images", "fisheries-cogs-cubeview.png"))
+knitr::include_graphics("images/fisheries-cogs-cubeview.png")
 ```
 
 We can extract this into a linked-data frame.

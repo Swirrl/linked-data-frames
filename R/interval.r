@@ -9,14 +9,18 @@ NULL
 
 #' `interval` vector
 #'
-#' This represents an interval from the
-#' [reference.data.gov.uk intervals ontology](http://reference.data.gov.uk/def/intervals)
+#' This represents an interval from the UK Government
+#' [intervals ontology](http://reference.data.gov.uk/def/intervals).
+#'
+#' `is_interval` returns `TRUE` if `x` is an interval and `FALSE` otherwise.
 #'
 #' @param uri A character vector of URIs
+#' @param x An interval
 #' @return An S3 vector of class `ldf_interval`.
 #' @export
 #' @examples
 #' year <- interval("http://reference.data.gov.uk/id/year/2020")
+#' is_interval(year)
 #' month <- interval("http://reference.data.gov.uk/id/month/2020-07")
 #' day <- interval("http://reference.data.gov.uk/id/day/2020-04-22")
 #' p7d <- interval("http://reference.data.gov.uk/id/gregorian-interval/2020-04-27T00:00:00/P7D")
@@ -86,8 +90,8 @@ int_duration_days <- function(int) {
 }
 
 #' @export
-label.ldf_interval <- function(int) {
-  purrr::map_chr(int, function(i) {
+label.ldf_interval <- function(x) {
+  purrr::map_chr(x, function(i) {
     switch (int_type(i),
             day = int_value(i),
             month = int_value(i),
@@ -116,6 +120,7 @@ vec_cast.ldf_interval.character <- function(x, to, ...) interval(x)
 vec_cast.character.ldf_interval <- function(x, to, ...) vec_data(x) # label.ldf_interval
 
 month_end <- function(x) {
+  year <- month <- NULL # for test check
   c(year, month) %<-% as.numeric(strsplit(x,"-")[[1]])
   as.character(as.Date(paste0(c(year, month+1, 1), collapse="-")) - 1)
 }

@@ -11,6 +11,10 @@ is_resource(x)
 }
 \arguments{
 \item{uri}{A character vector of URIs}
+
+\item{data}{A data frame of descriptions (must have a \code{uri} column)}
+
+\item{x}{Any vector}
 }
 \value{
 An S3 vector of class \code{ldf_resource}.

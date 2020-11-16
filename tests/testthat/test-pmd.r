@@ -4,6 +4,9 @@ test_that("get_geography works", {
   })
   expect_equal(uk$label, "United Kingdom")
 })
+# can show code or label
+# can find parent
+# can find geometry
 
 test_that("query works", {
   vcr::use_cassette("query", {
@@ -25,3 +28,4 @@ test_that("get_label works", {
   })
   expect_equal(mt$label, "Measure type")
 })
+
