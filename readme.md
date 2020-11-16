@@ -1,4 +1,4 @@
-# Linked Data Frames (LDF)
+# Linked Data Frames (LDF) <img src="man/figures/logo.png" align="right" height="139" />
 
 Work with linked-data idiomatically in R using data frames.
 
