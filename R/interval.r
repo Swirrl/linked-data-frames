@@ -4,7 +4,7 @@
 NULL
 
 # type for the intervals ontology: http://reference.data.gov.uk/def/intervals
-
+# https://github.com/epimorphics/IntervalServer/blob/master/interval-uris.md
 
 
 #' `interval` vector

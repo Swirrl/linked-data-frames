@@ -1,13 +1,13 @@
 Package: ldf
 Title: Linked-Data-Frames
 Version: 0.0.0.9000
-Authors@R:
-    person(given = "Robin",
-           family = "Gower",
-           role = c("aut", "cre"),
-           email = "ldf@infonomics.ltd.uk")
+Authors@R: c(
+    person("Robin", "Gower", role = c("aut", "cre"), email = "ldf@infonomics.ltd.uk"),
+    person("Swirrl", role=c("cph", "fnd")))
 Description: Use RDF resources in data frames.
 License: GPL-3
+URL: https://swirrl.github.io/linked-data-frames, https://github.com/Swirrl/linked-data-frames
+BugReports: https://github.com/Swirrl/linked-data-frames/issues
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)

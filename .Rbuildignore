@@ -3,3 +3,6 @@
 ^LICENSE\.md$
 .Rhistory
 readme.md
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
