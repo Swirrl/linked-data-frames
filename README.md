@@ -47,7 +47,7 @@ descriptions <- data.frame(uri=uris, label=labels)
 food <- resource(uris, descriptions)
 ```
 
-The `resource` constructor returns a `ldf_resource` object that has a variety of methods defined on it, including the `format` generic which allows us to use the labels instead of the URIs when printing to the console.
+The `resource()` constructor returns a `ldf_resource` object that has a variety of methods defined on it, including the `format()` generic which allows us to use the labels instead of the URIs when printing to the console.
 
 ```r
 food

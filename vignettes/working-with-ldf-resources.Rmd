@@ -1,0 +1,107 @@
+---
+title: "Working with LDF Resources"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Working with LDF Resources}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(ldf)
+```
+
+Linked-data uses the [Resource Description Framework](https://www.w3.org/TR/rdf11-concepts/) (RDF) to identify resources with [Uniform Resource Identifiers](https://en.wikipedia.org/wiki/Uniform_Resource_Identifier) (URIs) and describe them with a set of statements, each specifying the value of a given property for the resource. We can represent this in R using a character vector for the URIs together with a data frame for the descriptions. That data frame should include a URI column to identify the resource being described in each row.
+
+```{r}
+uris <- c("http://example.net/id/apple",
+          "http://example.net/id/banana",
+          "http://example.net/id/carrot")
+labels <- c("Apple","Banana","Carrot")
+descriptions <- data.frame(uri=uris, label=labels)
+
+food <- resource(uris, descriptions)
+```
+
+The `resource()` constructor returns a `ldf_resource` object that has a variety of methods defined on it, including the `format()` generic which allows us to use the labels instead of the URIs when printing to the console.
+
+```{r}
+(picnic <- data.frame(food=food, quantity=c(3,2,0)))
+```
+
+The contents of the vector itself can vary from the attached descriptions this allows you to repeat values without needing to duplicate descriptions:
+
+```{r}
+(kitchen <- data.frame(
+  dish=c("Fruit Salad", "Fruit Salad",
+         "Carrot Salad", "Carrot Salad"),
+  food=resource(c("http://example.net/id/apple", "http://example.net/id/banana",
+                  "http://example.net/id/apple", "http://example.net/id/carrot"),
+                descriptions),
+  quantity=c(2,2,1,3)))
+```
+
+The underlying identity of each resource in the vector can be retrieved with `uri()`:
+
+```{r}
+uri(food)
+```
+
+There's also the `curie()` function for retreiving URIs compacted with prefixes (see also: `default_prefixes()`):
+
+```{r}
+curie(food, prefixes=c(food="http://example.net/id/"))
+```
+
+In order to access properties from the resource's description, you can use `property()`:
+
+```{r}
+property(food, "label")
+```
+
+The second argument is the name of a column from the description.
+
+Since label is such a commonly used property, there's also a function provided for it: `label()`. You can use these functions to perform operations on resources in terms of their descriptions:
+
+```{r}
+food[label(food) == "Apple"]
+```
+
+We use the label to pretty print linked data frames with `format.ldf_resource()`:
+
+```{r}
+format(kitchen)
+```
+
+Because the base type of resources is character, R will tend to dispatch on this basis. To prevent functions from base R (or other packages that aren't expecting any novel S3 vectors) from misinterpreting resources, we have `as.character()` return the URI and _not the resource's label_:
+
+```{r}
+as.character(food)
+```
+
+This can be unexpected. The `table()` function, for example, returns counts by URI:
+
+```{r}
+table(kitchen$food)
+```
+
+You can use the label by calling `table` on that instead:
+
+```{r}
+table(label(kitchen$food))
+```
+
+You can convert a linked data frame back into a "normal" data frame (i.e. one not containing vectors of RDF resources) using the `as_dataframe_of_labels()` function. This converts RDF resources into their labels:
+
+```{r}
+kitchen_labels <- as_dataframe_of_labels(kitchen)
+
+str(kitchen_labels)
+```

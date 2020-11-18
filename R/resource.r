@@ -208,7 +208,29 @@ vec_cast.character.ldf_resource <- function(x, to, ...) vec_data(x)
 levels.ldf_resource <- function(...) { return(NULL) }
 
 # escape hatch TODO: write-up
-df_of_labels <- function(d, ...) {
+#' Convert a linked data frame to labels
+#'
+#' This take a data frame containing `ldf_resource` or `ldf_interval` vectors
+#' and converts those vectors into labels.
+#'
+#' The labels will either be character vectors or factors depending on the value of
+#' `default.stringsAsFactors()`. This can be ridden by passing the argument
+#' `stringsAsFactors=F`.
+#'
+#' @param d A linked data frame
+#' @param ... Additional arguments passed to `data.frame`
+#' @return A data frame with labels in place of any ldf vectors
+#' @export
+#' @examples
+#' uris <- c("http://example.net/id/apple",
+#'           "http://example.net/id/banana",
+#'           "http://example.net/id/carrot")
+#' labels <- c("Apple","Banana","Carrot")
+#' data <- data.frame(uri=uris, label=labels)
+#'
+#' linked_data_frame <- data.frame(fruit=resource(uris, data))
+#' labelled_data_frame <- as_dataframe_of_labels(linked_data_frame, stringsAsFactors=FALSE)
+as_dataframe_of_labels <- function(d, ...) {
   data.frame(lapply(d, function(x) {
     if(is_resource(x) | is_interval(x)) {
       label(x)
