@@ -1,0 +1,8 @@
+pandoc: 2.7.3
+pkgdown: 1.6.1
+pkgdown_sha: ~
+articles:
+  tabulate-datacube: tabulate-datacube.html
+  working-with-ldf-resources: working-with-ldf-resources.html
+last_built: 2020-11-18T14:01Z
+
