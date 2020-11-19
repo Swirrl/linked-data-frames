@@ -1,0 +1,166 @@
+---
+title: "Creating LDF Resources"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Creating LDF Resources}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+This vignette describes how to create ldf resources from SPARQL queries or RDF files. You might like to first read the [Working with LDF Resources](working-with-ldf-resources.html) vignette to understand how RDF resources are represented in LDF.
+
+```{r setup}
+library(ldf)
+```
+
+## Downloading Resources with SPARQL
+
+You can create resources by downloading a table of descriptions with a SPARQL `SELECT` query.
+
+As an example, lets download some music genres from [dbpedia](http://dbpedia.org). This query will find 100 things, identified by their `uri` that are music genres, along with their `label` and a descriptive `comment`. We'll look for the English version of the latter two strings.
+
+```{r}
+music_genres_query <- "
+PREFIX : <http://dbpedia.org/ontology/>
+
+SELECT *
+WHERE {
+  ?uri a :MusicGenre;
+    rdfs:label ?label;
+    rdfs:comment ?comment
+    .
+  FILTER langMatches(lang(?label), 'EN')
+  FILTER langMatches(lang(?comment), 'EN')
+} LIMIT 100
+"
+```
+
+We can use the `query()` function to execute the query and parse the results:
+
+```{r eval=F}
+music_genre_results <- query(music_genres_query, endpoint="http://dbpedia.org/sparql/")
+```
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+suppressPackageStartupMessages(require(vcr, quietly = TRUE))
+invisible(vcr::use_cassette("music-genres", {
+  music_genre_results <- query(music_genres_query, endpoint="http://dbpedia.org/sparql/")
+}))
+```
+
+This is what the first few results look like:
+
+```{r}
+head(music_genre_results)
+```
+
+We can then create resources for these:
+
+```{r}
+music_genres <- resource(music_genre_results$uri, data=music_genre_results)
+```
+
+Which we can then manipulate within R:
+
+```{r}
+# find music genres where the description mentions "dance"
+music_genres[grep("dance", property(music_genres, "comment"))]
+```
+
+## Reading RDF with rdflib
+
+We can create resources from serialised RDF files too.
+
+To read RDF into R we can use the [rdflib](https://cran.r-project.org/web/packages/rdflib/) package. This in turn uses the [redland](https://cran.r-project.org/web/packages/redland/) package to provide bindings to the C library of the same name, and the [jsonld](https://cran.r-project.org/web/packages/jsonld/) package for JSON-LD serialisations.
+
+Let's load up an example from that package.
+
+```{r}
+library(rdflib)
+
+article_rdf <- rdf_parse(system.file("extdata", "ex.xml", package="rdflib", mustWork=TRUE))
+```
+
+This creates a list containing pointers to a redland world and model objects. We can take a peak at the statements with `rdflib::print.rdf()` (this serialises the data again and prints back the result):
+
+```{r}
+print(article_rdf, format="turtle")
+```
+
+The contents is too big to display here, but you can see from the [rdf file itself](https://github.com/ropensci/rdflib/blob/master/inst/extdata/ex.xml), that the data describes a journal article: https://doi.org/10.1002/ece3.2314.
+
+The description is a graph, not a table. It's not a tidy collection of similarly shaped objects. We've got the article itself, and nested descriptions of related resources.
+
+We can identify the different resource types with a query:
+```{r}
+rdf_query(article_rdf, "SELECT * WHERE { ?s a ?type }")
+```
+
+Here we can see the description also includes the journal in which the article is published and the creators.
+
+We could gather all of these entities into a single resource vector, but the descriptions wouldn't overlap. The creators don't have `prism:issn` identifiers and the journal doesn't have a `foaf:familyName`.
+
+Instead it makes more sense to split these entities into separate vectors. We'll focus on the creators, since there are several of them. We can do this with a query:
+
+```{r}
+creators_triples <- rdf_query(article_rdf, "SELECT * WHERE { ?s a <http://xmlns.com/foaf/0.1/Person>; ?p ?o }")
+```
+
+Now we have a table of statements about the creators:
+
+```{r}
+creators_triples
+```
+
+We can tabulate these statements into a tidy data frame with one row per creator, and one column per property.
+
+```{r}
+library(tidyr)
+
+(creators_description <- creators_triples %>% 
+  spread("p","o"))
+```
+
+We could proceed using the full URIs as properties, but it's nicer to replace these with shorter strings that don't need escaping with backticks:
+
+```{r}
+library(dplyr)
+
+(creators_description <- creators_description %>% 
+  rename(uri=s,
+         type=`http://www.w3.org/1999/02/22-rdf-syntax-ns#type`,
+         family_name=`http://xmlns.com/foaf/0.1/familyName`,
+         given_name=`http://xmlns.com/foaf/0.1/givenName`,
+         name=`http://xmlns.com/foaf/0.1/name`))
+```
+
+We could have done the same transformation within the select query:
+
+```{r}
+describe_creator = "
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+SELECT * WHERE { 
+  ?uri a <http://xmlns.com/foaf/0.1/Person>;
+    a ?type;
+    foaf:familyName ?family_name;
+    foaf:givenName ?given_name;
+    foaf:name ?name;
+    .
+}
+"
+
+(creators_description <- rdf_query(article_rdf, describe_creator))
+```
+
+We can then use this to create the resource vector:
+
+```{r}
+(creators <- resource(creators_description$uri, creators_description))
+```

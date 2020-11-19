@@ -56,7 +56,10 @@ food
 #> [1] Apple  Banana Carrot
 ```
 
-For a complete introduction to `ldf_resource` vectors library please see the `vignette("working-with-ldf-resources")`.
+For a complete introduction to `ldf_resource` vectors library please see:
+
+- `vignette("working-with-ldf-resources")`: explains how resources are represented and introduces the functions like `property()` and `curie()` that available for working with them;
+- `vignette("creating-ldf-resources")`: explains how to create resources from SPARQL queries or RDF files.
 
 ## Installation
 

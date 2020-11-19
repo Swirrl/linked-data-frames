@@ -21,7 +21,8 @@ Suggests:
     tibble,
     kableExtra,
     scales,
-    tidyr
+    tidyr,
+    rdflib
 Imports:
     dplyr,
     glue,
