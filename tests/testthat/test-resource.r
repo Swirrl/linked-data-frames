@@ -33,6 +33,9 @@ describe("resources can have arbitrary descriptions", {
   test_that("warning is given if property is missing", {
     r <- resource(uris, data=data.frame(uri=uris))
     expect_warning(property(r, "id"))
+
+    r <- resource(uris, data=tibble::tibble(uri=uris))
+    expect_warning(property(r, "id"))
   })
 
   test_that("descriptions must include uri", {

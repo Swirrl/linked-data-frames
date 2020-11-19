@@ -89,7 +89,11 @@ property <- function(resource, p) {
   index <- match(resource, data$uri)
 
   if(inherits(data, "tbl")) {
-    data[index,] %>% dplyr::pull(p)
+    if((p %in% colnames(data))) {
+      data[index,] %>% dplyr::pull(p)
+    } else {
+      NULL
+    }
   } else {
     data[index, p]
   }
