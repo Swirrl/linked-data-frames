@@ -7,6 +7,7 @@ NULL
 #' @param endpoint A string defining the endpoint
 #' @param format A string defining the format, either `"csv"` or `"json"`
 #' @return A data frame with a column for each variable binding, and a row per result
+#' @export
 #' @examples
 #' \dontrun{
 #' query("SELECT * WHERE { ?s ?p ?o } LIMIT 10", "https://statistics.data.gov.uk/sparql")
