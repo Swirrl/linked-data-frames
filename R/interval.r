@@ -39,7 +39,11 @@ is_interval <- function(x) {
   inherits(x, "ldf_interval")
 }
 
-
+#' The start date of an interval
+#'
+#' @param int An interval
+#' @return A Date
+#' @export
 int_start <- function(int) {
   date_strings <- purrr::map_chr(int, function(i) {
     switch (int_type(i),
@@ -52,6 +56,11 @@ int_start <- function(int) {
   as.Date(date_strings)
 }
 
+#' The end date of an interval
+#'
+#' @param int An interval
+#' @return A Date
+#' @export
 int_end <- function(int) {
   date_strings <- purrr::map_chr(int, function(i) {
     switch (int_type(i),
