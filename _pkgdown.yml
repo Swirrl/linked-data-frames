@@ -4,4 +4,27 @@ authors:
   Swirrl:
     href: https://www.swirrl.com
     html: <img src="https://www.swirrl.com/icons/icon-512x512.png" height="24" /> Swirrl
-
+reference:
+- title: "Working with LDF resources"
+  desc: Create resources and extract data from their descriptions.
+  contents:
+  - resource
+  - property
+  - uri
+  - curie
+  - label
+  - sort_priority
+  - validate_resource
+  - as_dataframe_of_labels
+- title: "Downloading DataCubes"
+  desc: Download resources from RDF Data Cubes available on PublishMyData platforms
+  contents:
+  - get_cube
+  - get_geography
+  - get_label
+- title: "Building SPARQL queries"
+  desc: Execute SPARQL queries and build them up from R objects
+  contents:
+  - query
+  - predobj_binding
+  - subpredobj_binding
