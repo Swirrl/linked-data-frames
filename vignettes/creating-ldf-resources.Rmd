@@ -74,7 +74,7 @@ Which we can then manipulate within R:
 music_genres[grep("dance", property(music_genres, "comment"))]
 ```
 
-## Reading RDF with rdflib
+## Reading RDF files with rdflib
 
 We can create resources from serialised RDF files too.
 
