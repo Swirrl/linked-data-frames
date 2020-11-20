@@ -22,7 +22,8 @@ Suggests:
     kableExtra,
     scales,
     tidyr,
-    rdflib
+    rdflib,
+    ggplot2
 Imports:
     dplyr,
     glue,

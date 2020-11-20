@@ -40,7 +40,7 @@ This is exactly what LDF intervals provide - a set of functions which, given an 
 
 ## Working with LDF intervals
 
-Creating an interval is quite simple:
+Creating an interval is quite simple, we only need provide a URI (as a character vector):
 
 ```{r}
 nov2020 <- interval("http://reference.data.gov.uk/id/month/2020-11")

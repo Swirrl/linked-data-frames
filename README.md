@@ -29,8 +29,6 @@ head(cube) %>% as_tibble()
 #> 6 Percent      2020-03-16 P7D   Flour                        100 Price Change Indice
 ```
 
-For more information consult `vignette("downloading-datacubes")`.
-
 The cube is modelled as a tidy table of observations with a column for each component property. The columns whose values are RDF resources are given a special type: either `ldf_resource` or `ldf_interval`.
 
 ### Modelling RDF resources as vectors
@@ -56,11 +54,11 @@ food
 #> [1] Apple  Banana Carrot
 ```
 
-For a complete introduction to `ldf_resource` vectors library please see:
+For a complete introduction to `ldf_resource` vectors library please see the following vignettes:
 
 - `vignette("working-with-ldf-resources")`: explains how resources are represented and introduces the functions like `property()` and `curie()` that available for working with them;
-- `vignette("creating-ldf-resources")`: explains how to create resources from SPARQL queries or RDF files.
-- `vignette("working-with-ldf-intervals")`: explains hot to create intervals from URIs and use them to plot with a time series chart.
+- `vignette("creating-ldf-resources")`: explains how to create resources from SPARQL queries or RDF files;
+- `vignette("working-with-ldf-intervals")`: explains hot to create interval resources from URIs and use them to plot with a time series chart.
 
 ## Installation
 
