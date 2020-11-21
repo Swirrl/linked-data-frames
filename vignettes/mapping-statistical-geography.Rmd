@@ -84,6 +84,8 @@ invisible(vcr::use_cassette("welsh-geography", {
 }))
 ```
 
+## Creating a thematic map
+
 We can use these boundaries to visualise the data on a map.
 
 The modern approach to spatial data in R is to create a simple feature `sf` object. This is a data frame with a particular column chosen to be the active geometry.
