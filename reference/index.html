@@ -105,7 +105,13 @@
       <a href="../articles/creating-ldf-resources.html">Creating LDF Resources</a>
     </li>
     <li>
+      <a href="../articles/mapping-statistical-geography.html">Mapping Statistical Geography</a>
+    </li>
+    <li>
       <a href="../articles/tabulate-datacube.html">Tabulating DataCubes</a>
+    </li>
+    <li>
+      <a href="../articles/working-with-ldf-intervals.html">Working with LDF Intervals</a>
     </li>
     <li>
       <a href="../articles/working-with-ldf-resources.html">Working with LDF Resources</a>
@@ -147,8 +153,8 @@
     <tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-          <p class="section-desc"></p>
+          <h2 id="section-working-with-ldf-resources" class="hasAnchor"><a href="#section-working-with-ldf-resources" class="anchor"></a>Working with LDF resources</h2>
+          <p class="section-desc"><p>Create resources and extract data from their descriptions.</p></p>
         </th>
       </tr>
       
@@ -159,9 +165,21 @@
       <tr>
         
         <td>
-          <p><code><a href="as_dataframe_of_labels.html">as_dataframe_of_labels()</a></code> </p>
+          <p><code><a href="resource.html">resource()</a></code> <code><a href="resource.html">is_resource()</a></code> </p>
         </td>
-        <td><p>Convert a linked data frame to labels</p></td>
+        <td><p><code>resource</code> vector</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="property.html">property()</a></code> </p>
+        </td>
+        <td><p>Extract a property value from a description</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="uri.html">uri()</a></code> </p>
+        </td>
+        <td><p>Extract the URI from a resource vector</p></td>
       </tr><tr>
         
         <td>
@@ -169,6 +187,43 @@
         </td>
         <td><p>Extract Compact URI from resources</p></td>
       </tr><tr>
+        
+        <td>
+          <p><code><a href="label.html">label()</a></code> </p>
+        </td>
+        <td><p>Extract resource labels</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="sort_priority.html">sort_priority()</a></code> </p>
+        </td>
+        <td><p>Extract resource sort priority</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="validate_resource.html">validate_resource()</a></code> </p>
+        </td>
+        <td><p>Validate a resource</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="as_dataframe_of_labels.html">as_dataframe_of_labels()</a></code> </p>
+        </td>
+        <td><p>Convert a linked data frame to labels</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-downloading-datacubes" class="hasAnchor"><a href="#section-downloading-datacubes" class="anchor"></a>Downloading DataCubes</h2>
+          <p class="section-desc"><p>Download resources from RDF Data Cubes available on PublishMyData platforms</p></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
         
         <td>
           <p><code><a href="get_cube.html">get_cube()</a></code> </p>
@@ -186,18 +241,25 @@
           <p><code><a href="get_label.html">get_label()</a></code> </p>
         </td>
         <td><p>Download a Resource's label</p></td>
-      </tr><tr>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-building-sparql-queries" class="hasAnchor"><a href="#section-building-sparql-queries" class="anchor"></a>Building SPARQL queries</h2>
+          <p class="section-desc"><p>Execute SPARQL queries and build them up from R objects</p></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
         
         <td>
-          <p><code><a href="interval.html">interval()</a></code> <code><a href="interval.html">is_interval()</a></code> </p>
+          <p><code><a href="query.html">query()</a></code> </p>
         </td>
-        <td><p><code>interval</code> vector</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="label.html">label()</a></code> </p>
-        </td>
-        <td><p>Extract resource labels</p></td>
+        <td><p>Execute SPARQL select query and parse results</p></td>
       </tr><tr>
         
         <td>
@@ -207,45 +269,9 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="property.html">property()</a></code> </p>
-        </td>
-        <td><p>Extract a property value from a description</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="query.html">query()</a></code> </p>
-        </td>
-        <td><p>Execute SPARQL select query and parse results</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="resource.html">resource()</a></code> <code><a href="resource.html">is_resource()</a></code> </p>
-        </td>
-        <td><p><code>resource</code> vector</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="sort_priority.html">sort_priority()</a></code> </p>
-        </td>
-        <td><p>Extract resource sort priority</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="subpredobj_binding.html">subpredobj_binding()</a></code> </p>
         </td>
         <td><p>Create Basic Graph Pattern for subject binding labelled properties</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="uri.html">uri()</a></code> </p>
-        </td>
-        <td><p>Extract the URI from a resource vector</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="validate_resource.html">validate_resource()</a></code> </p>
-        </td>
-        <td><p>Validate a resource</p></td>
       </tr>
     </tbody>
     </table>
