@@ -23,7 +23,8 @@ Suggests:
     scales,
     tidyr,
     rdflib,
-    ggplot2
+    ggplot2,
+    sf
 Imports:
     dplyr,
     glue,
