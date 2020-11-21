@@ -54,11 +54,12 @@ food
 #> [1] Apple  Banana Carrot
 ```
 
-For a complete introduction to `ldf_resource` vectors library please see the following vignettes:
+For a complete introduction to the LDF library please see the following vignettes:
 
 - `vignette("working-with-ldf-resources")`: explains how resources are represented and introduces the functions like `property()` and `curie()` that available for working with them;
 - `vignette("creating-ldf-resources")`: explains how to create resources from SPARQL queries or RDF files;
-- `vignette("working-with-ldf-intervals")`: explains hot to create interval resources from URIs and use them to plot with a time series chart.
+- `vignette("working-with-ldf-intervals")`: explains hot to create interval resources from URIs and use them to plot a time series chart;
+- `vignette("mapping-statistical-geography")`: explains how to download geographic resources and use them to plot a thematic map.
 
 ## Installation
 
