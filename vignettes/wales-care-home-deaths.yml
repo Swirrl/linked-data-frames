@@ -1,0 +1,31 @@
+http_interactions:
+- request:
+    method: post
+    uri: https://staging.gss-data.org.uk/sparql?query=%0APREFIX%20wgd%3A%20%3Chttp%3A%2F%2Fgss-data.org.uk%2Fdata%2Fgss_data%2Fcovid-19%2Fwg-notifications-of-deaths-of-residents-related-to-covid-19-in-adult-care-homes%23dimension%2F%3E%0APREFIX%20cause%3A%20%3Chttp%3A%2F%2Fgss-data.org.uk%2Fdata%2Fgss_data%2Fcovid-19%2Fwg-notifications-of-deaths-of-residents-related-to-covid-19-in-adult-care-homes%23concept%2Fcause-of-death%2F%3E%0APREFIX%20location%3A%20%3Chttp%3A%2F%2Fgss-data.org.uk%2Fdata%2Fgss_data%2Fcovid-19%2Fwg-notifications-of-deaths-of-residents-related-to-covid-19-in-adult-care-homes%23concept%2Flocation-of-death%2F%3E%0A%0ASELECT%20%3Fgeo%20%28SUM%28%3Fdeaths%29%20AS%20%3Ftotal_deaths%29%0AWHERE%20%7B%0A%20%20%3Fobs%20wgd%3Acause-of-death%20cause%3Atotal%20%3B%0A%20%20%20%20%20%20%20wgd%3Alocation-of-death%20location%3Atotal%3B%0A%20%20%20%20%20%20%20%3Chttp%3A%2F%2Fgss-data.org.uk%2Fdef%2Fmeasure%2Fcount%3E%20%3Fdeaths%20%3B%0A%20%20%20%20%20%20%20wgd%3Anotification-date%20%3Fdate%20%3B%0A%20%20%20%20%20%20%20wgd%3Aarea-code%20%3Fgeo%20.%0A%20%20%3Fgeo%20%3Chttp%3A%2F%2Fstatistics.data.gov.uk%2Fdef%2Fstatistical-entity%23code%3E%20%3Chttp%3A%2F%2Fstatistics.data.gov.uk%2Fid%2Fstatistical-entity%2FW06%3E%20.%0A%0A%7D%0A%0AGROUP%20BY%20%3Fgeo%0A
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Content-Type: ''
+      Accept: text/csv
+  response:
+    status:
+      status_code: 200
+      category: Success
+      reason: OK
+      message: 'Success: (200) OK'
+    headers:
+      server: nginx
+      date: Sat, 21 Nov 2020 17:39:56 GMT
+      content-type: text/csv
+      vary: Accept-Encoding
+      content-encoding: gzip
+      via: 1.1 google
+      alt-svc: clear
+      transfer-encoding: chunked
+    body:
+      encoding: UTF-8
+      file: no
+      string: "geo,total_deaths\r\nhttp://statistics.data.gov.uk/id/statistical-geography/W06000009,172\r\nhttp://statistics.data.gov.uk/id/statistical-geography/W06000010,336\r\nhttp://statistics.data.gov.uk/id/statistical-geography/W06000011,350\r\nhttp://statistics.data.gov.uk/id/statistical-geography/W06000012,222\r\nhttp://statistics.data.gov.uk/id/statistical-geography/W06000013,235\r\nhttp://statistics.data.gov.uk/id/statistical-geography/W06000014,158\r\nhttp://statistics.data.gov.uk/id/statistical-geography/W06000015,463\r\nhttp://statistics.data.gov.uk/id/statistical-geography/W06000016,332\r\nhttp://statistics.data.gov.uk/id/statistical-geography/W06000018,184\r\nhttp://statistics.data.gov.uk/id/statistical-geography/W06000019,129\r\nhttp://statistics.data.gov.uk/id/statistical-geography/W06000020,135\r\nhttp://statistics.data.gov.uk/id/statistical-geography/W06000021,174\r\nhttp://statistics.data.gov.uk/id/statistical-geography/W06000022,234\r\nhttp://statistics.data.gov.uk/id/statistical-geography/W06000023,230\r\nhttp://statistics.data.gov.uk/id/statistical-geography/W06000001,86\r\nhttp://statistics.data.gov.uk/id/statistical-geography/W06000024,83\r\nhttp://statistics.data.gov.uk/id/statistical-geography/W06000002,249\r\nhttp://statistics.data.gov.uk/id/statistical-geography/W06000003,233\r\nhttp://statistics.data.gov.uk/id/statistical-geography/W06000004,176\r\nhttp://statistics.data.gov.uk/id/statistical-geography/W06000005,189\r\nhttp://statistics.data.gov.uk/id/statistical-geography/W06000006,250\r\nhttp://statistics.data.gov.uk/id/statistical-geography/W06000008,92\r\n"
+  recorded_at: 2020-11-21 17:39:57 GMT
+  recorded_with: vcr/0.5.4, webmockr/0.7.0

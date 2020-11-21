@@ -202,6 +202,7 @@ get_label <- function(uri, endpoint=default_endpoint()) {
 #' @param endpoint A string for the sparql endpoint
 #' @param include_geometry A boolean indicating whether the geometries should be downloaded (defaults to `FALSE`).
 #' @return A data frame of geography descriptions
+#' @export
 #' @examples
 #' \dontrun{
 #' get_geography("http://statistics.data.gov.uk/id/statistical-geography/K02000001")
