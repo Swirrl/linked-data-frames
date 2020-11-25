@@ -5,14 +5,14 @@
 \alias{is_resource}
 \title{\code{resource} vector}
 \usage{
-resource(uri = character(), data = data.frame(uri = unique(uri)))
+resource(uri = character(), description = data.frame(uri = unique(uri)))
 
 is_resource(x)
 }
 \arguments{
 \item{uri}{A character vector of URIs}
 
-\item{data}{A data frame of descriptions (must have a \code{uri} column)}
+\item{description}{A data frame of descriptions (must have a \code{uri} column)}
 
 \item{x}{Any vector}
 }
@@ -20,7 +20,7 @@ is_resource(x)
 An S3 vector of class \code{ldf_resource}.
 }
 \description{
-This represents an RDF resource with the data held in an orthogonal table.
+A vector of RDF resources with descriptions held in an orthogonal table.
 }
 \examples{
 resource("http://example.net")
@@ -29,6 +29,6 @@ uris <- c("http://example.net/id/apple",
           "http://example.net/id/banana",
           "http://example.net/id/carrot")
 labels <- c("Apple","Banana","Carrot")
-data <- data.frame(uri=uris, label=labels)
-r <- resource(uris, data)
+description <- data.frame(uri=uris, label=labels)
+r <- resource(uris, description)
 }

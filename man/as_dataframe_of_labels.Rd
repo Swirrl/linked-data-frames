@@ -28,8 +28,8 @@ uris <- c("http://example.net/id/apple",
           "http://example.net/id/banana",
           "http://example.net/id/carrot")
 labels <- c("Apple","Banana","Carrot")
-data <- data.frame(uri=uris, label=labels)
+description <- data.frame(uri=uris, label=labels)
 
-linked_data_frame <- data.frame(fruit=resource(uris, data))
+linked_data_frame <- data.frame(fruit=resource(uris, description))
 labelled_data_frame <- as_dataframe_of_labels(linked_data_frame, stringsAsFactors=FALSE)
 }

@@ -10,10 +10,10 @@ NULL
 
 #' `resource` vector
 #'
-#' This represents an RDF resource with the data held in an orthogonal table.
+#' A vector of RDF resources with descriptions held in an orthogonal table.
 #'
 #' @param uri A character vector of URIs
-#' @param data A data frame of descriptions (must have a `uri` column)
+#' @param description A data frame of descriptions (must have a `uri` column)
 #' @param x Any vector
 #' @return An S3 vector of class `ldf_resource`.
 #' @export
@@ -24,24 +24,24 @@ NULL
 #'           "http://example.net/id/banana",
 #'           "http://example.net/id/carrot")
 #' labels <- c("Apple","Banana","Carrot")
-#' data <- data.frame(uri=uris, label=labels)
-#' r <- resource(uris, data)
-resource <- function(uri=character(), data=data.frame(uri=unique(uri))) {
+#' description <- data.frame(uri=uris, label=labels)
+#' r <- resource(uris, description)
+resource <- function(uri=character(), description=data.frame(uri=unique(uri))) {
   uri <- vec_cast(uri, character())
-  validate_resource(new_resource(uri, data))
+  validate_resource(new_resource(uri, description))
 }
 
-new_resource <- function(uri=character(), data=data.frame(uri=unique(uri))) {
+new_resource <- function(uri=character(), description=data.frame(uri=unique(uri))) {
   vec_assert(uri, character())
-  if(!is.null(data)) { stopifnot(inherits(data, "data.frame")) }
-  new_vctr(uri, data=data, class = "ldf_resource", inherit_base_type=F)
+  if(!is.null(description)) { stopifnot(inherits(description, "data.frame")) }
+  new_vctr(uri, description=description, class = "ldf_resource", inherit_base_type=F)
 }
 # for compatibility with the S4 system
 methods::setOldClass(c("ldf_resource", "vctrs_vctr"))
 
 #' Validate a resource
 #'
-#' Checks whether a URI column is present in the data descriptions and that it includes a value
+#' Checks whether a URI column is present in the description and that it includes a value
 #' for every resource with no duplicates.
 #'
 #' Violations `stop` execution and report the error message.
@@ -50,19 +50,19 @@ methods::setOldClass(c("ldf_resource", "vctrs_vctr"))
 #' @return The resource (fluent interface for chaining)
 #' @export
 validate_resource <- function(resource) {
-  if(!is.null(attr(resource, "data"))) {
-    if(!("uri" %in% colnames(attr(resource, "data")))) {
-      stop("Data must include a uri column")
+  if(!is.null(description(resource))) {
+    if(!("uri" %in% colnames(description(resource)))) {
+      stop("Description must include a uri column")
     }
 
-    uris <- attr(resource, "data")$uri
+    uris <- description(resource)$uri
     if(anyDuplicated(uris) != 0) {
-      stop("Data must not include duplicate uris")
+      stop("Description must not include duplicate uris")
     }
     target_uri <- uri(resource) %>% purrr::discard(is.na)
     missing_uri <- target_uri[!target_uri %in% uris]
     if(length(missing_uri)>0) {
-      stop("Data must include all uris. Missing e.g. ", missing_uri[1])
+      stop("Description must include all uris. Missing e.g. ", missing_uri[1])
     }
   }
 
@@ -81,7 +81,7 @@ is_resource <- function(x) {
 #' @return The resource's description - a type inheriting from data frame
 #' @export
 description <- function(resource) {
-  attr(resource, "data")
+  attr(resource, "description")
 }
 
 #' Extract a property value from a resource description
@@ -91,20 +91,20 @@ description <- function(resource) {
 #' @return A vector with the values of the property that apply to each resource
 #' @export
 property <- function(resource, p) {
-  data <- attr(resource, "data")
-  if(!(p %in% colnames(data))) {
-    warning("Column missing from data=", p)
+  description <- description(resource)
+  if(!(p %in% colnames(description))) {
+    warning("Column missing from description: ", p)
   }
-  index <- match(resource, data$uri)
+  index <- match(resource, description$uri)
 
-  if(inherits(data, "tbl")) {
-    if((p %in% colnames(data))) {
-      data[index,] %>% dplyr::pull(p)
+  if(inherits(description, "tbl")) {
+    if((p %in% colnames(description))) {
+      description[index,] %>% dplyr::pull(p)
     } else {
       NULL
     }
   } else {
-    data[index, p]
+    description[index, p]
   }
 }
 
@@ -206,7 +206,7 @@ merge_description <- function(x, y) {
 
 #' @export
 obj_print_footer.ldf_resource <- function(x, ...) {
-  cat("Description: ", paste0(colnames(attr(x, "data")), collapse=", "), "\n", sep = "")
+  cat("Description: ", paste0(colnames(description(x)), collapse=", "), "\n", sep = "")
 }
 
 #' @export
@@ -216,7 +216,7 @@ vec_ptype_abbr.ldf_resource <- function(x, ...) {
 
 #' @export
 vec_ptype2.ldf_resource.ldf_resource <- function(x, y, ...) {
-  new_resource(data=merge_description(description(x), description(y)))
+  new_resource(description=merge_description(description(x), description(y)))
 }
 
 # TODO: should this actually allow char to be lifted to resource?
@@ -231,7 +231,7 @@ vec_ptype2.character.ldf_resource <- function(x, y, ...) character()
 vec_cast.ldf_resource.ldf_resource <- function(x, to, ...) {
   all_description <- merge_description(description(x), description(to))
 
-  new_resource(vec_data(x), data=all_description)
+  new_resource(vec_data(x), description=all_description)
 }
 
 # Cast from character -> resource
@@ -252,7 +252,7 @@ vec_restore.ldf_resource <- function(x, to, ...) {
     all_description <- all_description %>% dplyr::filter(uri %in% vec_data(x))
   }
 
-  new_resource(vec_data(x), data=all_description)
+  new_resource(vec_data(x), description=all_description)
 }
 
 # #' @export
@@ -283,9 +283,9 @@ levels.ldf_resource <- function(...) { return(NULL) }
 #'           "http://example.net/id/banana",
 #'           "http://example.net/id/carrot")
 #' labels <- c("Apple","Banana","Carrot")
-#' data <- data.frame(uri=uris, label=labels)
+#' description <- data.frame(uri=uris, label=labels)
 #'
-#' linked_data_frame <- data.frame(fruit=resource(uris, data))
+#' linked_data_frame <- data.frame(fruit=resource(uris, description))
 #' labelled_data_frame <- as_dataframe_of_labels(linked_data_frame, stringsAsFactors=FALSE)
 as_dataframe_of_labels <- function(d, ...) {
   data.frame(lapply(d, function(x) {

@@ -57,7 +57,7 @@ This data frame looks like this (peeking at the first 10 rows):
 library(kableExtra)
 
 peak <- function(df) {
-  df %>% head() %>%  kbl()
+  df %>% head() %>% kbl()
 }
 
 peak(fish)

@@ -13,7 +13,7 @@ validate_resource(resource)
 The resource (fluent interface for chaining)
 }
 \description{
-Checks whether a URI column is present in the data descriptions and that it includes a value
+Checks whether a URI column is present in the description and that it includes a value
 for every resource with no duplicates.
 }
 \details{

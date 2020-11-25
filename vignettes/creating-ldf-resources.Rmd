@@ -64,7 +64,7 @@ head(music_genre_results)
 We can then create resources for these:
 
 ```{r}
-music_genres <- resource(music_genre_results$uri, data=music_genre_results)
+music_genres <- resource(music_genre_results$uri, description=music_genre_results)
 ```
 
 Which we can then manipulate within R:
