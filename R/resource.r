@@ -26,12 +26,12 @@ NULL
 #' labels <- c("Apple","Banana","Carrot")
 #' data <- data.frame(uri=uris, label=labels)
 #' r <- resource(uris, data)
-resource <- function(uri=character(), data=NULL) {
+resource <- function(uri=character(), data=data.frame(uri=unique(uri))) {
   uri <- vec_cast(uri, character())
   validate_resource(new_resource(uri, data))
 }
 
-new_resource <- function(uri=character(), data=data.frame(uri=uri)) {
+new_resource <- function(uri=character(), data=data.frame(uri=unique(uri))) {
   vec_assert(uri, character())
   if(!is.null(data)) { stopifnot(inherits(data, "data.frame")) }
   new_vctr(uri, data=data, class = "ldf_resource", inherit_base_type=F)
@@ -75,7 +75,16 @@ is_resource <- function(x) {
   inherits(x, "ldf_resource")
 }
 
-#' Extract a property value from a description
+#' Extract the description from a resource
+#'
+#' @param resource A vector of `ldf_resource`s
+#' @return The resource's description - a type inheriting from data frame
+#' @export
+description <- function(resource) {
+  attr(resource, "data")
+}
+
+#' Extract a property value from a resource description
 #'
 #' @param resource A vector of `ldf_resource`s
 #' @param p A property (column name from the description)
@@ -177,35 +186,79 @@ format.ldf_resource <- function(x, ...) {
   format(output)
 }
 
+#' Combine resource descriptions
+#'
+#' Merges descriptions on URI, and attempts to merge columns from either description (filling with
+#' `NA` where the column exists only in one description).
+#'
+#' @param x A resource description (inherits from data frame)
+#' @param y A resource description (inherits from data frame)
+#' @return A resource description (inherits from data frame)
+#' @export
+merge_description <- function(x, y) {
+  if(!is.null(x)) {
+    common_columns <- intersect(colnames(x), colnames(y))
+    dplyr::full_join(x, y, by=common_columns)
+  } else {
+    y
+  }
+}
+
+#' @export
+obj_print_footer.ldf_resource <- function(x, ...) {
+  cat("Description: ", paste0(colnames(attr(x, "data")), collapse=", "), "\n", sep = "")
+}
+
 #' @export
 vec_ptype_abbr.ldf_resource <- function(x, ...) {
   "ldf_rsrc"
 }
 
-# TODO: check
-
 #' @export
-vec_ptype2.ldf_resource.ldf_resource <- function(x, y, ...) new_resource()
+vec_ptype2.ldf_resource.ldf_resource <- function(x, y, ...) {
+  new_resource(data=merge_description(description(x), description(y)))
+}
 
 # TODO: should this actually allow char to be lifted to resource?
-# or change the next to achieve this?
 #' @export
 vec_ptype2.ldf_resource.character <- function(x, y, ...) character()
 
 #' @export
 vec_ptype2.character.ldf_resource <- function(x, y, ...) character()
 
+
 #' @export
-vec_cast.ldf_resource.ldf_resource <- function(x, to, ...) x
+vec_cast.ldf_resource.ldf_resource <- function(x, to, ...) {
+  all_description <- merge_description(description(x), description(to))
+
+  new_resource(vec_data(x), data=all_description)
+}
 
 # Cast from character -> resource
 #' @export
 vec_cast.ldf_resource.character <- function(x, to, ...) resource(x)
 
 # Cast from resource -> character
-# Should this extract the URI instead?
+# Extracts the URI
 #' @export
 vec_cast.character.ldf_resource <- function(x, to, ...) vec_data(x)
+
+#' Rebuild the description
+#' @export
+vec_restore.ldf_resource <- function(x, to, ...) {
+  all_description <- merge_description(description(x), description(to))
+
+  if(nrow(all_description)>0 & length(vec_data(x)) > 0) {
+    all_description <- all_description %>% dplyr::filter(uri %in% vec_data(x))
+  }
+
+  new_resource(vec_data(x), data=all_description)
+}
+
+# #' @export
+# vec_proxy.ldf_resource <- function(x, ...) {
+#   unclass(x)
+# }
 
 
 #' @export

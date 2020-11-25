@@ -2,7 +2,7 @@
 % Please edit documentation in R/resource.r
 \name{property}
 \alias{property}
-\title{Extract a property value from a description}
+\title{Extract a property value from a resource description}
 \usage{
 property(resource, p)
 }
@@ -15,5 +15,5 @@ property(resource, p)
 A vector with the values of the property that apply to each resource
 }
 \description{
-Extract a property value from a description
+Extract a property value from a resource description
 }

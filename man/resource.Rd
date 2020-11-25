@@ -5,7 +5,7 @@
 \alias{is_resource}
 \title{\code{resource} vector}
 \usage{
-resource(uri = character(), data = NULL)
+resource(uri = character(), data = data.frame(uri = unique(uri)))
 
 is_resource(x)
 }

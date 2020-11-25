@@ -128,7 +128,8 @@ describe("formatter", {
 
 describe("casting and coercion", {
   test_that("may be cast to itself", {
-    expect_equal(vec_cast(resource("a"), resource()), resource("a"))
+    expect_equal(vec_cast(resource("a"), resource()),
+                 resource("a"))
   })
 
   test_that("may be cast to character", {
@@ -142,10 +143,73 @@ describe("casting and coercion", {
   })
 })
 
+describe("merge_description", {
+  a <- data.frame(uri="a",label="A",stringsAsFactors = F)
+  b <- data.frame(uri="b",label="B",stringsAsFactors = F)
+  x <- data.frame(uri="x",label="X",value=10,stringsAsFactors = F)
+
+  test_that("rbinds matching descriptions", {
+    expect_equal(merge_description(a, b), rbind(a,b))
+  })
+
+  test_that("returns union of columns", {
+    ax <- merge_description(a, x)
+    expect_equal(ax$value, c(NA,10))
+  })
+
+  test_that("matches on URI (deduplicating)", {
+    expect_equal(merge_description(a, a), a)
+  })
+
+  # test_that("matches on URI (stopping on conflict)", {
+  #   az <- data.frame(uri="a",label="Z",stringsAsFactors = F)
+  #   expect_error(merge_description(a, az))
+  # })
+})
+
 describe("combining", {
   test_that("may be cast from a character", {
     expect_equal(vec_c(c("a"), resource("b")),
                  c("a", "b"))
+  })
+
+  a <- resource("a", data.frame(uri="a",label="A",stringsAsFactors = F))
+  b <- resource("b", data.frame(uri="b",label="B",stringsAsFactors = F))
+
+  test_that("resource descriptions may be concatenated with vec_c()", {
+    ab <- vec_c(a, b)
+    expect_equal(attr(ab, "data")$label, c("A","B"))
+  })
+
+  test_that("resource descriptions may be concatenated with c()", {
+    ab <- c(a, b)
+    expect_equal(attr(ab, "data")$label, c("A","B"))
+  })
+})
+
+describe("subsetting", {
+  test_that("vec_restore.ldf_resource can round trip vectors", {
+    a <- resource("a", data.frame(uri="a",label="A"))
+    expect_equal(vec_restore(vec_data(a), a), a)
+  })
+
+  test_that("description is subset when uri is subset", {
+    uris <- c("http://example.net/id/apple",
+              "http://example.net/id/banana",
+              "http://example.net/id/carrot")
+    labels <- c("Apple","Banana","Carrot")
+    sort_priorities <- 1:3
+    data <- data.frame(uri=uris,
+                       label=labels,
+                       sort_priority=sort_priorities,
+                       stringsAsFactors = F)
+    r <- resource(uris, data)
+
+    expect_equal(attr(r[1],"data"),
+                 data.frame(uri=uris[1],
+                            label=labels[1],
+                            sort_priority=sort_priorities[1],
+                            stringsAsFactors = F))
   })
 })
 
@@ -184,6 +248,7 @@ describe("works with other functions", {
     expect_equal(dim(m), c(3,1))
   })
 })
+
 # with data specified as a tibble or sf object
 # underlying type could be integer with uri mapping
 # sorts by sort priority
