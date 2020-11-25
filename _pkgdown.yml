@@ -9,22 +9,45 @@ reference:
   desc: Create resources and extract data from their descriptions.
   contents:
   - resource
+  - description
   - property
   - uri
   - curie
   - label
   - sort_priority
   - validate_resource
+  - merge_description
   - as_dataframe_of_labels
+- title: "Working with LDF intervals"
+  desc: Create intervals and extract data from their descriptions.
+  contents:
+  - interval
+  - int_start
+  - int_end
 - title: "Downloading DataCubes"
   desc: Download resources from RDF Data Cubes available on PublishMyData platforms
   contents:
   - get_cube
   - get_geography
   - get_label
+  - get_dimensions
 - title: "Building SPARQL queries"
   desc: Execute SPARQL queries and build them up from R objects
   contents:
   - query
   - predobj_binding
   - subpredobj_binding
+articles:
+  - title: Linked data frames
+    desc: Working with RDF resources in linked data frames
+    navbar: Linked data frames
+    contents:
+    - working-with-ldf-resources
+    - creating-ldf-resources
+    - working-with-ldf-intervals
+  - title: Data cubes
+    desc: Manipulation of data cubes for analysis and visualisation
+    navbar: Data cubes
+    contents:
+    - mapping-statistical-geography
+    - tabulate-datacube

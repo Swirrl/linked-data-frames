@@ -243,7 +243,7 @@ vec_cast.ldf_resource.character <- function(x, to, ...) resource(x)
 #' @export
 vec_cast.character.ldf_resource <- function(x, to, ...) vec_data(x)
 
-#' Rebuild the description
+# Rebuild the description
 #' @export
 vec_restore.ldf_resource <- function(x, to, ...) {
   all_description <- merge_description(description(x), description(to))
