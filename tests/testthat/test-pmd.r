@@ -22,6 +22,44 @@ test_that("get_cube works", {
   expect_equal(dim(cube), c(572,5)) # this might change when new data is loaded
 })
 
+describe("get_dimensions", {
+  test_that("finds codelist via qb:codeList on a dimension property", {
+    vcr::use_cassette("get_dimensions-dimension-codelist", {
+      dimensions <- get_dimensions("http://gss-data.org.uk/data/gss_data/covid-19/mmo-ad-hoc-statistical-release-uk-sea-fisheries-statistics#dataset",
+                                   endpoint="https://staging.gss-data.org.uk/sparql")
+    })
+
+    vessel_length <- dplyr::filter(dimensions, label=="Vessel Length")
+    expect_equal(vessel_length$codelist,
+                 "http://gss-data.org.uk/data/gss_data/covid-19/mmo-ad-hoc-statistical-release-uk-sea-fisheries-statistics#scheme/vessel-length")
+  })
+
+  test_that("finds codelist via qb:codeList on a component specification", {
+    vcr::use_cassette("get_dimensions-component-codelist", {
+      dimensions <- get_dimensions("http://statistics.gov.scot/data/gross-domestic-product-annual-output-by-industry",
+                                   endpoint="https://statistics.gov.scot/sparql")
+    })
+
+    industry <- dplyr::filter(dimensions, label=="Industry Sector (SIC 07)")
+    expect_equal(industry$codelist,
+                 "http://statistics.gov.scot/def/code-list/gross-domestic-product-annual-output-by-industry/industrySector(sic07)")
+  })
+
+  test_that("finds codelist via pmd:codesUsed on a component specification", {
+    vcr::use_cassette("get_dimensions-component-codesused", {
+      dimensions <- get_dimensions("http://linked.nisra.gov.uk/data/tourism-data",
+                                   endpoint="http://linked.nisra.gov.uk/sparql")
+    })
+
+    ref_area <- dplyr::filter(dimensions, label=="Reference Area")
+    expect_equal(ref_area$codelist,
+                 "http://linked.nisra.gov.uk/data/tourism-data/codes-used/geography_code")
+  })
+})
+
+
+
+
 test_that("get_label works", {
   vcr::use_cassette("get_label", {
     mt <- get_label("http://purl.org/linked-data/cube#measureType")

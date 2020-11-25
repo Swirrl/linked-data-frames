@@ -1,0 +1,48 @@
+http_interactions:
+- request:
+    method: post
+    uri: https://statistics.gov.scot/sparql?query=PREFIX%20rdfs%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3EPREFIX%20qb%3A%20%3Chttp%3A%2F%2Fpurl.org%2Flinked-data%2Fcube%23%3ESELECT%20%3Furi%20%3Flabel%20%3Fcodelist%20WHERE%20%7B%20%20%3Chttp%3A%2F%2Fstatistics.gov.scot%2Fdata%2Fgross-domestic-product-annual-output-by-industry%3E%20qb%3Astructure%2Fqb%3Acomponent%20%3Fcomponent%20.%20%20%3Fcomponent%20qb%3Adimension%20%3Furi%20.%20%20%3Furi%20rdfs%3Alabel%20%3Flabel%20.%20%20OPTIONAL%20%7B%20%3Furi%20qb%3AcodeList%20%3Fcodelist%20%7D%20%20OPTIONAL%20%7B%20%3Fcomponent%20qb%3AcodeList%20%3Fcodelist%20%7D%20%20OPTIONAL%20%7B%20%3Fcomponent%20%3Chttp%3A%2F%2Fpublishmydata.com%2Fdef%2Fqb%2FcodesUsed%3E%20%3Fcodelist%20%7D%7D
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Content-Type: ''
+      Accept: text/csv
+  response:
+    status:
+      status_code: 200
+      category: Success
+      reason: OK
+      message: 'Success: (200) OK'
+    headers:
+      server: nginx
+      date: Wed, 25 Nov 2020 10:43:25 GMT
+      content-type: text/csv
+      transfer-encoding: chunked
+      connection: keep-alive
+      status: 200 OK
+      x-frame-options: SAMEORIGIN
+      x-xss-protection: 1; mode=block
+      x-content-type-options: nosniff
+      content-disposition: attachment; filename=sparql.csv
+      content-transfer-encoding: binary
+      cache-control: no-cache
+      etag: W/"fb919a8853c481cfab37909243135e75"
+      x-request-id: c66e02a3-57e1-4bbc-bc96-fd6779963511
+      x-runtime: '0.137588'
+      expires: Wed, 25 Nov 2020 10:43:24 GMT
+      access-control-allow-origin: '*'
+      access-control-allow-methods: GET, POST, OPTIONS
+      access-control-allow-headers: DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type
+      strict-transport-security: max-age=15768000
+      content-encoding: gzip
+    body:
+      encoding: UTF-8
+      file: no
+      string: "uri,label,codelist\r\nhttp://purl.org/linked-data/sdmx/2009/dimension#refArea,Reference
+        Area,http://statistics.gov.scot/def/code-list/gross-domestic-product-annual-output-by-industry/refArea\r\nhttp://purl.org/linked-data/sdmx/2009/dimension#refPeriod,Reference
+        Period,http://statistics.gov.scot/def/code-list/gross-domestic-product-annual-output-by-industry/refPeriod\r\nhttp://purl.org/linked-data/cube#measureType,measure
+        type,http://statistics.gov.scot/def/code-list/gross-domestic-product-annual-output-by-industry/measureType\r\nhttp://statistics.gov.scot/def/dimension/industrySector(sic07),Industry
+        Sector (SIC 07),http://statistics.gov.scot/def/code-list/gross-domestic-product-annual-output-by-industry/industrySector(sic07)\r\n"
+  recorded_at: 2020-11-25 10:43:25 GMT
+  recorded_with: vcr/0.5.4, webmockr/0.7.0

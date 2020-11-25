@@ -1,0 +1,46 @@
+http_interactions:
+- request:
+    method: post
+    uri: http://linked.nisra.gov.uk/sparql?query=PREFIX%20rdfs%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3EPREFIX%20qb%3A%20%3Chttp%3A%2F%2Fpurl.org%2Flinked-data%2Fcube%23%3ESELECT%20%3Furi%20%3Flabel%20%3Fcodelist%20WHERE%20%7B%20%20%3Chttp%3A%2F%2Flinked.nisra.gov.uk%2Fdata%2Ftourism-data%3E%20qb%3Astructure%2Fqb%3Acomponent%20%3Fcomponent%20.%20%20%3Fcomponent%20qb%3Adimension%20%3Furi%20.%20%20%3Furi%20rdfs%3Alabel%20%3Flabel%20.%20%20OPTIONAL%20%7B%20%3Furi%20qb%3AcodeList%20%3Fcodelist%20%7D%20%20OPTIONAL%20%7B%20%3Fcomponent%20qb%3AcodeList%20%3Fcodelist%20%7D%20%20OPTIONAL%20%7B%20%3Fcomponent%20%3Chttp%3A%2F%2Fpublishmydata.com%2Fdef%2Fqb%2FcodesUsed%3E%20%3Fcodelist%20%7D%7D
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Content-Type: ''
+      Accept: text/csv
+  response:
+    status:
+      status_code: 200
+      category: Success
+      reason: OK
+      message: 'Success: (200) OK'
+    headers:
+      server: nginx/1.10.3 (Ubuntu)
+      date: Wed, 25 Nov 2020 10:43:26 GMT
+      content-type: text/csv
+      transfer-encoding: chunked
+      connection: keep-alive
+      status: 200 OK
+      x-frame-options: SAMEORIGIN
+      x-xss-protection: 1; mode=block
+      x-content-type-options: nosniff
+      content-disposition: attachment; filename=sparql.csv
+      content-transfer-encoding: binary
+      cache-control: no-cache
+      etag: W/"6fc73227f76d9b76cbaac8ed02b1f94e"
+      x-request-id: c970f64d-87a0-4575-9c99-56877b98f65f
+      x-runtime: '0.004623'
+      expires: Wed, 25 Nov 2020 10:43:25 GMT
+      access-control-allow-origin: '*'
+      access-control-allow-methods: GET, POST, OPTIONS
+      access-control-allow-headers: DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type
+      content-encoding: gzip
+    body:
+      encoding: UTF-8
+      file: no
+      string: "uri,label,codelist\r\nhttp://purl.org/linked-data/sdmx/2009/dimension#refPeriod,Reference
+        Period,http://linked.nisra.gov.uk/data/tourism-data/codes-used/year\r\nhttp://purl.org/linked-data/cube#measureType,measure
+        type,http://linked.nisra.gov.uk/data/tourism-data/codes-used/measure_type\r\nhttp://purl.org/linked-data/sdmx/2009/dimension#refArea,Reference
+        Area,http://linked.nisra.gov.uk/data/tourism-data/codes-used/geography_code\r\n"
+  recorded_at: 2020-11-25 10:43:26 GMT
+  recorded_with: vcr/0.5.4, webmockr/0.7.0

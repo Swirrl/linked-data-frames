@@ -77,15 +77,28 @@ subpredobj_binding <- function(subject, properties, optional=F) {
   ))
 }
 
+#' Download dimension properties
+#'
+#' @param dataset_uri A string
+#' @param endpoint A string for the sparql endpoint
+#' @return A data frame containing the dimension uris, labels and optionally codelists
+#' @export
+#' @examples
+#' \dontrun{
+#' get_cube("http://gss-data.org.uk/data/gss_data/covid-19/ons-online-price-changes-for-high-demand-products#dataset")
+#' }
 get_dimensions <- function(dataset_uri, endpoint=default_endpoint()) {
   q <- stringr::str_interp(c(
     "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>",
     "PREFIX qb: <http://purl.org/linked-data/cube#>",
     "",
     "SELECT ?uri ?label ?codelist WHERE {",
-    "  <${dataset_uri}> qb:structure/qb:component/qb:dimension ?uri .",
+    "  <${dataset_uri}> qb:structure/qb:component ?component .",
+    "  ?component qb:dimension ?uri .",
     "  ?uri rdfs:label ?label .",
     "  OPTIONAL { ?uri qb:codeList ?codelist }",
+    "  OPTIONAL { ?component qb:codeList ?codelist }",
+    "  OPTIONAL { ?component <http://publishmydata.com/def/qb/codesUsed> ?codelist }",
     "}"
   ))
   query(q, endpoint)
