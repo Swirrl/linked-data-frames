@@ -60,20 +60,24 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
-<li>
+<li class="divider">
+    <li class="dropdown-header">Linked data frames</li>
+    <li>
+      <a href="../articles/working-with-ldf-resources.html">Working with LDF Resources</a>
+    </li>
+    <li>
       <a href="../articles/creating-ldf-resources.html">Creating LDF Resources</a>
     </li>
+    <li>
+      <a href="../articles/working-with-ldf-intervals.html">Working with LDF Intervals</a>
+    </li>
+    <li class="divider">
+    <li class="dropdown-header">Data cubes</li>
     <li>
       <a href="../articles/mapping-statistical-geography.html">Mapping Statistical Geography</a>
     </li>
     <li>
       <a href="../articles/tabulate-datacube.html">Tabulating DataCubes</a>
-    </li>
-    <li>
-      <a href="../articles/working-with-ldf-intervals.html">Working with LDF Intervals</a>
-    </li>
-    <li>
-      <a href="../articles/working-with-ldf-resources.html">Working with LDF Resources</a>
     </li>
   </ul>
 </li>
@@ -188,6 +192,10 @@ GROUP BY ?geo
 <div class="sourceCode" id="cb5"><pre class="downlit">
 <span class="kw">geo</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_geography.html">get_geography</a></span>(<span class="kw">deaths</span><span class="op">$</span><span class="kw">geo</span>, include_geometry = <span class="kw">T</span>)
 </pre></div>
+</div>
+<div id="creating-a-thematic-map" class="section level2">
+<h2 class="hasAnchor">
+<a href="#creating-a-thematic-map" class="anchor"></a>Creating a thematic map</h2>
 <p>We can use these boundaries to visualise the data on a map.</p>
 <p>The modern approach to spatial data in R is to create a simple feature <code>sf</code> object. This is a data frame with a particular column chosen to be the active geometry.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit">

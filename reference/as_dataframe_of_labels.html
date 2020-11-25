@@ -103,20 +103,24 @@ and converts those vectors into labels." />
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li class="divider"></li>
+    <li class="dropdown-header">Linked data frames</li>
+    <li>
+      <a href="../articles/working-with-ldf-resources.html">Working with LDF Resources</a>
+    </li>
     <li>
       <a href="../articles/creating-ldf-resources.html">Creating LDF Resources</a>
     </li>
+    <li>
+      <a href="../articles/working-with-ldf-intervals.html">Working with LDF Intervals</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Data cubes</li>
     <li>
       <a href="../articles/mapping-statistical-geography.html">Mapping Statistical Geography</a>
     </li>
     <li>
       <a href="../articles/tabulate-datacube.html">Tabulating DataCubes</a>
-    </li>
-    <li>
-      <a href="../articles/working-with-ldf-intervals.html">Working with LDF Intervals</a>
-    </li>
-    <li>
-      <a href="../articles/working-with-ldf-resources.html">Working with LDF Resources</a>
     </li>
   </ul>
 </li>
@@ -180,9 +184,9 @@ and converts those vectors into labels.</p>
           <span class='st'>"http://example.net/id/banana"</span>,
           <span class='st'>"http://example.net/id/carrot"</span>)
 <span class='kw'>labels</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Apple"</span>,<span class='st'>"Banana"</span>,<span class='st'>"Carrot"</span>)
-<span class='kw'>data</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(uri=<span class='kw'>uris</span>, label=<span class='kw'>labels</span>)
+<span class='kw'>description</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(uri=<span class='kw'>uris</span>, label=<span class='kw'>labels</span>)
 
-<span class='kw'>linked_data_frame</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(fruit=<span class='fu'><a href='resource.html'>resource</a></span>(<span class='kw'>uris</span>, <span class='kw'>data</span>))
+<span class='kw'>linked_data_frame</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(fruit=<span class='fu'><a href='resource.html'>resource</a></span>(<span class='kw'>uris</span>, <span class='kw'>description</span>))
 <span class='kw'>labelled_data_frame</span> <span class='op'>&lt;-</span> <span class='fu'>as_dataframe_of_labels</span>(<span class='kw'>linked_data_frame</span>, stringsAsFactors=<span class='fl'>FALSE</span>)
 </div></pre>
   </div>

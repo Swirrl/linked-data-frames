@@ -60,20 +60,24 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
-<li>
+<li class="divider">
+    <li class="dropdown-header">Linked data frames</li>
+    <li>
+      <a href="articles/working-with-ldf-resources.html">Working with LDF Resources</a>
+    </li>
+    <li>
       <a href="articles/creating-ldf-resources.html">Creating LDF Resources</a>
     </li>
+    <li>
+      <a href="articles/working-with-ldf-intervals.html">Working with LDF Intervals</a>
+    </li>
+    <li class="divider">
+    <li class="dropdown-header">Data cubes</li>
     <li>
       <a href="articles/mapping-statistical-geography.html">Mapping Statistical Geography</a>
     </li>
     <li>
       <a href="articles/tabulate-datacube.html">Tabulating DataCubes</a>
-    </li>
-    <li>
-      <a href="articles/working-with-ldf-intervals.html">Working with LDF Intervals</a>
-    </li>
-    <li>
-      <a href="articles/working-with-ldf-resources.html">Working with LDF Resources</a>
     </li>
   </ul>
 </li>
@@ -148,14 +152,16 @@
 <span class="co">#&gt; &lt;ldf_resource[3]&gt;</span>
 <span class="co">#&gt; [1] Apple  Banana Carrot</span>
 </pre></div>
-<p>For a complete introduction to <code>ldf_resource</code> vectors library please see the following vignettes:</p>
+<p>For a complete introduction to the LDF library please see the following vignettes:</p>
 <ul>
 <li>
 <code><a href="articles/working-with-ldf-resources.html">vignette("working-with-ldf-resources")</a></code>: explains how resources are represented and introduces the functions like <code><a href="reference/property.html">property()</a></code> and <code><a href="reference/curie.html">curie()</a></code> that available for working with them;</li>
 <li>
 <code><a href="articles/creating-ldf-resources.html">vignette("creating-ldf-resources")</a></code>: explains how to create resources from SPARQL queries or RDF files;</li>
 <li>
-<code><a href="articles/working-with-ldf-intervals.html">vignette("working-with-ldf-intervals")</a></code>: explains hot to create interval resources from URIs and use them to plot with a time series chart.</li>
+<code><a href="articles/working-with-ldf-intervals.html">vignette("working-with-ldf-intervals")</a></code>: explains how to create interval resources from URIs and use them to plot a time series chart;</li>
+<li>
+<code><a href="articles/mapping-statistical-geography.html">vignette("mapping-statistical-geography")</a></code>: explains how to download geographic resources and use them to plot a thematic map.</li>
 </ul>
 </div>
 </div>

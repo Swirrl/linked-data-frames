@@ -60,20 +60,24 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
-<li>
+<li class="divider">
+    <li class="dropdown-header">Linked data frames</li>
+    <li>
+      <a href="../articles/working-with-ldf-resources.html">Working with LDF Resources</a>
+    </li>
+    <li>
       <a href="../articles/creating-ldf-resources.html">Creating LDF Resources</a>
     </li>
+    <li>
+      <a href="../articles/working-with-ldf-intervals.html">Working with LDF Intervals</a>
+    </li>
+    <li class="divider">
+    <li class="dropdown-header">Data cubes</li>
     <li>
       <a href="../articles/mapping-statistical-geography.html">Mapping Statistical Geography</a>
     </li>
     <li>
       <a href="../articles/tabulate-datacube.html">Tabulating DataCubes</a>
-    </li>
-    <li>
-      <a href="../articles/working-with-ldf-intervals.html">Working with LDF Intervals</a>
-    </li>
-    <li>
-      <a href="../articles/working-with-ldf-resources.html">Working with LDF Resources</a>
     </li>
   </ul>
 </li>
@@ -152,7 +156,7 @@ WHERE {
 </pre></div>
 <p>We can then create resources for these:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit">
-<span class="kw">music_genres</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/resource.html">resource</a></span>(<span class="kw">music_genre_results</span><span class="op">$</span><span class="kw">uri</span>, data=<span class="kw">music_genre_results</span>)
+<span class="kw">music_genres</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/resource.html">resource</a></span>(<span class="kw">music_genre_results</span><span class="op">$</span><span class="kw">uri</span>, description=<span class="kw">music_genre_results</span>)
 </pre></div>
 <p>Which we can then manipulate within R:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit">
@@ -164,7 +168,8 @@ WHERE {
 <span class="co">#&gt;  [5] Afro/Cosmic music              Benga music                   </span>
 <span class="co">#&gt;  [7] Bubblegum dance                Waltz (International Standard)</span>
 <span class="co">#&gt;  [9] Logobi                         Sega (genre)                  </span>
-<span class="co">#&gt; [11] K-pop                          Western swing</span>
+<span class="co">#&gt; [11] K-pop                          Western swing                 </span>
+<span class="co">#&gt; Description: uri, label, comment</span>
 </pre></div>
 </div>
 <div id="reading-rdf-files-with-rdflib" class="section level2">
@@ -301,6 +306,7 @@ SELECT * WHERE {
 <span class="co">#&gt; [1] http://id.crossref.org/contributor/carl-boettiger-2etprmps2zm1a     </span>
 <span class="co">#&gt; [2] http://id.crossref.org/contributor/t-alex-perkins-2etprmps2zm1a     </span>
 <span class="co">#&gt; [3] http://id.crossref.org/contributor/benjamin-l-phillips-2etprmps2zm1a</span>
+<span class="co">#&gt; Description: uri, type, family_name, given_name, name</span>
 </pre></div>
 </div>
   </div>

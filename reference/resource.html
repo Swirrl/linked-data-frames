@@ -47,7 +47,7 @@
 
 
 <meta property="og:title" content="resource vector — resource" />
-<meta property="og:description" content="This represents an RDF resource with the data held in an orthogonal table." />
+<meta property="og:description" content="A vector of RDF resources with descriptions held in an orthogonal table." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -102,20 +102,24 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li class="divider"></li>
+    <li class="dropdown-header">Linked data frames</li>
+    <li>
+      <a href="../articles/working-with-ldf-resources.html">Working with LDF Resources</a>
+    </li>
     <li>
       <a href="../articles/creating-ldf-resources.html">Creating LDF Resources</a>
     </li>
+    <li>
+      <a href="../articles/working-with-ldf-intervals.html">Working with LDF Intervals</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Data cubes</li>
     <li>
       <a href="../articles/mapping-statistical-geography.html">Mapping Statistical Geography</a>
     </li>
     <li>
       <a href="../articles/tabulate-datacube.html">Tabulating DataCubes</a>
-    </li>
-    <li>
-      <a href="../articles/working-with-ldf-intervals.html">Working with LDF Intervals</a>
-    </li>
-    <li>
-      <a href="../articles/working-with-ldf-resources.html">Working with LDF Resources</a>
     </li>
   </ul>
 </li>
@@ -146,10 +150,10 @@
     </div>
 
     <div class="ref-description">
-    <p>This represents an RDF resource with the data held in an orthogonal table.</p>
+    <p>A vector of RDF resources with descriptions held in an orthogonal table.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>resource</span>(uri = <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span>(), data = <span class='kw'>NULL</span>)
+    <pre class="usage"><span class='fu'>resource</span>(uri = <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span>(), description = <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(uri = <span class='fu'><a href='https://rdrr.io/r/base/unique.html'>unique</a></span>(<span class='kw'>uri</span>)))
 
 <span class='fu'>is_resource</span>(<span class='kw'>x</span>)</pre>
 
@@ -161,7 +165,7 @@
       <td><p>A character vector of URIs</p></td>
     </tr>
     <tr>
-      <th>data</th>
+      <th>description</th>
       <td><p>A data frame of descriptions (must have a <code>uri</code> column)</p></td>
     </tr>
     <tr>
@@ -177,13 +181,14 @@
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'>resource</span>(<span class='st'>"http://example.net"</span>)
 </div><div class='output co'>#&gt; &lt;ldf_resource[1]&gt;
-#&gt; [1] http://example.net</div><div class='input'>
+#&gt; [1] http://example.net
+#&gt; Description: uri</div><div class='input'>
 <span class='kw'>uris</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"http://example.net/id/apple"</span>,
           <span class='st'>"http://example.net/id/banana"</span>,
           <span class='st'>"http://example.net/id/carrot"</span>)
 <span class='kw'>labels</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Apple"</span>,<span class='st'>"Banana"</span>,<span class='st'>"Carrot"</span>)
-<span class='kw'>data</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(uri=<span class='kw'>uris</span>, label=<span class='kw'>labels</span>)
-<span class='kw'>r</span> <span class='op'>&lt;-</span> <span class='fu'>resource</span>(<span class='kw'>uris</span>, <span class='kw'>data</span>)
+<span class='kw'>description</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(uri=<span class='kw'>uris</span>, label=<span class='kw'>labels</span>)
+<span class='kw'>r</span> <span class='op'>&lt;-</span> <span class='fu'>resource</span>(<span class='kw'>uris</span>, <span class='kw'>description</span>)
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

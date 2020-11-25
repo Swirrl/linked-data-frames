@@ -101,20 +101,24 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li class="divider"></li>
+    <li class="dropdown-header">Linked data frames</li>
+    <li>
+      <a href="../articles/working-with-ldf-resources.html">Working with LDF Resources</a>
+    </li>
     <li>
       <a href="../articles/creating-ldf-resources.html">Creating LDF Resources</a>
     </li>
+    <li>
+      <a href="../articles/working-with-ldf-intervals.html">Working with LDF Intervals</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Data cubes</li>
     <li>
       <a href="../articles/mapping-statistical-geography.html">Mapping Statistical Geography</a>
     </li>
     <li>
       <a href="../articles/tabulate-datacube.html">Tabulating DataCubes</a>
-    </li>
-    <li>
-      <a href="../articles/working-with-ldf-intervals.html">Working with LDF Intervals</a>
-    </li>
-    <li>
-      <a href="../articles/working-with-ldf-resources.html">Working with LDF Resources</a>
     </li>
   </ul>
 </li>
@@ -171,9 +175,15 @@
       </tr><tr>
         
         <td>
+          <p><code><a href="description.html">description()</a></code> </p>
+        </td>
+        <td><p>Extract the description from a resource</p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="property.html">property()</a></code> </p>
         </td>
-        <td><p>Extract a property value from a description</p></td>
+        <td><p>Extract a property value from a resource description</p></td>
       </tr><tr>
         
         <td>
@@ -207,9 +217,46 @@
       </tr><tr>
         
         <td>
+          <p><code><a href="merge_description.html">merge_description()</a></code> </p>
+        </td>
+        <td><p>Combine resource descriptions</p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="as_dataframe_of_labels.html">as_dataframe_of_labels()</a></code> </p>
         </td>
         <td><p>Convert a linked data frame to labels</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-working-with-ldf-intervals" class="hasAnchor"><a href="#section-working-with-ldf-intervals" class="anchor"></a>Working with LDF intervals</h2>
+          <p class="section-desc"><p>Create intervals and extract data from their descriptions.</p></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="interval.html">interval()</a></code> <code><a href="interval.html">is_interval()</a></code> </p>
+        </td>
+        <td><p><code>interval</code> vector</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="int_start.html">int_start()</a></code> </p>
+        </td>
+        <td><p>The start date of an interval</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="int_end.html">int_end()</a></code> </p>
+        </td>
+        <td><p>The end date of an interval</p></td>
       </tr>
     </tbody><tbody>
       <tr>
@@ -241,6 +288,12 @@
           <p><code><a href="get_label.html">get_label()</a></code> </p>
         </td>
         <td><p>Download a Resource's label</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="get_dimensions.html">get_dimensions()</a></code> </p>
+        </td>
+        <td><p>Download dimension properties</p></td>
       </tr>
     </tbody><tbody>
       <tr>

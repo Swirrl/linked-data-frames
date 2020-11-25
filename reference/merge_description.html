@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>interval vector — interval • ldf</title>
+<title>Combine resource descriptions — merge_description • ldf</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,9 +46,9 @@
 
 
 
-<meta property="og:title" content="interval vector — interval" />
-<meta property="og:description" content="This represents an interval from the UK Government
-intervals ontology." />
+<meta property="og:title" content="Combine resource descriptions — merge_description" />
+<meta property="og:description" content="Merges descriptions on URI, and attempts to merge columns from either description (filling with
+NA where the column exists only in one description)." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -145,47 +145,35 @@ intervals ontology." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1><code>interval</code> vector</h1>
-    <small class="dont-index">Source: <a href='https://github.com/Swirrl/linked-data-frames/blob/master/R/interval.r'><code>R/interval.r</code></a></small>
-    <div class="hidden name"><code>interval.Rd</code></div>
+    <h1>Combine resource descriptions</h1>
+    <small class="dont-index">Source: <a href='https://github.com/Swirrl/linked-data-frames/blob/master/R/resource.r'><code>R/resource.r</code></a></small>
+    <div class="hidden name"><code>merge_description.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>This represents an interval from the UK Government
-<a href='http://reference.data.gov.uk/def/intervals'>intervals ontology</a>.</p>
+    <p>Merges descriptions on URI, and attempts to merge columns from either description (filling with
+<code>NA</code> where the column exists only in one description).</p>
     </div>
 
-    <pre class="usage"><span class='fu'>interval</span>(<span class='kw'>uri</span>)
-
-<span class='fu'>is_interval</span>(<span class='kw'>x</span>)</pre>
+    <pre class="usage"><span class='fu'>merge_description</span>(<span class='kw'>x</span>, <span class='kw'>y</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>uri</th>
-      <td><p>A character vector of URIs</p></td>
+      <th>x</th>
+      <td><p>A resource description (inherits from data frame)</p></td>
     </tr>
     <tr>
-      <th>x</th>
-      <td><p>An interval</p></td>
+      <th>y</th>
+      <td><p>A resource description (inherits from data frame)</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>An S3 vector of class <code>ldf_interval</code>.</p>
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+    <p>A resource description (inherits from data frame)</p>
 
-    <p><code>is_interval</code> returns <code>TRUE</code> if <code>x</code> is an interval and <code>FALSE</code> otherwise.</p>
-
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>year</span> <span class='op'>&lt;-</span> <span class='fu'>interval</span>(<span class='st'>"http://reference.data.gov.uk/id/year/2020"</span>)
-<span class='fu'>is_interval</span>(<span class='kw'>year</span>)
-</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'><span class='kw'>month</span> <span class='op'>&lt;-</span> <span class='fu'>interval</span>(<span class='st'>"http://reference.data.gov.uk/id/month/2020-07"</span>)
-<span class='kw'>day</span> <span class='op'>&lt;-</span> <span class='fu'>interval</span>(<span class='st'>"http://reference.data.gov.uk/id/day/2020-04-22"</span>)
-<span class='kw'>p7d</span> <span class='op'>&lt;-</span> <span class='fu'>interval</span>(<span class='st'>"http://reference.data.gov.uk/id/gregorian-interval/2020-04-27T00:00:00/P7D"</span>)
-</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

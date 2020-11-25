@@ -60,20 +60,24 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
-<li>
+<li class="divider">
+    <li class="dropdown-header">Linked data frames</li>
+    <li>
+      <a href="../articles/working-with-ldf-resources.html">Working with LDF Resources</a>
+    </li>
+    <li>
       <a href="../articles/creating-ldf-resources.html">Creating LDF Resources</a>
     </li>
+    <li>
+      <a href="../articles/working-with-ldf-intervals.html">Working with LDF Intervals</a>
+    </li>
+    <li class="divider">
+    <li class="dropdown-header">Data cubes</li>
     <li>
       <a href="../articles/mapping-statistical-geography.html">Mapping Statistical Geography</a>
     </li>
     <li>
       <a href="../articles/tabulate-datacube.html">Tabulating DataCubes</a>
-    </li>
-    <li>
-      <a href="../articles/working-with-ldf-intervals.html">Working with LDF Intervals</a>
-    </li>
-    <li>
-      <a href="../articles/working-with-ldf-resources.html">Working with LDF Resources</a>
     </li>
   </ul>
 </li>
@@ -139,7 +143,7 @@ Fisheries Statistics as they appear on COGS
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="http://haozhu233.github.io/kableExtra">kableExtra</a></span>)
 
 <span class="kw">peak</span> <span class="op">&lt;-</span> <span class="fu">function</span>(<span class="kw">df</span>) {
-  <span class="kw">df</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>() <span class="op">%&gt;%</span>  <span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/kbl.html">kbl</a></span>()
+  <span class="kw">df</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>() <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/kbl.html">kbl</a></span>()
 }
 
 <span class="fu">peak</span>(<span class="kw">fish</span>)
@@ -147,22 +151,22 @@ Fisheries Statistics as they appear on COGS
 <table class="table">
 <thead><tr>
 <th style="text-align:left;">
-measure_type
-</th>
-<th style="text-align:left;">
-reference_period
+admin_port
 </th>
 <th style="text-align:left;">
 reference_area
 </th>
 <th style="text-align:left;">
-vessel_length
+measure_type
 </th>
 <th style="text-align:left;">
 species_group
 </th>
 <th style="text-align:left;">
-admin_port
+vessel_length
+</th>
+<th style="text-align:left;">
+reference_period
 </th>
 <th style="text-align:right;">
 weight
@@ -177,22 +181,22 @@ observation_status
 <tbody>
 <tr>
 <td style="text-align:left;">
+United Kingdom
+</td>
+<td style="text-align:left;">
+United Kingdom
+</td>
+<td style="text-align:left;">
 Weight
 </td>
 <td style="text-align:left;">
+All
+</td>
+<td style="text-align:left;">
+All
+</td>
+<td style="text-align:left;">
 2019-07
-</td>
-<td style="text-align:left;">
-United Kingdom
-</td>
-<td style="text-align:left;">
-All
-</td>
-<td style="text-align:left;">
-All
-</td>
-<td style="text-align:left;">
-United Kingdom
 </td>
 <td style="text-align:right;">
 65751
@@ -206,22 +210,22 @@ NA
 </tr>
 <tr>
 <td style="text-align:left;">
+United Kingdom
+</td>
+<td style="text-align:left;">
+United Kingdom
+</td>
+<td style="text-align:left;">
 Weight
 </td>
 <td style="text-align:left;">
+All
+</td>
+<td style="text-align:left;">
+All
+</td>
+<td style="text-align:left;">
 2020-07
-</td>
-<td style="text-align:left;">
-United Kingdom
-</td>
-<td style="text-align:left;">
-All
-</td>
-<td style="text-align:left;">
-All
-</td>
-<td style="text-align:left;">
-United Kingdom
 </td>
 <td style="text-align:right;">
 68003
@@ -235,22 +239,22 @@ NA
 </tr>
 <tr>
 <td style="text-align:left;">
-Weight
-</td>
-<td style="text-align:left;">
-2019-07
+United Kingdom
 </td>
 <td style="text-align:left;">
 United Kingdom
 </td>
 <td style="text-align:left;">
-Under 10m
+Weight
 </td>
 <td style="text-align:left;">
 All
 </td>
 <td style="text-align:left;">
-United Kingdom
+Under 10m
+</td>
+<td style="text-align:left;">
+2019-07
 </td>
 <td style="text-align:right;">
 3841
@@ -264,22 +268,22 @@ NA
 </tr>
 <tr>
 <td style="text-align:left;">
-Weight
-</td>
-<td style="text-align:left;">
-2020-07
+United Kingdom
 </td>
 <td style="text-align:left;">
 United Kingdom
 </td>
 <td style="text-align:left;">
-Under 10m
+Weight
 </td>
 <td style="text-align:left;">
 All
 </td>
 <td style="text-align:left;">
-United Kingdom
+Under 10m
+</td>
+<td style="text-align:left;">
+2020-07
 </td>
 <td style="text-align:right;">
 2829
@@ -293,22 +297,22 @@ NA
 </tr>
 <tr>
 <td style="text-align:left;">
-Weight
-</td>
-<td style="text-align:left;">
-2019-07
+United Kingdom
 </td>
 <td style="text-align:left;">
 United Kingdom
 </td>
 <td style="text-align:left;">
-Under 10m
+Weight
 </td>
 <td style="text-align:left;">
 Demersal
 </td>
 <td style="text-align:left;">
-United Kingdom
+Under 10m
+</td>
+<td style="text-align:left;">
+2019-07
 </td>
 <td style="text-align:right;">
 385
@@ -322,22 +326,22 @@ NA
 </tr>
 <tr>
 <td style="text-align:left;">
-Weight
-</td>
-<td style="text-align:left;">
-2020-07
+United Kingdom
 </td>
 <td style="text-align:left;">
 United Kingdom
 </td>
 <td style="text-align:left;">
-Under 10m
+Weight
 </td>
 <td style="text-align:left;">
 Demersal
 </td>
 <td style="text-align:left;">
-United Kingdom
+Under 10m
+</td>
+<td style="text-align:left;">
+2020-07
 </td>
 <td style="text-align:right;">
 451

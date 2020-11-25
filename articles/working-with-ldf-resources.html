@@ -60,20 +60,24 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
-<li>
+<li class="divider">
+    <li class="dropdown-header">Linked data frames</li>
+    <li>
+      <a href="../articles/working-with-ldf-resources.html">Working with LDF Resources</a>
+    </li>
+    <li>
       <a href="../articles/creating-ldf-resources.html">Creating LDF Resources</a>
     </li>
+    <li>
+      <a href="../articles/working-with-ldf-intervals.html">Working with LDF Intervals</a>
+    </li>
+    <li class="divider">
+    <li class="dropdown-header">Data cubes</li>
     <li>
       <a href="../articles/mapping-statistical-geography.html">Mapping Statistical Geography</a>
     </li>
     <li>
       <a href="../articles/tabulate-datacube.html">Tabulating DataCubes</a>
-    </li>
-    <li>
-      <a href="../articles/working-with-ldf-intervals.html">Working with LDF Intervals</a>
-    </li>
-    <li>
-      <a href="../articles/working-with-ldf-resources.html">Working with LDF Resources</a>
     </li>
   </ul>
 </li>
@@ -168,6 +172,7 @@
 <span class="kw">food</span>[<span class="fu"><a href="../reference/label.html">label</a></span>(<span class="kw">food</span>) <span class="op">==</span> <span class="st">"Apple"</span>]
 <span class="co">#&gt; &lt;ldf_resource[1]&gt;</span>
 <span class="co">#&gt; [1] Apple</span>
+<span class="co">#&gt; Description: uri, label</span>
 </pre></div>
 <p>We use the label to pretty print linked data frames with <code>format.ldf_resource()</code>:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit">
