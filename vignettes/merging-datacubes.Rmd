@@ -1,0 +1,280 @@
+---
+title: "Merging DataCubes"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Merging DataCubes}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+This tutorial demonstrates how to merge data cubes using linked data frames.
+
+For brevity the code used to construct the input cubes is hidden. You can read the details in the [source code for this vignette on github](https://github.com/Swirrl/linked-data-frames/blob/master/vignettes/merging-datacubes.Rmd).
+
+```{r setup, warning=FALSE, message=F}
+library(ldf)
+library(knitr)
+library(magrittr)
+library(dplyr)
+library(vctrs)
+```
+
+There are a several ways to combine data cubes:
+
+- concatenating rows to gather observations from different cubes into a single collection
+- using correspondence lookups to translate dimension values from one codelist into another
+- joining cubes by dimension and code URIs to add more rows or columns as required
+
+We'll explore each in turn.
+
+# Concatenating rows of observations
+
+You can concatenate observations by "row binding" tables - adding rows from one table onto the end of another making a single, longer table.
+
+This is simple if the cubes have the same components. This basically means that tables need to have the same set of columns.
+
+## Rows with matching columns
+
+```{r echo=F, message=FALSE, warning=FALSE}
+library(vcr, quietly=T)
+
+invisible(vcr::use_cassette("ni-population", {
+  pop_by_lgd <- query("
+PREFIX qb: <http://purl.org/linked-data/cube#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX sdmxd: <http://purl.org/linked-data/sdmx/2009/dimension#>
+PREFIX sdmxa: <http://purl.org/linked-data/sdmx/2009/attribute#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX dim: <http://linked.nisra.gov.uk/def/dimension/>
+PREFIX meas: <http://linked.nisra.gov.uk/def/measure/>
+
+SELECT ?area ?gender ?age ?population WHERE {
+  ?obs 
+  	qb:dataSet <http://linked.nisra.gov.uk/data/local-government-districts-by-single-year-of-age-and-gender-mid-2001-to-mid-2018> ;
+  	sdmxd:refPeriod <http://reference.data.gov.uk/id/year/2019> ;
+  	qb:measureType meas:count ;
+  	sdmxa:unitMeasure <http://linked.nisra.gov.uk/def/concept/measure-units/people> ;
+  	sdmxd:refArea ?area ;
+  	dim:gender ?gender ;
+  	dim:age ?age ;
+  	meas:count ?population ;
+  	.
+} LIMIT 10
+", endpoint="http://linked.nisra.gov.uk/sparql") %>%
+    as_dataframe_of_resources(endpoint="http://linked.nisra.gov.uk/sparql")
+
+  pop_by_pc <- query("
+PREFIX qb: <http://purl.org/linked-data/cube#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX sdmxd: <http://purl.org/linked-data/sdmx/2009/dimension#>
+PREFIX sdmxa: <http://purl.org/linked-data/sdmx/2009/attribute#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX dim: <http://linked.nisra.gov.uk/def/dimension/>
+PREFIX meas: <http://linked.nisra.gov.uk/def/measure/>
+
+SELECT ?area ?gender ?age ?population WHERE {
+  ?obs 
+  	qb:dataSet <http://linked.nisra.gov.uk/data/parliamentary-constituencies-by-single-year-of-age-and-gender-mid-2001-to-mid-2018> ;
+  	sdmxd:refPeriod <http://reference.data.gov.uk/id/year/2019> ;
+  	qb:measureType meas:count ;
+  	sdmxa:unitMeasure <http://linked.nisra.gov.uk/def/concept/measure-units/people> ;
+  	sdmxd:refArea ?area ;
+  	dim:gender ?gender ;
+  	dim:age ?age ;
+  	meas:count ?population ;
+  	.
+} LIMIT 10
+", endpoint="http://linked.nisra.gov.uk/sparql") %>%
+    as_dataframe_of_resources(endpoint="http://linked.nisra.gov.uk/sparql")
+}))
+```
+
+The following two excerpts from population datasets on [linked.nisra.gov.uk](http://linked.nisra.gov.uk) have the same structure. 
+
+One is for Local Government Districts:
+
+```{r}
+kable(pop_by_lgd)
+```
+
+The other for Parliamentary Constituencies:
+
+```{r}
+kable(pop_by_pc)
+```
+
+These cubes are essentially the same, it's just the there are different types of geography in the `area` column. Because the URIs for the two geography types can't overlap (they're _Unique_ Resource Identifiers after all), we can concatenate the rows into a single table.
+
+We need to use `vctrs::vec_rbind()` instead of `base::rbind()` because this makes sure the resource descriptions are merged:
+
+```{r}
+vec_rbind(pop_by_lgd, pop_by_pc) %>% kable()
+```
+
+## Rows with different columns
+
+If the cubes have different structures we will need to alter the tables of observations so that they have the same columns. We can remove spare columns if we first filter the rows such that there's only a single value for that column. We can add missing columns by filling in values with a default.
+
+These two excerpts from the [Journey times to key services](https://www.gov.uk/government/statistical-data-sets/journey-time-statistics-data-tables-jts) datasets demonstrate the problem.
+
+```{r, echo=F, message=FALSE, warning=FALSE}
+invisible(vcr::use_cassette("journey-times", {
+  jt_town <- query("
+PREFIX qb: <http://purl.org/linked-data/cube#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX sdmxd: <http://purl.org/linked-data/sdmx/2009/dimension#>
+PREFIX sdmxa: <http://purl.org/linked-data/sdmx/2009/attribute#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX dim: <http://linked.nisra.gov.uk/def/dimension/>
+PREFIX meas: <http://linked.nisra.gov.uk/def/measure/>
+
+SELECT ?area ?mode ?date ?travel_time ?unit WHERE {
+  VALUES ?area { <http://statistics.data.gov.uk/id/statistical-geography/E01000001> }
+
+  ?obs
+     qb:dataSet <http://gss-data.org.uk/data/gss_data/towns-high-streets/dft-journey-times-to-key-services-by-lower-super-output-area/town-centre#dataset>;
+     <http://gss-data.org.uk/data/gss_data/towns-high-streets/dft-journey-times-to-key-services-by-lower-super-output-area/town-centre#dimension/lower-layer-super-output-area>
+       ?area;
+     <http://gss-data.org.uk/data/gss_data/towns-high-streets/dft-journey-times-to-key-services-by-lower-super-output-area/town-centre#dimension/mode-of-travel>
+       ?mode;
+     <http://gss-data.org.uk/data/gss_data/towns-high-streets/dft-journey-times-to-key-services-by-lower-super-output-area/town-centre#dimension/year>
+       ?date;
+     <http://gss-data.org.uk/def/measure/travel-time> ?travel_time;
+     sdmxa:unitMeasure ?unit .
+} LIMIT 3
+", endpoint="https://staging.gss-data.org.uk/sparql") %>%
+    as_dataframe_of_resources(endpoint="https://staging.gss-data.org.uk/sparql")
+
+  jt_employment <- query("
+PREFIX qb: <http://purl.org/linked-data/cube#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX sdmxd: <http://purl.org/linked-data/sdmx/2009/dimension#>
+PREFIX sdmxa: <http://purl.org/linked-data/sdmx/2009/attribute#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX dim: <http://linked.nisra.gov.uk/def/dimension/>
+PREFIX meas: <http://linked.nisra.gov.uk/def/measure/>
+
+SELECT ?area ?employment_centre_size ?mode ?date ?travel_time ?unit WHERE {
+  VALUES ?area { <http://statistics.data.gov.uk/id/statistical-geography/E01000001> }
+
+  ?obs
+     qb:dataSet <http://gss-data.org.uk/data/gss_data/towns-high-streets/dft-journey-times-to-key-services-by-lower-super-output-area/employment-centres#dataset>;
+     <http://gss-data.org.uk/data/gss_data/towns-high-streets/dft-journey-times-to-key-services-by-lower-super-output-area/employment-centres#dimension/lower-layer-super-output-area>
+       ?area;
+     <http://gss-data.org.uk/data/gss_data/towns-high-streets/dft-journey-times-to-key-services-by-lower-super-output-area/employment-centres#dimension/employment-centre-size> ?employment_centre_size;
+     <http://gss-data.org.uk/data/gss_data/towns-high-streets/dft-journey-times-to-key-services-by-lower-super-output-area/employment-centres#dimension/mode-of-travel>
+       ?mode;
+     <http://gss-data.org.uk/data/gss_data/towns-high-streets/dft-journey-times-to-key-services-by-lower-super-output-area/employment-centres#dimension/year>
+       ?date;
+     <http://gss-data.org.uk/def/measure/travel-time> ?travel_time;
+     sdmxa:unitMeasure ?unit .
+} LIMIT 6
+", endpoint="https://staging.gss-data.org.uk/sparql") %>%
+    as_dataframe_of_resources(endpoint="https://staging.gss-data.org.uk/sparql")
+}))
+```
+
+These are the journey times from each neighbourhood to the town centre:
+
+```{r}
+kable(jt_town)
+```
+
+The employment centres table by contrast has one extra column: `employment_centre_size`. This breakdown wasn't applicable to town centres but it's important to distinguish employment centres.
+
+```{r}
+kable(jt_employment)
+```
+
+We could choose to ignore it, picking a single value from the breakdown. In some cases the codelist will be hierarchical, having e.g. a value for "Any" or "Total" at the top of the tree. This effectively ignores the breakdown [^1]. In this case that's not possible so we'll have to pick an employment centre size.
+
+[^1]: We're not really "ignoring" the breakdown, so much as marginalising it by taking a value which effectively represents the integral over that dimension. In the case of counts, for example, this will be a sum. Picking an arbitrary value from the dimension would conditionalise the distribution upon it. Either way we're removing a dimension from the cube.
+
+Let's take moderately-sized employment centres. Once we've filtered to those rows, we can remove the redundant column:
+
+```{r}
+jt_employment_500 <- 
+   filter(jt_employment,
+          label(employment_centre_size)=="Employment centre with 500 to 4999 jobs") %>%
+   select(!employment_centre_size)
+
+kable(jt_employment_500)
+```
+
+We can then concatenate this with `jt_town`. If we do this now, however, there won't be a way to distinguish between the rows that come from each dataset. The destination of the service being travelled to is defined only in metadata (i.e. by the dataset's title) and isn't available in the data to let the observations distinguish themselves [^2]. We need to add this column in ourselves:
+
+[^2]: Of course the observation URIs would still be distinct, but we didn't return those from the query so they aren't in the table. We could instead have had the query bind a `dataset` variable for the `qb:dataSet` property in each case (yielding each dataset's URI), but doing it explicitly like this is hopefully more instructive.
+
+```{r}
+jt_town <- mutate(jt_town,
+                  destination="Town Centre")
+jt_employment_500 <- mutate(jt_employment_500,
+                            destination="Employment Centre (500-4999 jobs)")
+
+vec_rbind(jt_town, jt_employment_500) %>% kable()
+```
+
+Alternatively we can add the column to `jt_town`. Indeed `vctrs::vec_rbind()` will automatically set this to `NA` for us:
+
+```{r}
+jt_employment <- mutate(jt_employment, destination="Employment Centre")
+
+vec_rbind(jt_town, jt_employment) %>% kable()
+```
+
+
+<hr />
+
+<div style="background-color: #fcf8e3; border-color: #faebcc; padding: 15px; border: 1px solid transparent; border-radius: 4px;">
+  <h2 style="color: rgb(138, 109, 59); text-align: center;">The following sections are a work in progress</h2>
+</div>
+
+<hr />
+
+# Using correspondence lookups
+
+The components ought to have compatible values too. We can mix codes from different codelists (`skos:Concept` URIs from different `skos:ConceptScheme`s) in the same column, but it is generally nicer to work with a common set.
+
+This is particularly true if the scope of the codelists overlaps. If you can derive a single codelist with a set of mutually exclusive and comprehensively exhaustive codes, then it's possible to aggregate the values without double-counting or gaps.
+
+We can use correspondence tables to lookup equivalent values from one codelist in another.
+
+```{r}
+# example with correspondence table
+# Map SITC to CPA at highest level?
+```
+
+# Join cubes by dimension and code URIs
+
+If two cubes use the same codelist (or have dimensions with common patterns for URIs like intervals or geographies) then it's possible to join them on that basis.
+
+If every dimension is common to both cube codes (or if it only a single value), then it's possible to do a full join using all the dimensions. This will result in a combined cube with the same set of dimensions (which uniquely identify the rows) and two values - one from each of the original cubes.
+
+If these values are distinguished by dimension values, then they will be on different rows. Otherwise, the values could be put into different columns on the same rows. It's possible to transform the data between these two representations using the `tidyr` package as described in the [Tabulating DataCubes](tabulate-datacube.html) vignette. The longer (row bound) form is nicer for analysis (e.g. modelling or charting) whereas the wider (column bound) form is nicer for calculations that compare the values (e.g. denomination).
+
+```{r}
+# example of linear model + scatter plot from row-bound joined cube
+
+# X vs population for something
+# demonstrate that X is bigger if there are more people :D
+# calculate population-rate of X
+```
+
+```{r}
+# example of tidy::spread() on above to calculate ratio
+```

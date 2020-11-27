@@ -1,0 +1,333 @@
+http_interactions:
+- request:
+    method: post
+    uri: https://staging.gss-data.org.uk/sparql
+    body:
+      encoding: ''
+      string: query=%0APREFIX%20qb%3A%20%3Chttp%3A%2F%2Fpurl.org%2Flinked-data%2Fcube%23%3E%0APREFIX%20rdf%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E%0APREFIX%20rdfs%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0APREFIX%20sdmxd%3A%20%3Chttp%3A%2F%2Fpurl.org%2Flinked-data%2Fsdmx%2F2009%2Fdimension%23%3E%0APREFIX%20sdmxa%3A%20%3Chttp%3A%2F%2Fpurl.org%2Flinked-data%2Fsdmx%2F2009%2Fattribute%23%3E%0APREFIX%20skos%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2004%2F02%2Fskos%2Fcore%23%3E%0APREFIX%20xsd%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2001%2FXMLSchema%23%3E%0APREFIX%20dim%3A%20%3Chttp%3A%2F%2Flinked.nisra.gov.uk%2Fdef%2Fdimension%2F%3E%0APREFIX%20meas%3A%20%3Chttp%3A%2F%2Flinked.nisra.gov.uk%2Fdef%2Fmeasure%2F%3E%0A%0ASELECT%20%3Farea%20%3Fmode%20%3Fdate%20%3Ftravel_time%20%3Funit%20WHERE%20%7B%0A%20%20VALUES%20%3Farea%20%7B%20%3Chttp%3A%2F%2Fstatistics.data.gov.uk%2Fid%2Fstatistical-geography%2FE01000001%3E%20%7D%0A%0A%20%20%3Fobs%0A%20%20%20%20%20qb%3AdataSet%20%3Chttp%3A%2F%2Fgss-data.org.uk%2Fdata%2Fgss_data%2Ftowns-high-streets%2Fdft-journey-times-to-key-services-by-lower-super-output-area%2Ftown-centre%23dataset%3E%3B%0A%20%20%20%20%20%3Chttp%3A%2F%2Fgss-data.org.uk%2Fdata%2Fgss_data%2Ftowns-high-streets%2Fdft-journey-times-to-key-services-by-lower-super-output-area%2Ftown-centre%23dimension%2Flower-layer-super-output-area%3E%0A%20%20%20%20%20%20%20%3Farea%3B%0A%20%20%20%20%20%3Chttp%3A%2F%2Fgss-data.org.uk%2Fdata%2Fgss_data%2Ftowns-high-streets%2Fdft-journey-times-to-key-services-by-lower-super-output-area%2Ftown-centre%23dimension%2Fmode-of-travel%3E%0A%20%20%20%20%20%20%20%3Fmode%3B%0A%20%20%20%20%20%3Chttp%3A%2F%2Fgss-data.org.uk%2Fdata%2Fgss_data%2Ftowns-high-streets%2Fdft-journey-times-to-key-services-by-lower-super-output-area%2Ftown-centre%23dimension%2Fyear%3E%0A%20%20%20%20%20%20%20%3Fdate%3B%0A%20%20%20%20%20%3Chttp%3A%2F%2Fgss-data.org.uk%2Fdef%2Fmeasure%2Ftravel-time%3E%20%3Ftravel_time%3B%0A%20%20%20%20%20sdmxa%3AunitMeasure%20%3Funit%20.%0A%7D%20LIMIT%203%0A
+    headers:
+      Content-Type: application/x-www-form-urlencoded
+      Accept: text/csv
+  response:
+    status:
+      status_code: 200
+      category: Success
+      reason: OK
+      message: 'Success: (200) OK'
+    headers:
+      server: nginx
+      date: Fri, 27 Nov 2020 15:31:00 GMT
+      content-type: text/csv
+      vary: Accept-Encoding
+      content-encoding: gzip
+      via: 1.1 google
+      alt-svc: clear
+      transfer-encoding: chunked
+    body:
+      encoding: UTF-8
+      file: no
+      string: "area,mode,date,travel_time,unit\r\nhttp://statistics.data.gov.uk/id/statistical-geography/E01000001,http://gss-data.org.uk/def/concept/mode-of-travel/townptt,http://reference.data.gov.uk/id/year/2017,2.272200749E1,http://gss-data.org.uk/def/concept/measurement-units/minutes\r\nhttp://statistics.data.gov.uk/id/statistical-geography/E01000001,http://gss-data.org.uk/def/concept/mode-of-travel/towncyct,http://reference.data.gov.uk/id/year/2017,1.394594912E1,http://gss-data.org.uk/def/concept/measurement-units/minutes\r\nhttp://statistics.data.gov.uk/id/statistical-geography/E01000001,http://gss-data.org.uk/def/concept/mode-of-travel/towncart,http://reference.data.gov.uk/id/year/2017,1.458818201E1,http://gss-data.org.uk/def/concept/measurement-units/minutes\r\n"
+  recorded_at: 2020-11-27 15:31:03 GMT
+  recorded_with: vcr/0.5.4, webmockr/0.7.0
+- request:
+    method: post
+    uri: https://staging.gss-data.org.uk/sparql
+    body:
+      encoding: ''
+      string: query=PREFIX%20rdfs%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3ESELECT%20%2A%20WHERE%20%7B%20%20VALUES%20%3Furi%20%7B%20%3Chttp%3A%2F%2Fstatistics.data.gov.uk%2Fid%2Fstatistical-geography%2FE01000001%3E%20%7D%20%20%3Furi%20rdfs%3Alabel%20%3Flabel%20.%7D
+    headers:
+      Content-Type: application/x-www-form-urlencoded
+      Accept: text/csv
+  response:
+    status:
+      status_code: 200
+      category: Success
+      reason: OK
+      message: 'Success: (200) OK'
+    headers:
+      server: nginx
+      date: Fri, 27 Nov 2020 15:31:01 GMT
+      content-type: text/csv
+      vary: Accept-Encoding
+      content-encoding: gzip
+      via: 1.1 google
+      alt-svc: clear
+      transfer-encoding: chunked
+    body:
+      encoding: UTF-8
+      file: no
+      string: "uri,label\r\nhttp://statistics.data.gov.uk/id/statistical-geography/E01000001,E01000001\r\n"
+  recorded_at: 2020-11-27 15:31:03 GMT
+  recorded_with: vcr/0.5.4, webmockr/0.7.0
+- request:
+    method: post
+    uri: https://staging.gss-data.org.uk/sparql
+    body:
+      encoding: ''
+      string: query=PREFIX%20rdfs%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3ESELECT%20%2A%20WHERE%20%7B%20%20VALUES%20%3Furi%20%7B%20%3Chttp%3A%2F%2Fgss-data.org.uk%2Fdef%2Fconcept%2Fmode-of-travel%2Ftownptt%3E%20%3Chttp%3A%2F%2Fgss-data.org.uk%2Fdef%2Fconcept%2Fmode-of-travel%2Ftowncyct%3E%20%3Chttp%3A%2F%2Fgss-data.org.uk%2Fdef%2Fconcept%2Fmode-of-travel%2Ftowncart%3E%20%7D%20%20%3Furi%20rdfs%3Alabel%20%3Flabel%20.%7D
+    headers:
+      Content-Type: application/x-www-form-urlencoded
+      Accept: text/csv
+  response:
+    status:
+      status_code: 200
+      category: Success
+      reason: OK
+      message: 'Success: (200) OK'
+    headers:
+      server: nginx
+      date: Fri, 27 Nov 2020 15:31:01 GMT
+      content-type: text/csv
+      vary: Accept-Encoding
+      content-encoding: gzip
+      via: 1.1 google
+      alt-svc: clear
+      transfer-encoding: chunked
+    body:
+      encoding: UTF-8
+      file: no
+      string: "uri,label\r\nhttp://gss-data.org.uk/def/concept/mode-of-travel/townptt,PT/walk\r\nhttp://gss-data.org.uk/def/concept/mode-of-travel/towncyct,Cycle\r\nhttp://gss-data.org.uk/def/concept/mode-of-travel/towncart,Car\r\n"
+  recorded_at: 2020-11-27 15:31:03 GMT
+  recorded_with: vcr/0.5.4, webmockr/0.7.0
+- request:
+    method: post
+    uri: https://staging.gss-data.org.uk/sparql
+    body:
+      encoding: ''
+      string: query=PREFIX%20rdfs%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3ESELECT%20%2A%20WHERE%20%7B%20%20VALUES%20%3Furi%20%7B%20%3Chttp%3A%2F%2Freference.data.gov.uk%2Fid%2Fyear%2F2017%3E%20%7D%20%20%3Furi%20rdfs%3Alabel%20%3Flabel%20.%7D
+    headers:
+      Content-Type: application/x-www-form-urlencoded
+      Accept: text/csv
+  response:
+    status:
+      status_code: 200
+      category: Success
+      reason: OK
+      message: 'Success: (200) OK'
+    headers:
+      server: nginx
+      date: Fri, 27 Nov 2020 15:31:01 GMT
+      content-type: text/csv
+      vary: Accept-Encoding
+      content-encoding: gzip
+      via: 1.1 google
+      alt-svc: clear
+      transfer-encoding: chunked
+    body:
+      encoding: UTF-8
+      file: no
+      string: "uri,label\r\nhttp://reference.data.gov.uk/id/year/2017,2017\r\n"
+  recorded_at: 2020-11-27 15:31:03 GMT
+  recorded_with: vcr/0.5.4, webmockr/0.7.0
+- request:
+    method: post
+    uri: https://staging.gss-data.org.uk/sparql
+    body:
+      encoding: ''
+      string: query=PREFIX%20rdfs%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3ESELECT%20%2A%20WHERE%20%7B%20%20VALUES%20%3Furi%20%7B%20%3Chttp%3A%2F%2Fgss-data.org.uk%2Fdef%2Fconcept%2Fmeasurement-units%2Fminutes%3E%20%7D%20%20%3Furi%20rdfs%3Alabel%20%3Flabel%20.%7D
+    headers:
+      Content-Type: application/x-www-form-urlencoded
+      Accept: text/csv
+  response:
+    status:
+      status_code: 200
+      category: Success
+      reason: OK
+      message: 'Success: (200) OK'
+    headers:
+      server: nginx
+      date: Fri, 27 Nov 2020 15:31:02 GMT
+      content-type: text/csv
+      vary: Accept-Encoding
+      content-encoding: gzip
+      via: 1.1 google
+      alt-svc: clear
+      transfer-encoding: chunked
+    body:
+      encoding: UTF-8
+      file: no
+      string: "uri,label\r\nhttp://gss-data.org.uk/def/concept/measurement-units/minutes,Minutes\r\n"
+  recorded_at: 2020-11-27 15:31:03 GMT
+  recorded_with: vcr/0.5.4, webmockr/0.7.0
+- request:
+    method: post
+    uri: https://staging.gss-data.org.uk/sparql
+    body:
+      encoding: ''
+      string: query=%0APREFIX%20qb%3A%20%3Chttp%3A%2F%2Fpurl.org%2Flinked-data%2Fcube%23%3E%0APREFIX%20rdf%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E%0APREFIX%20rdfs%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0APREFIX%20sdmxd%3A%20%3Chttp%3A%2F%2Fpurl.org%2Flinked-data%2Fsdmx%2F2009%2Fdimension%23%3E%0APREFIX%20sdmxa%3A%20%3Chttp%3A%2F%2Fpurl.org%2Flinked-data%2Fsdmx%2F2009%2Fattribute%23%3E%0APREFIX%20skos%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2004%2F02%2Fskos%2Fcore%23%3E%0APREFIX%20xsd%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2001%2FXMLSchema%23%3E%0APREFIX%20dim%3A%20%3Chttp%3A%2F%2Flinked.nisra.gov.uk%2Fdef%2Fdimension%2F%3E%0APREFIX%20meas%3A%20%3Chttp%3A%2F%2Flinked.nisra.gov.uk%2Fdef%2Fmeasure%2F%3E%0A%0ASELECT%20%3Farea%20%3Femployment_centre_size%20%3Fmode%20%3Fdate%20%3Ftravel_time%20%3Funit%20WHERE%20%7B%0A%20%20VALUES%20%3Farea%20%7B%20%3Chttp%3A%2F%2Fstatistics.data.gov.uk%2Fid%2Fstatistical-geography%2FE01000001%3E%20%7D%0A%0A%20%20%3Fobs%0A%20%20%20%20%20qb%3AdataSet%20%3Chttp%3A%2F%2Fgss-data.org.uk%2Fdata%2Fgss_data%2Ftowns-high-streets%2Fdft-journey-times-to-key-services-by-lower-super-output-area%2Femployment-centres%23dataset%3E%3B%0A%20%20%20%20%20%3Chttp%3A%2F%2Fgss-data.org.uk%2Fdata%2Fgss_data%2Ftowns-high-streets%2Fdft-journey-times-to-key-services-by-lower-super-output-area%2Femployment-centres%23dimension%2Flower-layer-super-output-area%3E%0A%20%20%20%20%20%20%20%3Farea%3B%0A%20%20%20%20%20%3Chttp%3A%2F%2Fgss-data.org.uk%2Fdata%2Fgss_data%2Ftowns-high-streets%2Fdft-journey-times-to-key-services-by-lower-super-output-area%2Femployment-centres%23dimension%2Femployment-centre-size%3E%20%3Femployment_centre_size%3B%0A%20%20%20%20%20%3Chttp%3A%2F%2Fgss-data.org.uk%2Fdata%2Fgss_data%2Ftowns-high-streets%2Fdft-journey-times-to-key-services-by-lower-super-output-area%2Femployment-centres%23dimension%2Fmode-of-travel%3E%0A%20%20%20%20%20%20%20%3Fmode%3B%0A%20%20%20%20%20%3Chttp%3A%2F%2Fgss-data.org.uk%2Fdata%2Fgss_data%2Ftowns-high-streets%2Fdft-journey-times-to-key-services-by-lower-super-output-area%2Femployment-centres%23dimension%2Fyear%3E%0A%20%20%20%20%20%20%20%3Fdate%3B%0A%20%20%20%20%20%3Chttp%3A%2F%2Fgss-data.org.uk%2Fdef%2Fmeasure%2Ftravel-time%3E%20%3Ftravel_time%3B%0A%20%20%20%20%20sdmxa%3AunitMeasure%20%3Funit%20.%0A%7D%20LIMIT%206%0A
+    headers:
+      Content-Type: application/x-www-form-urlencoded
+      Accept: text/csv
+  response:
+    status:
+      status_code: 200
+      category: Success
+      reason: OK
+      message: 'Success: (200) OK'
+    headers:
+      server: nginx
+      date: Fri, 27 Nov 2020 15:31:02 GMT
+      content-type: text/csv
+      vary: Accept-Encoding
+      content-encoding: gzip
+      via: 1.1 google
+      alt-svc: clear
+      transfer-encoding: chunked
+    body:
+      encoding: UTF-8
+      file: no
+      string: "area,employment_centre_size,mode,date,travel_time,unit\r\nhttp://statistics.data.gov.uk/id/statistical-geography/E01000001,http://gss-data.org.uk/def/concept/employment-centre-size/employment-centre-with-100-to-499-jobs,http://gss-data.org.uk/def/concept/mode-of-travel/100empptt,http://reference.data.gov.uk/id/year/2017,2.0E1,http://gss-data.org.uk/def/concept/measurement-units/minutes\r\nhttp://statistics.data.gov.uk/id/statistical-geography/E01000001,http://gss-data.org.uk/def/concept/employment-centre-size/employment-centre-with-100-to-499-jobs,http://gss-data.org.uk/def/concept/mode-of-travel/100empcyct,http://reference.data.gov.uk/id/year/2017,1.2E1,http://gss-data.org.uk/def/concept/measurement-units/minutes\r\nhttp://statistics.data.gov.uk/id/statistical-geography/E01000001,http://gss-data.org.uk/def/concept/employment-centre-size/employment-centre-with-100-to-499-jobs,http://gss-data.org.uk/def/concept/mode-of-travel/100empcart,http://reference.data.gov.uk/id/year/2017,1.3E1,http://gss-data.org.uk/def/concept/measurement-units/minutes\r\nhttp://statistics.data.gov.uk/id/statistical-geography/E01000001,http://gss-data.org.uk/def/concept/employment-centre-size/employment-centre-with-500-to-4999-jobs,http://gss-data.org.uk/def/concept/mode-of-travel/500empptt,http://reference.data.gov.uk/id/year/2017,4.0E0,http://gss-data.org.uk/def/concept/measurement-units/minutes\r\nhttp://statistics.data.gov.uk/id/statistical-geography/E01000001,http://gss-data.org.uk/def/concept/employment-centre-size/employment-centre-with-500-to-4999-jobs,http://gss-data.org.uk/def/concept/mode-of-travel/500empcyct,http://reference.data.gov.uk/id/year/2017,7.0E0,http://gss-data.org.uk/def/concept/measurement-units/minutes\r\nhttp://statistics.data.gov.uk/id/statistical-geography/E01000001,http://gss-data.org.uk/def/concept/employment-centre-size/employment-centre-with-500-to-4999-jobs,http://gss-data.org.uk/def/concept/mode-of-travel/500empcart,http://reference.data.gov.uk/id/year/2017,7.0E0,http://gss-data.org.uk/def/concept/measurement-units/minutes\r\n"
+  recorded_at: 2020-11-27 15:31:03 GMT
+  recorded_with: vcr/0.5.4, webmockr/0.7.0
+- request:
+    method: post
+    uri: https://staging.gss-data.org.uk/sparql
+    body:
+      encoding: ''
+      string: query=PREFIX%20rdfs%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3ESELECT%20%2A%20WHERE%20%7B%20%20VALUES%20%3Furi%20%7B%20%3Chttp%3A%2F%2Fstatistics.data.gov.uk%2Fid%2Fstatistical-geography%2FE01000001%3E%20%7D%20%20%3Furi%20rdfs%3Alabel%20%3Flabel%20.%7D
+    headers:
+      Content-Type: application/x-www-form-urlencoded
+      Accept: text/csv
+  response:
+    status:
+      status_code: 200
+      category: Success
+      reason: OK
+      message: 'Success: (200) OK'
+    headers:
+      server: nginx
+      date: Fri, 27 Nov 2020 15:31:02 GMT
+      content-type: text/csv
+      vary: Accept-Encoding
+      content-encoding: gzip
+      via: 1.1 google
+      alt-svc: clear
+      transfer-encoding: chunked
+    body:
+      encoding: UTF-8
+      file: no
+      string: "uri,label\r\nhttp://statistics.data.gov.uk/id/statistical-geography/E01000001,E01000001\r\n"
+  recorded_at: 2020-11-27 15:31:03 GMT
+  recorded_with: vcr/0.5.4, webmockr/0.7.0
+- request:
+    method: post
+    uri: https://staging.gss-data.org.uk/sparql
+    body:
+      encoding: ''
+      string: query=PREFIX%20rdfs%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3ESELECT%20%2A%20WHERE%20%7B%20%20VALUES%20%3Furi%20%7B%20%3Chttp%3A%2F%2Fgss-data.org.uk%2Fdef%2Fconcept%2Femployment-centre-size%2Femployment-centre-with-100-to-499-jobs%3E%20%3Chttp%3A%2F%2Fgss-data.org.uk%2Fdef%2Fconcept%2Femployment-centre-size%2Femployment-centre-with-500-to-4999-jobs%3E%20%7D%20%20%3Furi%20rdfs%3Alabel%20%3Flabel%20.%7D
+    headers:
+      Content-Type: application/x-www-form-urlencoded
+      Accept: text/csv
+  response:
+    status:
+      status_code: 200
+      category: Success
+      reason: OK
+      message: 'Success: (200) OK'
+    headers:
+      server: nginx
+      date: Fri, 27 Nov 2020 15:31:02 GMT
+      content-type: text/csv
+      vary: Accept-Encoding
+      content-encoding: gzip
+      via: 1.1 google
+      alt-svc: clear
+      transfer-encoding: chunked
+    body:
+      encoding: UTF-8
+      file: no
+      string: "uri,label\r\nhttp://gss-data.org.uk/def/concept/employment-centre-size/employment-centre-with-100-to-499-jobs,Employment
+        centre with 100 to 499 jobs\r\nhttp://gss-data.org.uk/def/concept/employment-centre-size/employment-centre-with-500-to-4999-jobs,Employment
+        centre with 500 to 4999 jobs\r\n"
+  recorded_at: 2020-11-27 15:31:03 GMT
+  recorded_with: vcr/0.5.4, webmockr/0.7.0
+- request:
+    method: post
+    uri: https://staging.gss-data.org.uk/sparql
+    body:
+      encoding: ''
+      string: query=PREFIX%20rdfs%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3ESELECT%20%2A%20WHERE%20%7B%20%20VALUES%20%3Furi%20%7B%20%3Chttp%3A%2F%2Fgss-data.org.uk%2Fdef%2Fconcept%2Fmode-of-travel%2F100empptt%3E%20%3Chttp%3A%2F%2Fgss-data.org.uk%2Fdef%2Fconcept%2Fmode-of-travel%2F100empcyct%3E%20%3Chttp%3A%2F%2Fgss-data.org.uk%2Fdef%2Fconcept%2Fmode-of-travel%2F100empcart%3E%20%3Chttp%3A%2F%2Fgss-data.org.uk%2Fdef%2Fconcept%2Fmode-of-travel%2F500empptt%3E%20%3Chttp%3A%2F%2Fgss-data.org.uk%2Fdef%2Fconcept%2Fmode-of-travel%2F500empcyct%3E%20%3Chttp%3A%2F%2Fgss-data.org.uk%2Fdef%2Fconcept%2Fmode-of-travel%2F500empcart%3E%20%7D%20%20%3Furi%20rdfs%3Alabel%20%3Flabel%20.%7D
+    headers:
+      Content-Type: application/x-www-form-urlencoded
+      Accept: text/csv
+  response:
+    status:
+      status_code: 200
+      category: Success
+      reason: OK
+      message: 'Success: (200) OK'
+    headers:
+      server: nginx
+      date: Fri, 27 Nov 2020 15:31:03 GMT
+      content-type: text/csv
+      vary: Accept-Encoding
+      content-encoding: gzip
+      via: 1.1 google
+      alt-svc: clear
+      transfer-encoding: chunked
+    body:
+      encoding: UTF-8
+      file: no
+      string: "uri,label\r\nhttp://gss-data.org.uk/def/concept/mode-of-travel/100empptt,PT/walk\r\nhttp://gss-data.org.uk/def/concept/mode-of-travel/100empcyct,Cycle\r\nhttp://gss-data.org.uk/def/concept/mode-of-travel/100empcart,Car\r\nhttp://gss-data.org.uk/def/concept/mode-of-travel/500empptt,PT/walk\r\nhttp://gss-data.org.uk/def/concept/mode-of-travel/500empcyct,Cycle\r\nhttp://gss-data.org.uk/def/concept/mode-of-travel/500empcart,Car\r\n"
+  recorded_at: 2020-11-27 15:31:03 GMT
+  recorded_with: vcr/0.5.4, webmockr/0.7.0
+- request:
+    method: post
+    uri: https://staging.gss-data.org.uk/sparql
+    body:
+      encoding: ''
+      string: query=PREFIX%20rdfs%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3ESELECT%20%2A%20WHERE%20%7B%20%20VALUES%20%3Furi%20%7B%20%3Chttp%3A%2F%2Freference.data.gov.uk%2Fid%2Fyear%2F2017%3E%20%7D%20%20%3Furi%20rdfs%3Alabel%20%3Flabel%20.%7D
+    headers:
+      Content-Type: application/x-www-form-urlencoded
+      Accept: text/csv
+  response:
+    status:
+      status_code: 200
+      category: Success
+      reason: OK
+      message: 'Success: (200) OK'
+    headers:
+      server: nginx
+      date: Fri, 27 Nov 2020 15:31:03 GMT
+      content-type: text/csv
+      vary: Accept-Encoding
+      content-encoding: gzip
+      via: 1.1 google
+      alt-svc: clear
+      transfer-encoding: chunked
+    body:
+      encoding: UTF-8
+      file: no
+      string: "uri,label\r\nhttp://reference.data.gov.uk/id/year/2017,2017\r\n"
+  recorded_at: 2020-11-27 15:31:03 GMT
+  recorded_with: vcr/0.5.4, webmockr/0.7.0
+- request:
+    method: post
+    uri: https://staging.gss-data.org.uk/sparql
+    body:
+      encoding: ''
+      string: query=PREFIX%20rdfs%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3ESELECT%20%2A%20WHERE%20%7B%20%20VALUES%20%3Furi%20%7B%20%3Chttp%3A%2F%2Fgss-data.org.uk%2Fdef%2Fconcept%2Fmeasurement-units%2Fminutes%3E%20%7D%20%20%3Furi%20rdfs%3Alabel%20%3Flabel%20.%7D
+    headers:
+      Content-Type: application/x-www-form-urlencoded
+      Accept: text/csv
+  response:
+    status:
+      status_code: 200
+      category: Success
+      reason: OK
+      message: 'Success: (200) OK'
+    headers:
+      server: nginx
+      date: Fri, 27 Nov 2020 15:31:03 GMT
+      content-type: text/csv
+      vary: Accept-Encoding
+      content-encoding: gzip
+      via: 1.1 google
+      alt-svc: clear
+      transfer-encoding: chunked
+    body:
+      encoding: UTF-8
+      file: no
+      string: "uri,label\r\nhttp://gss-data.org.uk/def/concept/measurement-units/minutes,Minutes\r\n"
+  recorded_at: 2020-11-27 15:31:03 GMT
+  recorded_with: vcr/0.5.4, webmockr/0.7.0

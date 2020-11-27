@@ -1,0 +1,339 @@
+http_interactions:
+- request:
+    method: post
+    uri: http://linked.nisra.gov.uk/sparql
+    body:
+      encoding: ''
+      string: query=%0APREFIX%20qb%3A%20%3Chttp%3A%2F%2Fpurl.org%2Flinked-data%2Fcube%23%3E%0APREFIX%20rdf%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E%0APREFIX%20rdfs%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0APREFIX%20sdmxd%3A%20%3Chttp%3A%2F%2Fpurl.org%2Flinked-data%2Fsdmx%2F2009%2Fdimension%23%3E%0APREFIX%20sdmxa%3A%20%3Chttp%3A%2F%2Fpurl.org%2Flinked-data%2Fsdmx%2F2009%2Fattribute%23%3E%0APREFIX%20skos%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2004%2F02%2Fskos%2Fcore%23%3E%0APREFIX%20xsd%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2001%2FXMLSchema%23%3E%0APREFIX%20dim%3A%20%3Chttp%3A%2F%2Flinked.nisra.gov.uk%2Fdef%2Fdimension%2F%3E%0APREFIX%20meas%3A%20%3Chttp%3A%2F%2Flinked.nisra.gov.uk%2Fdef%2Fmeasure%2F%3E%0A%0ASELECT%20%3Farea%20%3Fgender%20%3Fage%20%3Fpopulation%20WHERE%20%7B%0A%20%20%3Fobs%20%0A%20%20%09qb%3AdataSet%20%3Chttp%3A%2F%2Flinked.nisra.gov.uk%2Fdata%2Flocal-government-districts-by-single-year-of-age-and-gender-mid-2001-to-mid-2018%3E%20%3B%0A%20%20%09sdmxd%3ArefPeriod%20%3Chttp%3A%2F%2Freference.data.gov.uk%2Fid%2Fyear%2F2019%3E%20%3B%0A%20%20%09qb%3AmeasureType%20meas%3Acount%20%3B%0A%20%20%09sdmxa%3AunitMeasure%20%3Chttp%3A%2F%2Flinked.nisra.gov.uk%2Fdef%2Fconcept%2Fmeasure-units%2Fpeople%3E%20%3B%0A%20%20%09sdmxd%3ArefArea%20%3Farea%20%3B%0A%20%20%09dim%3Agender%20%3Fgender%20%3B%0A%20%20%09dim%3Aage%20%3Fage%20%3B%0A%20%20%09meas%3Acount%20%3Fpopulation%20%3B%0A%20%20%09.%0A%7D%20LIMIT%2010%0A
+    headers:
+      Content-Type: application/x-www-form-urlencoded
+      Accept: text/csv
+  response:
+    status:
+      status_code: 200
+      category: Success
+      reason: OK
+      message: 'Success: (200) OK'
+    headers:
+      server: nginx/1.10.3 (Ubuntu)
+      date: Fri, 27 Nov 2020 09:01:49 GMT
+      content-type: text/csv
+      transfer-encoding: chunked
+      connection: keep-alive
+      status: 200 OK
+      x-frame-options: SAMEORIGIN
+      x-xss-protection: 1; mode=block
+      x-content-type-options: nosniff
+      content-disposition: attachment; filename=sparql.csv
+      content-transfer-encoding: binary
+      cache-control: no-cache
+      etag: W/"8276974de641ddc4d21726c0dbd974c2"
+      x-request-id: 48218887-e959-409d-994a-94da108ea345
+      x-runtime: '0.005985'
+      expires: Fri, 27 Nov 2020 09:01:48 GMT
+      access-control-allow-origin: '*'
+      access-control-allow-methods: GET, POST, OPTIONS
+      access-control-allow-headers: DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type
+      content-encoding: gzip
+    body:
+      encoding: UTF-8
+      file: no
+      string: "area,gender,age,population\r\nhttp://statistics.data.gov.uk/id/statistical-geography/N09000001,http://linked.nisra.gov.uk/def/concept/gender/all-persons,http://linked.nisra.gov.uk/def/concept/single-year-of-age/0,1629\r\nhttp://statistics.data.gov.uk/id/statistical-geography/N09000001,http://linked.nisra.gov.uk/def/concept/gender/all-persons,http://linked.nisra.gov.uk/def/concept/single-year-of-age/1,1672\r\nhttp://statistics.data.gov.uk/id/statistical-geography/N09000001,http://linked.nisra.gov.uk/def/concept/gender/all-persons,http://linked.nisra.gov.uk/def/concept/single-year-of-age/2,1710\r\nhttp://statistics.data.gov.uk/id/statistical-geography/N09000001,http://linked.nisra.gov.uk/def/concept/gender/all-persons,http://linked.nisra.gov.uk/def/concept/single-year-of-age/3,1861\r\nhttp://statistics.data.gov.uk/id/statistical-geography/N09000001,http://linked.nisra.gov.uk/def/concept/gender/all-persons,http://linked.nisra.gov.uk/def/concept/single-year-of-age/4,1816\r\nhttp://statistics.data.gov.uk/id/statistical-geography/N09000001,http://linked.nisra.gov.uk/def/concept/gender/all-persons,http://linked.nisra.gov.uk/def/concept/single-year-of-age/5,1845\r\nhttp://statistics.data.gov.uk/id/statistical-geography/N09000001,http://linked.nisra.gov.uk/def/concept/gender/all-persons,http://linked.nisra.gov.uk/def/concept/single-year-of-age/6,1907\r\nhttp://statistics.data.gov.uk/id/statistical-geography/N09000001,http://linked.nisra.gov.uk/def/concept/gender/all-persons,http://linked.nisra.gov.uk/def/concept/single-year-of-age/7,2006\r\nhttp://statistics.data.gov.uk/id/statistical-geography/N09000001,http://linked.nisra.gov.uk/def/concept/gender/all-persons,http://linked.nisra.gov.uk/def/concept/single-year-of-age/8,1988\r\nhttp://statistics.data.gov.uk/id/statistical-geography/N09000001,http://linked.nisra.gov.uk/def/concept/gender/all-persons,http://linked.nisra.gov.uk/def/concept/single-year-of-age/9,2004\r\n"
+  recorded_at: 2020-11-27 09:01:50 GMT
+  recorded_with: vcr/0.5.4, webmockr/0.7.0
+- request:
+    method: post
+    uri: http://linked.nisra.gov.uk/sparql
+    body:
+      encoding: ''
+      string: query=PREFIX%20rdfs%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3ESELECT%20%2A%20WHERE%20%7B%20%20VALUES%20%3Furi%20%7B%20%3Chttp%3A%2F%2Fstatistics.data.gov.uk%2Fid%2Fstatistical-geography%2FN09000001%3E%20%7D%20%20%3Furi%20rdfs%3Alabel%20%3Flabel%20.%7D
+    headers:
+      Content-Type: application/x-www-form-urlencoded
+      Accept: text/csv
+  response:
+    status:
+      status_code: 200
+      category: Success
+      reason: OK
+      message: 'Success: (200) OK'
+    headers:
+      server: nginx/1.10.3 (Ubuntu)
+      date: Fri, 27 Nov 2020 09:01:49 GMT
+      content-type: text/csv
+      transfer-encoding: chunked
+      connection: keep-alive
+      status: 200 OK
+      x-frame-options: SAMEORIGIN
+      x-xss-protection: 1; mode=block
+      x-content-type-options: nosniff
+      content-disposition: attachment; filename=sparql.csv
+      content-transfer-encoding: binary
+      cache-control: no-cache
+      etag: W/"0e59cf4587c45b561cda55f058a5edf5"
+      x-request-id: e5e2c553-9ded-42e3-80d5-67060a644649
+      x-runtime: '0.005183'
+      expires: Fri, 27 Nov 2020 09:01:48 GMT
+      access-control-allow-origin: '*'
+      access-control-allow-methods: GET, POST, OPTIONS
+      access-control-allow-headers: DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type
+      content-encoding: gzip
+    body:
+      encoding: UTF-8
+      file: no
+      string: "uri,label\r\nhttp://statistics.data.gov.uk/id/statistical-geography/N09000001,N09000001\r\n"
+  recorded_at: 2020-11-27 09:01:50 GMT
+  recorded_with: vcr/0.5.4, webmockr/0.7.0
+- request:
+    method: post
+    uri: http://linked.nisra.gov.uk/sparql
+    body:
+      encoding: ''
+      string: query=PREFIX%20rdfs%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3ESELECT%20%2A%20WHERE%20%7B%20%20VALUES%20%3Furi%20%7B%20%3Chttp%3A%2F%2Flinked.nisra.gov.uk%2Fdef%2Fconcept%2Fgender%2Fall-persons%3E%20%7D%20%20%3Furi%20rdfs%3Alabel%20%3Flabel%20.%7D
+    headers:
+      Content-Type: application/x-www-form-urlencoded
+      Accept: text/csv
+  response:
+    status:
+      status_code: 200
+      category: Success
+      reason: OK
+      message: 'Success: (200) OK'
+    headers:
+      server: nginx/1.10.3 (Ubuntu)
+      date: Fri, 27 Nov 2020 09:01:50 GMT
+      content-type: text/csv
+      transfer-encoding: chunked
+      connection: keep-alive
+      status: 200 OK
+      x-frame-options: SAMEORIGIN
+      x-xss-protection: 1; mode=block
+      x-content-type-options: nosniff
+      content-disposition: attachment; filename=sparql.csv
+      content-transfer-encoding: binary
+      cache-control: no-cache
+      etag: W/"4a909e04972e5e89dec6cffe71e2d2ab"
+      x-request-id: 1b350de5-967a-470c-909b-08eaf5e36893
+      x-runtime: '0.005392'
+      expires: Fri, 27 Nov 2020 09:01:49 GMT
+      access-control-allow-origin: '*'
+      access-control-allow-methods: GET, POST, OPTIONS
+      access-control-allow-headers: DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type
+      content-encoding: gzip
+    body:
+      encoding: UTF-8
+      file: no
+      string: "uri,label\r\nhttp://linked.nisra.gov.uk/def/concept/gender/all-persons,All
+        Persons\r\n"
+  recorded_at: 2020-11-27 09:01:50 GMT
+  recorded_with: vcr/0.5.4, webmockr/0.7.0
+- request:
+    method: post
+    uri: http://linked.nisra.gov.uk/sparql
+    body:
+      encoding: ''
+      string: query=PREFIX%20rdfs%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3ESELECT%20%2A%20WHERE%20%7B%20%20VALUES%20%3Furi%20%7B%20%3Chttp%3A%2F%2Flinked.nisra.gov.uk%2Fdef%2Fconcept%2Fsingle-year-of-age%2F0%3E%20%3Chttp%3A%2F%2Flinked.nisra.gov.uk%2Fdef%2Fconcept%2Fsingle-year-of-age%2F1%3E%20%3Chttp%3A%2F%2Flinked.nisra.gov.uk%2Fdef%2Fconcept%2Fsingle-year-of-age%2F2%3E%20%3Chttp%3A%2F%2Flinked.nisra.gov.uk%2Fdef%2Fconcept%2Fsingle-year-of-age%2F3%3E%20%3Chttp%3A%2F%2Flinked.nisra.gov.uk%2Fdef%2Fconcept%2Fsingle-year-of-age%2F4%3E%20%3Chttp%3A%2F%2Flinked.nisra.gov.uk%2Fdef%2Fconcept%2Fsingle-year-of-age%2F5%3E%20%3Chttp%3A%2F%2Flinked.nisra.gov.uk%2Fdef%2Fconcept%2Fsingle-year-of-age%2F6%3E%20%3Chttp%3A%2F%2Flinked.nisra.gov.uk%2Fdef%2Fconcept%2Fsingle-year-of-age%2F7%3E%20%3Chttp%3A%2F%2Flinked.nisra.gov.uk%2Fdef%2Fconcept%2Fsingle-year-of-age%2F8%3E%20%3Chttp%3A%2F%2Flinked.nisra.gov.uk%2Fdef%2Fconcept%2Fsingle-year-of-age%2F9%3E%20%7D%20%20%3Furi%20rdfs%3Alabel%20%3Flabel%20.%7D
+    headers:
+      Content-Type: application/x-www-form-urlencoded
+      Accept: text/csv
+  response:
+    status:
+      status_code: 200
+      category: Success
+      reason: OK
+      message: 'Success: (200) OK'
+    headers:
+      server: nginx/1.10.3 (Ubuntu)
+      date: Fri, 27 Nov 2020 09:01:50 GMT
+      content-type: text/csv
+      transfer-encoding: chunked
+      connection: keep-alive
+      status: 200 OK
+      x-frame-options: SAMEORIGIN
+      x-xss-protection: 1; mode=block
+      x-content-type-options: nosniff
+      content-disposition: attachment; filename=sparql.csv
+      content-transfer-encoding: binary
+      cache-control: no-cache
+      etag: W/"b6594bac1aa10bbc550c98a2c42b3817"
+      x-request-id: 26a43751-d126-4cc3-b5f2-47f3d98b7bb8
+      x-runtime: '0.004490'
+      expires: Fri, 27 Nov 2020 09:01:49 GMT
+      access-control-allow-origin: '*'
+      access-control-allow-methods: GET, POST, OPTIONS
+      access-control-allow-headers: DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type
+      content-encoding: gzip
+    body:
+      encoding: UTF-8
+      file: no
+      string: "uri,label\r\nhttp://linked.nisra.gov.uk/def/concept/single-year-of-age/0,0\r\nhttp://linked.nisra.gov.uk/def/concept/single-year-of-age/1,1\r\nhttp://linked.nisra.gov.uk/def/concept/single-year-of-age/2,2\r\nhttp://linked.nisra.gov.uk/def/concept/single-year-of-age/3,3\r\nhttp://linked.nisra.gov.uk/def/concept/single-year-of-age/4,4\r\nhttp://linked.nisra.gov.uk/def/concept/single-year-of-age/5,5\r\nhttp://linked.nisra.gov.uk/def/concept/single-year-of-age/6,6\r\nhttp://linked.nisra.gov.uk/def/concept/single-year-of-age/7,7\r\nhttp://linked.nisra.gov.uk/def/concept/single-year-of-age/8,8\r\nhttp://linked.nisra.gov.uk/def/concept/single-year-of-age/9,9\r\n"
+  recorded_at: 2020-11-27 09:01:50 GMT
+  recorded_with: vcr/0.5.4, webmockr/0.7.0
+- request:
+    method: post
+    uri: http://linked.nisra.gov.uk/sparql
+    body:
+      encoding: ''
+      string: query=%0APREFIX%20qb%3A%20%3Chttp%3A%2F%2Fpurl.org%2Flinked-data%2Fcube%23%3E%0APREFIX%20rdf%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E%0APREFIX%20rdfs%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0APREFIX%20sdmxd%3A%20%3Chttp%3A%2F%2Fpurl.org%2Flinked-data%2Fsdmx%2F2009%2Fdimension%23%3E%0APREFIX%20sdmxa%3A%20%3Chttp%3A%2F%2Fpurl.org%2Flinked-data%2Fsdmx%2F2009%2Fattribute%23%3E%0APREFIX%20skos%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2004%2F02%2Fskos%2Fcore%23%3E%0APREFIX%20xsd%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2001%2FXMLSchema%23%3E%0APREFIX%20dim%3A%20%3Chttp%3A%2F%2Flinked.nisra.gov.uk%2Fdef%2Fdimension%2F%3E%0APREFIX%20meas%3A%20%3Chttp%3A%2F%2Flinked.nisra.gov.uk%2Fdef%2Fmeasure%2F%3E%0A%0ASELECT%20%3Farea%20%3Fgender%20%3Fage%20%3Fpopulation%20WHERE%20%7B%0A%20%20%3Fobs%20%0A%20%20%09qb%3AdataSet%20%3Chttp%3A%2F%2Flinked.nisra.gov.uk%2Fdata%2Fparliamentary-constituencies-by-single-year-of-age-and-gender-mid-2001-to-mid-2018%3E%20%3B%0A%20%20%09sdmxd%3ArefPeriod%20%3Chttp%3A%2F%2Freference.data.gov.uk%2Fid%2Fyear%2F2019%3E%20%3B%0A%20%20%09qb%3AmeasureType%20meas%3Acount%20%3B%0A%20%20%09sdmxa%3AunitMeasure%20%3Chttp%3A%2F%2Flinked.nisra.gov.uk%2Fdef%2Fconcept%2Fmeasure-units%2Fpeople%3E%20%3B%0A%20%20%09sdmxd%3ArefArea%20%3Farea%20%3B%0A%20%20%09dim%3Agender%20%3Fgender%20%3B%0A%20%20%09dim%3Aage%20%3Fage%20%3B%0A%20%20%09meas%3Acount%20%3Fpopulation%20%3B%0A%20%20%09.%0A%7D%20LIMIT%2010%0A
+    headers:
+      Content-Type: application/x-www-form-urlencoded
+      Accept: text/csv
+  response:
+    status:
+      status_code: 200
+      category: Success
+      reason: OK
+      message: 'Success: (200) OK'
+    headers:
+      server: nginx/1.10.3 (Ubuntu)
+      date: Fri, 27 Nov 2020 09:01:50 GMT
+      content-type: text/csv
+      transfer-encoding: chunked
+      connection: keep-alive
+      status: 200 OK
+      x-frame-options: SAMEORIGIN
+      x-xss-protection: 1; mode=block
+      x-content-type-options: nosniff
+      content-disposition: attachment; filename=sparql.csv
+      content-transfer-encoding: binary
+      cache-control: no-cache
+      etag: W/"505304a9160f2141bba8337bc967571f"
+      x-request-id: a93c8a8e-3351-45a3-b5c0-36a238b40ec2
+      x-runtime: '0.004319'
+      expires: Fri, 27 Nov 2020 09:01:49 GMT
+      access-control-allow-origin: '*'
+      access-control-allow-methods: GET, POST, OPTIONS
+      access-control-allow-headers: DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type
+      content-encoding: gzip
+    body:
+      encoding: UTF-8
+      file: no
+      string: "area,gender,age,population\r\nhttp://statistics.data.gov.uk/id/statistical-geography/N06000001,http://linked.nisra.gov.uk/def/concept/gender/all-persons,http://linked.nisra.gov.uk/def/concept/single-year-of-age/0,1141\r\nhttp://statistics.data.gov.uk/id/statistical-geography/N06000001,http://linked.nisra.gov.uk/def/concept/gender/all-persons,http://linked.nisra.gov.uk/def/concept/single-year-of-age/1,1163\r\nhttp://statistics.data.gov.uk/id/statistical-geography/N06000001,http://linked.nisra.gov.uk/def/concept/gender/all-persons,http://linked.nisra.gov.uk/def/concept/single-year-of-age/2,1170\r\nhttp://statistics.data.gov.uk/id/statistical-geography/N06000001,http://linked.nisra.gov.uk/def/concept/gender/all-persons,http://linked.nisra.gov.uk/def/concept/single-year-of-age/3,1159\r\nhttp://statistics.data.gov.uk/id/statistical-geography/N06000001,http://linked.nisra.gov.uk/def/concept/gender/all-persons,http://linked.nisra.gov.uk/def/concept/single-year-of-age/4,1150\r\nhttp://statistics.data.gov.uk/id/statistical-geography/N06000001,http://linked.nisra.gov.uk/def/concept/gender/all-persons,http://linked.nisra.gov.uk/def/concept/single-year-of-age/5,1205\r\nhttp://statistics.data.gov.uk/id/statistical-geography/N06000001,http://linked.nisra.gov.uk/def/concept/gender/all-persons,http://linked.nisra.gov.uk/def/concept/single-year-of-age/6,1135\r\nhttp://statistics.data.gov.uk/id/statistical-geography/N06000001,http://linked.nisra.gov.uk/def/concept/gender/all-persons,http://linked.nisra.gov.uk/def/concept/single-year-of-age/7,1186\r\nhttp://statistics.data.gov.uk/id/statistical-geography/N06000001,http://linked.nisra.gov.uk/def/concept/gender/all-persons,http://linked.nisra.gov.uk/def/concept/single-year-of-age/8,1233\r\nhttp://statistics.data.gov.uk/id/statistical-geography/N06000001,http://linked.nisra.gov.uk/def/concept/gender/all-persons,http://linked.nisra.gov.uk/def/concept/single-year-of-age/9,1153\r\n"
+  recorded_at: 2020-11-27 09:01:50 GMT
+  recorded_with: vcr/0.5.4, webmockr/0.7.0
+- request:
+    method: post
+    uri: http://linked.nisra.gov.uk/sparql
+    body:
+      encoding: ''
+      string: query=PREFIX%20rdfs%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3ESELECT%20%2A%20WHERE%20%7B%20%20VALUES%20%3Furi%20%7B%20%3Chttp%3A%2F%2Fstatistics.data.gov.uk%2Fid%2Fstatistical-geography%2FN06000001%3E%20%7D%20%20%3Furi%20rdfs%3Alabel%20%3Flabel%20.%7D
+    headers:
+      Content-Type: application/x-www-form-urlencoded
+      Accept: text/csv
+  response:
+    status:
+      status_code: 200
+      category: Success
+      reason: OK
+      message: 'Success: (200) OK'
+    headers:
+      server: nginx/1.10.3 (Ubuntu)
+      date: Fri, 27 Nov 2020 09:01:50 GMT
+      content-type: text/csv
+      transfer-encoding: chunked
+      connection: keep-alive
+      status: 200 OK
+      x-frame-options: SAMEORIGIN
+      x-xss-protection: 1; mode=block
+      x-content-type-options: nosniff
+      content-disposition: attachment; filename=sparql.csv
+      content-transfer-encoding: binary
+      cache-control: no-cache
+      etag: W/"c3a2385b161ec03e2535b715ee4420b2"
+      x-request-id: d23ebbc2-92bb-4ea2-aa6b-7d2a28a50314
+      x-runtime: '0.004812'
+      expires: Fri, 27 Nov 2020 09:01:49 GMT
+      access-control-allow-origin: '*'
+      access-control-allow-methods: GET, POST, OPTIONS
+      access-control-allow-headers: DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type
+      content-encoding: gzip
+    body:
+      encoding: UTF-8
+      file: no
+      string: "uri,label\r\nhttp://statistics.data.gov.uk/id/statistical-geography/N06000001,N06000001\r\nhttp://statistics.data.gov.uk/id/statistical-geography/N06000001,N06000001\r\n"
+  recorded_at: 2020-11-27 09:01:50 GMT
+  recorded_with: vcr/0.5.4, webmockr/0.7.0
+- request:
+    method: post
+    uri: http://linked.nisra.gov.uk/sparql
+    body:
+      encoding: ''
+      string: query=PREFIX%20rdfs%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3ESELECT%20%2A%20WHERE%20%7B%20%20VALUES%20%3Furi%20%7B%20%3Chttp%3A%2F%2Flinked.nisra.gov.uk%2Fdef%2Fconcept%2Fgender%2Fall-persons%3E%20%7D%20%20%3Furi%20rdfs%3Alabel%20%3Flabel%20.%7D
+    headers:
+      Content-Type: application/x-www-form-urlencoded
+      Accept: text/csv
+  response:
+    status:
+      status_code: 200
+      category: Success
+      reason: OK
+      message: 'Success: (200) OK'
+    headers:
+      server: nginx/1.10.3 (Ubuntu)
+      date: Fri, 27 Nov 2020 09:01:50 GMT
+      content-type: text/csv
+      transfer-encoding: chunked
+      connection: keep-alive
+      status: 200 OK
+      x-frame-options: SAMEORIGIN
+      x-xss-protection: 1; mode=block
+      x-content-type-options: nosniff
+      content-disposition: attachment; filename=sparql.csv
+      content-transfer-encoding: binary
+      cache-control: no-cache
+      etag: W/"4a909e04972e5e89dec6cffe71e2d2ab"
+      x-request-id: 21be1e10-891f-4772-b297-88eb39466b00
+      x-runtime: '0.004180'
+      expires: Fri, 27 Nov 2020 09:01:49 GMT
+      access-control-allow-origin: '*'
+      access-control-allow-methods: GET, POST, OPTIONS
+      access-control-allow-headers: DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type
+      content-encoding: gzip
+    body:
+      encoding: UTF-8
+      file: no
+      string: "uri,label\r\nhttp://linked.nisra.gov.uk/def/concept/gender/all-persons,All
+        Persons\r\n"
+  recorded_at: 2020-11-27 09:01:50 GMT
+  recorded_with: vcr/0.5.4, webmockr/0.7.0
+- request:
+    method: post
+    uri: http://linked.nisra.gov.uk/sparql
+    body:
+      encoding: ''
+      string: query=PREFIX%20rdfs%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3ESELECT%20%2A%20WHERE%20%7B%20%20VALUES%20%3Furi%20%7B%20%3Chttp%3A%2F%2Flinked.nisra.gov.uk%2Fdef%2Fconcept%2Fsingle-year-of-age%2F0%3E%20%3Chttp%3A%2F%2Flinked.nisra.gov.uk%2Fdef%2Fconcept%2Fsingle-year-of-age%2F1%3E%20%3Chttp%3A%2F%2Flinked.nisra.gov.uk%2Fdef%2Fconcept%2Fsingle-year-of-age%2F2%3E%20%3Chttp%3A%2F%2Flinked.nisra.gov.uk%2Fdef%2Fconcept%2Fsingle-year-of-age%2F3%3E%20%3Chttp%3A%2F%2Flinked.nisra.gov.uk%2Fdef%2Fconcept%2Fsingle-year-of-age%2F4%3E%20%3Chttp%3A%2F%2Flinked.nisra.gov.uk%2Fdef%2Fconcept%2Fsingle-year-of-age%2F5%3E%20%3Chttp%3A%2F%2Flinked.nisra.gov.uk%2Fdef%2Fconcept%2Fsingle-year-of-age%2F6%3E%20%3Chttp%3A%2F%2Flinked.nisra.gov.uk%2Fdef%2Fconcept%2Fsingle-year-of-age%2F7%3E%20%3Chttp%3A%2F%2Flinked.nisra.gov.uk%2Fdef%2Fconcept%2Fsingle-year-of-age%2F8%3E%20%3Chttp%3A%2F%2Flinked.nisra.gov.uk%2Fdef%2Fconcept%2Fsingle-year-of-age%2F9%3E%20%7D%20%20%3Furi%20rdfs%3Alabel%20%3Flabel%20.%7D
+    headers:
+      Content-Type: application/x-www-form-urlencoded
+      Accept: text/csv
+  response:
+    status:
+      status_code: 200
+      category: Success
+      reason: OK
+      message: 'Success: (200) OK'
+    headers:
+      server: nginx/1.10.3 (Ubuntu)
+      date: Fri, 27 Nov 2020 09:01:50 GMT
+      content-type: text/csv
+      transfer-encoding: chunked
+      connection: keep-alive
+      status: 200 OK
+      x-frame-options: SAMEORIGIN
+      x-xss-protection: 1; mode=block
+      x-content-type-options: nosniff
+      content-disposition: attachment; filename=sparql.csv
+      content-transfer-encoding: binary
+      cache-control: no-cache
+      etag: W/"b6594bac1aa10bbc550c98a2c42b3817"
+      x-request-id: 38a25cb2-10ec-4b94-9b17-5115996cf26d
+      x-runtime: '0.004501'
+      expires: Fri, 27 Nov 2020 09:01:49 GMT
+      access-control-allow-origin: '*'
+      access-control-allow-methods: GET, POST, OPTIONS
+      access-control-allow-headers: DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type
+      content-encoding: gzip
+    body:
+      encoding: UTF-8
+      file: no
+      string: "uri,label\r\nhttp://linked.nisra.gov.uk/def/concept/single-year-of-age/0,0\r\nhttp://linked.nisra.gov.uk/def/concept/single-year-of-age/1,1\r\nhttp://linked.nisra.gov.uk/def/concept/single-year-of-age/2,2\r\nhttp://linked.nisra.gov.uk/def/concept/single-year-of-age/3,3\r\nhttp://linked.nisra.gov.uk/def/concept/single-year-of-age/4,4\r\nhttp://linked.nisra.gov.uk/def/concept/single-year-of-age/5,5\r\nhttp://linked.nisra.gov.uk/def/concept/single-year-of-age/6,6\r\nhttp://linked.nisra.gov.uk/def/concept/single-year-of-age/7,7\r\nhttp://linked.nisra.gov.uk/def/concept/single-year-of-age/8,8\r\nhttp://linked.nisra.gov.uk/def/concept/single-year-of-age/9,9\r\n"
+  recorded_at: 2020-11-27 09:01:50 GMT
+  recorded_with: vcr/0.5.4, webmockr/0.7.0
