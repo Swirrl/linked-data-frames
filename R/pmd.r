@@ -23,12 +23,16 @@ query <- function(query_string, endpoint=default_endpoint(), format="csv") {
                          body=list(query=query_string),
                          encode="form")
 
-  if(format=="csv") {
-    httr::content(response, encoding="UTF-8", col_types=readr::cols())
-  } else if (format=="json") {
-    # TODO: use the binding type to parse the value - currently returns two columns for each binding
-    parsed <- jsonlite::fromJSON(httr::content(response, encoding="UTF-8", "text"), simplifyVector = T)
-    parsed$results$bindings
+  if(httr::http_error(response)) {
+    stop(httr::http_status(response)$message, ": ", httr::content(response))
+  } else {
+    if(format=="csv") {
+      httr::content(response, encoding="UTF-8", col_types=readr::cols())
+    } else if (format=="json") {
+      # TODO: use the binding type to parse the value - currently returns two columns for each binding
+      parsed <- jsonlite::fromJSON(httr::content(response, encoding="UTF-8", "text"), simplifyVector = T)
+      parsed$results$bindings
+    }
   }
 }
 
