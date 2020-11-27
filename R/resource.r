@@ -248,9 +248,11 @@ vec_cast.character.ldf_resource <- function(x, to, ...) vec_data(x)
 vec_restore.ldf_resource <- function(x, to, ...) {
   all_description <- merge_description(description(x), description(to))
 
-  if(nrow(all_description)>0 & length(vec_data(x)) > 0) {
-    all_description <- all_description %>% dplyr::filter(uri %in% vec_data(x))
-  }
+  # this enables subsetting to also subset descriptions
+  # it's commented out as it's also stripping descriptions when rbinding
+  # if(nrow(all_description)>0 & length(na.omit(vec_data(x))) > 0) {
+  #   all_description <- all_description %>% dplyr::filter(uri %in% vec_data(x))
+  # }
 
   new_resource(vec_data(x), description=all_description)
 }

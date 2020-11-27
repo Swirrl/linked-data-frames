@@ -186,6 +186,13 @@ describe("combining", {
     ab <- c(a, b)
     expect_equal(description(ab)$label, c("A","B"))
   })
+
+  test_that("data frames may be row-bound with vec_rbind()", {
+    d_a <- data.frame(x=a)
+    d_b <- data.frame(x=b)
+    d <- vec_rbind(d_a,d_b)
+    expect_equal(description(d$x)$label, c("A","B"))
+  })
 })
 
 describe("subsetting", {
@@ -194,24 +201,28 @@ describe("subsetting", {
     expect_equal(vec_restore(vec_data(a), a), a)
   })
 
-  test_that("description is subset when uri is subset", {
-    uris <- c("http://example.net/id/apple",
-              "http://example.net/id/banana",
-              "http://example.net/id/carrot")
-    labels <- c("Apple","Banana","Carrot")
-    sort_priorities <- 1:3
-    description <- data.frame(uri=uris,
-                              label=labels,
-                              sort_priority=sort_priorities,
-                              stringsAsFactors = F)
-    r <- resource(uris, description)
+  # commented out the code to do this in vec_restore.ldf_resource as also
+  # subsets descriptions erroneously when rbinding
+  # test_that("description is subset when uri is subset", {
+  #   uris <- c("http://example.net/id/apple",
+  #             "http://example.net/id/banana",
+  #             "http://example.net/id/carrot")
+  #   labels <- c("Apple","Banana","Carrot")
+  #   sort_priorities <- 1:3
+  #   description <- data.frame(uri=uris,
+  #                             label=labels,
+  #                             sort_priority=sort_priorities,
+  #                             stringsAsFactors = F)
+  #   r <- resource(uris, description)
+  #
+  #   expect_equal(description(r[1]),
+  #                data.frame(uri=uris[1],
+  #                           label=labels[1],
+  #                           sort_priority=sort_priorities[1],
+  #                           stringsAsFactors = F))
+  # })
 
-    expect_equal(description(r[1]),
-                 data.frame(uri=uris[1],
-                            label=labels[1],
-                            sort_priority=sort_priorities[1],
-                            stringsAsFactors = F))
-  })
+  # subset assignment r[4] <- "http://example.net/id/apple"
 })
 
 describe("works with other functions", {
