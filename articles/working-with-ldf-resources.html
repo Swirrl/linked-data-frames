@@ -79,6 +79,9 @@
     <li>
       <a href="../articles/tabulate-datacube.html">Tabulating DataCubes</a>
     </li>
+    <li>
+      <a href="../articles/merging-datacubes.html">Merging DataCubes</a>
+    </li>
   </ul>
 </li>
       </ul>
@@ -189,9 +192,9 @@
 <span class="co">#&gt; [1] "http://example.net/id/apple"  "http://example.net/id/banana"</span>
 <span class="co">#&gt; [3] "http://example.net/id/carrot"</span>
 </pre></div>
-<p>This can be unexpected. The <code><a href="https://rdrr.io/r/base/table.html">table()</a></code> function, for example, returns counts by URI:</p>
+<p>This can be unexpected. The <code><a href="https://vctrs.r-lib.org/reference/table.html">table()</a></code> function, for example, returns counts by URI:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span>(<span class="kw">kitchen</span><span class="op">$</span><span class="kw">food</span>)
+<span class="fu"><a href="https://vctrs.r-lib.org/reference/table.html">table</a></span>(<span class="kw">kitchen</span><span class="op">$</span><span class="kw">food</span>)
 <span class="co">#&gt; </span>
 <span class="co">#&gt;  http://example.net/id/apple http://example.net/id/banana </span>
 <span class="co">#&gt;                            2                            1 </span>
@@ -200,7 +203,7 @@
 </pre></div>
 <p>You can use the label by calling <code>table</code> on that instead:</p>
 <div class="sourceCode" id="cb12"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span>(<span class="fu"><a href="../reference/label.html">label</a></span>(<span class="kw">kitchen</span><span class="op">$</span><span class="kw">food</span>))
+<span class="fu"><a href="https://vctrs.r-lib.org/reference/table.html">table</a></span>(<span class="fu"><a href="../reference/label.html">label</a></span>(<span class="kw">kitchen</span><span class="op">$</span><span class="kw">food</span>))
 <span class="co">#&gt; </span>
 <span class="co">#&gt;  Apple Banana Carrot </span>
 <span class="co">#&gt;      2      1      1</span>

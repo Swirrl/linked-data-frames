@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>resource vector — resource • ldf</title>
+<title>Enrich a data frame of URIs with resources descriptions — as_dataframe_of_resources • ldf</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,8 @@
 
 
 
-<meta property="og:title" content="resource vector — resource" />
-<meta property="og:description" content="A vector of RDF resources with descriptions held in an orthogonal table." />
+<meta property="og:title" content="Enrich a data frame of URIs with resources descriptions — as_dataframe_of_resources" />
+<meta property="og:description" content="This takes a data frame containing URIs and attempts to download descriptions for them." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -147,52 +147,37 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1><code>resource</code> vector</h1>
+    <h1>Enrich a data frame of URIs with resources descriptions</h1>
     <small class="dont-index">Source: <a href='https://github.com/Swirrl/linked-data-frames/blob/master/R/resource.r'><code>R/resource.r</code></a></small>
-    <div class="hidden name"><code>resource.Rd</code></div>
+    <div class="hidden name"><code>as_dataframe_of_resources.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>A vector of RDF resources with descriptions held in an orthogonal table.</p>
+    <p>This takes a data frame containing URIs and attempts to download descriptions for them.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>resource</span>(uri = <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span>(), description = <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(uri = <span class='fu'><a href='https://rdrr.io/r/base/unique.html'>unique</a></span>(<span class='kw'>uri</span>)))
-
-<span class='fu'>is_resource</span>(<span class='kw'>x</span>)</pre>
+    <pre class="usage"><span class='fu'>as_dataframe_of_resources</span>(<span class='kw'>d</span>, endpoint = <span class='fu'>default_endpoint</span>())</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>uri</th>
-      <td><p>A character vector of URIs</p></td>
+      <th>d</th>
+      <td><p>A data frame containing URIs</p></td>
     </tr>
     <tr>
-      <th>description</th>
-      <td><p>A data frame of descriptions (must have a <code>uri</code> column)</p></td>
-    </tr>
-    <tr>
-      <th>x</th>
-      <td><p>Any vector</p></td>
+      <th>endpoint</th>
+      <td><p>A SPARQL endpoint</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>An S3 vector of class <code>ldf_resource</code>.</p>
+    <p>A data frame of resources</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>resource</span>(<span class='st'>"http://example.net"</span>)
-</div><div class='output co'>#&gt; &lt;ldf_resource[1]&gt;
-#&gt; [1] http://example.net
-#&gt; Description: uri</div><div class='input'>
-<span class='kw'>uris</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"http://example.net/id/apple"</span>,
-          <span class='st'>"http://example.net/id/banana"</span>,
-          <span class='st'>"http://example.net/id/carrot"</span>)
-<span class='kw'>labels</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Apple"</span>,<span class='st'>"Banana"</span>,<span class='st'>"Carrot"</span>)
-<span class='kw'>description</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(uri=<span class='kw'>uris</span>, label=<span class='kw'>labels</span>)
-<span class='kw'>r</span> <span class='op'>&lt;-</span> <span class='fu'>resource</span>(<span class='kw'>uris</span>, <span class='kw'>description</span>)
-</div></pre>
+    <p>The basic version just uses <code><a href='get_label.html'>get_label()</a></code>.</p>
+
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

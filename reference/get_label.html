@@ -121,6 +121,9 @@
     <li>
       <a href="../articles/tabulate-datacube.html">Tabulating DataCubes</a>
     </li>
+    <li>
+      <a href="../articles/merging-datacubes.html">Merging DataCubes</a>
+    </li>
   </ul>
 </li>
       </ul>
@@ -171,6 +174,12 @@
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A data frame with column's for the <code>uri</code> and <code>label</code></p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>The vector of <code>uri</code>s passed to the function may contain duplicates, only
+one description per URI will be returned (even if the database contains duplicate labels).</p>
+<p>If no label is found, the URI is used. This guarantees that there is a description of all URIs
+which is required by <code><a href='resource.html'>resource()</a></code>.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fl'>FALSE</span>) {
