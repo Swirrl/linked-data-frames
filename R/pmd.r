@@ -181,6 +181,12 @@ get_codelist <- function(codelist_uri, endpoint=default_endpoint()) {
 #'
 #' Provides for a very generic description, just requesting the `rdfs:label`.
 #'
+#' The vector of `uri`s passed to the function may contain duplicates, only
+#' one description per URI will be returned (even if the database contains duplicate labels).
+#'
+#' If no label is found, the URI is used. This guarantees that there is a description of all URIs
+#' which is required by [resource()].
+#'
 #' @param uri A character vector of URIs.
 #' @param endpoint A string for the sparql endpoint
 #' @return A data frame with column's for the `uri` and `label`
@@ -189,6 +195,7 @@ get_codelist <- function(codelist_uri, endpoint=default_endpoint()) {
 #' get_label("http://purl.org/linked-data/cube#measureType")
 #' }
 get_label <- function(uri, endpoint=default_endpoint()) {
+  uri <- unique(uri)
   uri_binding <- glue::glue_collapse(glue::glue_data(list(uri=uri), "<{uri}>"), " ")
 
   q <- stringr::str_interp(c(
@@ -200,7 +207,11 @@ get_label <- function(uri, endpoint=default_endpoint()) {
     "  ?uri rdfs:label ?label .",
     "}"
   ))
-  query(q, endpoint)
+  results <- query(q, endpoint) %>%
+    dplyr::distinct(uri, .keep_all=T) %>% # enforce one label per URI
+    dplyr::mutate(label = as.character(label)) # reverse readr parsing for e.g. labels with numbers
+  missing <- setdiff(uri, dplyr::pull(results, "uri"))
+  vctrs::vec_rbind(results, data.frame(uri=missing, label=missing, stringsAsFactors = F))
 }
 
 #' Download Statistical Geographies

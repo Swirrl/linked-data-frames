@@ -17,6 +17,13 @@ A data frame with column's for the \code{uri} and \code{label}
 \description{
 Provides for a very generic description, just requesting the \code{rdfs:label}.
 }
+\details{
+The vector of \code{uri}s passed to the function may contain duplicates, only
+one description per URI will be returned (even if the database contains duplicate labels).
+
+If no label is found, the URI is used. This guarantees that there is a description of all URIs
+which is required by \code{\link[=resource]{resource()}}.
+}
 \examples{
 \dontrun{
 get_label("http://purl.org/linked-data/cube#measureType")
