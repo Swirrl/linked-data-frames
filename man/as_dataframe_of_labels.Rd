@@ -15,7 +15,7 @@ as_dataframe_of_labels(d, ...)
 A data frame with labels in place of any ldf vectors
 }
 \description{
-This take a data frame containing \code{ldf_resource} or \code{ldf_interval} vectors
+This takes a data frame containing \code{ldf_resource} or \code{ldf_interval} vectors
 and converts those vectors into labels.
 }
 \details{

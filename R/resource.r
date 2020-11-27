@@ -264,10 +264,9 @@ vec_restore.ldf_resource <- function(x, to, ...) {
 #' @export
 levels.ldf_resource <- function(...) { return(NULL) }
 
-# escape hatch TODO: write-up
 #' Convert a linked data frame to labels
 #'
-#' This take a data frame containing `ldf_resource` or `ldf_interval` vectors
+#' This takes a data frame containing `ldf_resource` or `ldf_interval` vectors
 #' and converts those vectors into labels.
 #'
 #' The labels will either be character vectors or factors depending on the value of
@@ -295,4 +294,29 @@ as_dataframe_of_labels <- function(d, ...) {
       x
     }
   }), ...)
+}
+
+#' Enrich a data frame of URIs with resources descriptions
+#'
+#' This takes a data frame containing URIs and attempts to download descriptions for them.
+#'
+#' The basic version just uses [get_label()].
+#'
+#' @param d A data frame containing URIs
+#' @param endpoint A SPARQL endpoint
+#' @return A data frame of resources
+#' @export
+as_dataframe_of_resources <- function(d, endpoint=default_endpoint()) {
+  data.frame(lapply(d, function(x) {
+    if(is.character(x) & !is_resource(x)) {
+      desc <- get_label(x, endpoint)
+      if(nrow(desc)>0) {
+        resource(x, desc)
+      } else {
+        x
+      }
+    } else {
+      x
+    }
+  }))
 }

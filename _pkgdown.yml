@@ -18,6 +18,7 @@ reference:
   - validate_resource
   - merge_description
   - as_dataframe_of_labels
+  - as_dataframe_of_resources
 - title: "Working with LDF intervals"
   desc: Create intervals and extract data from their descriptions.
   contents:
