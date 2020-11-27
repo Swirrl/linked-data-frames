@@ -198,6 +198,7 @@ get_codelist <- function(codelist_uri, endpoint=default_endpoint()) {
 #' \dontrun{
 #' get_label("http://purl.org/linked-data/cube#measureType")
 #' }
+#' @export
 get_label <- function(uri, endpoint=default_endpoint()) {
   uri <- unique(uri)
   uri_binding <- glue::glue_collapse(glue::glue_data(list(uri=uri), "<{uri}>"), " ")
