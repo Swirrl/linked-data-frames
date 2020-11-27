@@ -1,12 +1,12 @@
 http_interactions:
 - request:
     method: post
-    uri: https://staging.gss-data.org.uk/sparql?query=PREFIX%20rdfs%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3ESELECT%20%2A%20WHERE%20%7B%20%20VALUES%20%3Furi%20%7B%20%3Chttp%3A%2F%2Fpurl.org%2Flinked-data%2Fcube%23measureType%3E%20%7D%20%20%3Furi%20rdfs%3Alabel%20%3Flabel%20.%7D
+    uri: https://staging.gss-data.org.uk/sparql
     body:
       encoding: ''
-      string: ''
+      string: query=PREFIX%20rdfs%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3ESELECT%20%2A%20WHERE%20%7B%20%20VALUES%20%3Furi%20%7B%20%3Chttp%3A%2F%2Fpurl.org%2Flinked-data%2Fcube%23measureType%3E%20%7D%20%20%3Furi%20rdfs%3Alabel%20%3Flabel%20.%7D
     headers:
-      Content-Type: ''
+      Content-Type: application/x-www-form-urlencoded
       Accept: text/csv
   response:
     status:
@@ -16,7 +16,7 @@ http_interactions:
       message: 'Success: (200) OK'
     headers:
       server: nginx
-      date: Fri, 13 Nov 2020 15:11:34 GMT
+      date: Fri, 27 Nov 2020 08:51:02 GMT
       content-type: text/csv
       vary: Accept-Encoding
       content-encoding: gzip
@@ -27,5 +27,5 @@ http_interactions:
       encoding: UTF-8
       file: no
       string: "uri,label\r\nhttp://purl.org/linked-data/cube#measureType,Measure type\r\n"
-  recorded_at: 2020-11-13 15:11:35 GMT
+  recorded_at: 2020-11-27 08:51:02 GMT
   recorded_with: vcr/0.5.4, webmockr/0.7.0

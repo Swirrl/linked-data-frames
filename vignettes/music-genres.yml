@@ -1,12 +1,12 @@
 http_interactions:
 - request:
     method: post
-    uri: http://dbpedia.org/sparql/?query=%0APREFIX%20%3A%20%3Chttp%3A%2F%2Fdbpedia.org%2Fontology%2F%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3Furi%20a%20%3AMusicGenre%3B%0A%20%20%20%20rdfs%3Alabel%20%3Flabel%3B%0A%20%20%20%20rdfs%3Acomment%20%3Fcomment%0A%20%20%20%20.%0A%20%20FILTER%20langMatches%28lang%28%3Flabel%29%2C%20%27EN%27%29%0A%20%20FILTER%20langMatches%28lang%28%3Fcomment%29%2C%20%27EN%27%29%0A%7D%20LIMIT%20100%0A
+    uri: http://dbpedia.org/sparql/
     body:
       encoding: ''
-      string: ''
+      string: query=%0APREFIX%20%3A%20%3Chttp%3A%2F%2Fdbpedia.org%2Fontology%2F%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3Furi%20a%20%3AMusicGenre%3B%0A%20%20%20%20rdfs%3Alabel%20%3Flabel%3B%0A%20%20%20%20rdfs%3Acomment%20%3Fcomment%0A%20%20%20%20.%0A%20%20FILTER%20langMatches%28lang%28%3Flabel%29%2C%20%27EN%27%29%0A%20%20FILTER%20langMatches%28lang%28%3Fcomment%29%2C%20%27EN%27%29%0A%7D%20LIMIT%20100%0A
     headers:
-      Content-Type: ''
+      Content-Type: application/x-www-form-urlencoded
       Accept: text/csv
   response:
     status:
@@ -15,12 +15,12 @@ http_interactions:
       reason: OK
       message: 'Success: (200) OK'
     headers:
-      date: Thu, 19 Nov 2020 14:16:17 GMT
+      date: Fri, 27 Nov 2020 09:01:39 GMT
       content-type: text/csv; charset=UTF-8
       content-length: '54986'
       connection: keep-alive
       server: Virtuoso/07.20.3235 (Linux) x86_64-generic-linux-glibc25  VDB
-      expires: Thu, 26 Nov 2020 14:16:17 GMT
+      expires: Fri, 04 Dec 2020 09:01:39 GMT
       cache-control: max-age=604800
       access-control-allow-credentials: 'true'
       access-control-allow-methods: GET, POST, OPTIONS
@@ -131,5 +131,5 @@ http_interactions:
         "http://dbpedia.org/resource/Progressive_house","Progressive house","Progressive house is a style (subgenre) of house music. The progressive house style emerged in the early 1990s. It initially developed in the United Kingdom as a natural progression of American and European house music of the late 1980s."
         "http://dbpedia.org/resource/Urban_fantasy","Urban fantasy","Urban fantasy is a subgenre of fantasy defined by place; the fantastic narrative has an urban setting. Urban fantasy exists on one side of a spectrum, opposite high fantasy, which is set in an entirely fictitious world. Many urban fantasies are set in contemporary times and contain supernatural elements. However, the stories can take place in historical, modern, or futuristic periods, and the settings may include fictional elements. The prerequisite is that they must be primarily set in a city."
         "http://dbpedia.org/resource/Western_swing","Western swing","Western swing music is a subgenre of American country music that originated in the late 1920s in the West and South among the region's Western string bands. It is dance music, often with an up-tempo beat, which attracted huge crowds to dance halls and clubs in Texas, Oklahoma and California during the 1930s and 1940s until a federal war-time nightclub tax in 1944 led to its decline."
-  recorded_at: 2020-11-19 14:16:20 GMT
+  recorded_at: 2020-11-27 09:01:42 GMT
   recorded_with: vcr/0.5.4, webmockr/0.7.0

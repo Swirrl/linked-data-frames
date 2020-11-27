@@ -1,12 +1,12 @@
 http_interactions:
 - request:
     method: post
-    uri: http://statistics.data.gov.uk/sparql?query=SELECT%20%2A%20WHERE%20%7B%0A%20%20VALUES%20%3Furi%20%7B%20%3Chttp%3A%2F%2Fstatistics.data.gov.uk%2Fid%2Fstatistical-geography%2FW06000009%3E%20%3Chttp%3A%2F%2Fstatistics.data.gov.uk%2Fid%2Fstatistical-geography%2FW06000010%3E%20%3Chttp%3A%2F%2Fstatistics.data.gov.uk%2Fid%2Fstatistical-geography%2FW06000011%3E%20%3Chttp%3A%2F%2Fstatistics.data.gov.uk%2Fid%2Fstatistical-geography%2FW06000012%3E%20%3Chttp%3A%2F%2Fstatistics.data.gov.uk%2Fid%2Fstatistical-geography%2FW06000013%3E%20%3Chttp%3A%2F%2Fstatistics.data.gov.uk%2Fid%2Fstatistical-geography%2FW06000014%3E%20%3Chttp%3A%2F%2Fstatistics.data.gov.uk%2Fid%2Fstatistical-geography%2FW06000015%3E%20%3Chttp%3A%2F%2Fstatistics.data.gov.uk%2Fid%2Fstatistical-geography%2FW06000016%3E%20%3Chttp%3A%2F%2Fstatistics.data.gov.uk%2Fid%2Fstatistical-geography%2FW06000018%3E%20%3Chttp%3A%2F%2Fstatistics.data.gov.uk%2Fid%2Fstatistical-geography%2FW06000019%3E%20%3Chttp%3A%2F%2Fstatistics.data.gov.uk%2Fid%2Fstatistical-geography%2FW06000020%3E%20%3Chttp%3A%2F%2Fstatistics.data.gov.uk%2Fid%2Fstatistical-geography%2FW06000021%3E%20%3Chttp%3A%2F%2Fstatistics.data.gov.uk%2Fid%2Fstatistical-geography%2FW06000022%3E%20%3Chttp%3A%2F%2Fstatistics.data.gov.uk%2Fid%2Fstatistical-geography%2FW06000023%3E%20%3Chttp%3A%2F%2Fstatistics.data.gov.uk%2Fid%2Fstatistical-geography%2FW06000001%3E%20%3Chttp%3A%2F%2Fstatistics.data.gov.uk%2Fid%2Fstatistical-geography%2FW06000024%3E%20%3Chttp%3A%2F%2Fstatistics.data.gov.uk%2Fid%2Fstatistical-geography%2FW06000002%3E%20%3Chttp%3A%2F%2Fstatistics.data.gov.uk%2Fid%2Fstatistical-geography%2FW06000003%3E%20%3Chttp%3A%2F%2Fstatistics.data.gov.uk%2Fid%2Fstatistical-geography%2FW06000004%3E%20%3Chttp%3A%2F%2Fstatistics.data.gov.uk%2Fid%2Fstatistical-geography%2FW06000005%3E%20%3Chttp%3A%2F%2Fstatistics.data.gov.uk%2Fid%2Fstatistical-geography%2FW06000006%3E%20%3Chttp%3A%2F%2Fstatistics.data.gov.uk%2Fid%2Fstatistical-geography%2FW06000008%3E%20%7D%0A%0A%20%20%3Furi%0A%20%20%20%20%3Chttp%3A%2F%2Fstatistics.data.gov.uk%2Fdef%2Fstatistical-geography%23officialname%3E%20%3Flabel%3B%0A%20%20%20%20%3Chttp%3A%2F%2Fwww.w3.org%2F2004%2F02%2Fskos%2Fcore%23notation%3E%20%3Fnotation%3B%0A%20%20%20%20.%0A%0A%20%20OPTIONAL%20%7B%0A%20%20%20%20%20%20%3Furi%20%3Chttp%3A%2F%2Fwww.opengis.net%2Font%2Fgeosparql%23hasGeometry%3E%2F%3Chttp%3A%2F%2Fwww.opengis.net%2Font%2Fgeosparql%23asWKT%3E%20%3Fboundary%3B%0A%20%20%20%20%7D%0A%0A%20%20OPTIONAL%20%7B%0A%20%20%20%20%3Furi%20%3Chttp%3A%2F%2Fstatistics.data.gov.uk%2Fdef%2Fstatistical-geography%23parentcode%3E%20%3Fparent%3B%0A%20%20%7D%0A%7D
+    uri: http://statistics.data.gov.uk/sparql
     body:
       encoding: ''
-      string: ''
+      string: query=SELECT%20%2A%20WHERE%20%7B%0A%20%20VALUES%20%3Furi%20%7B%20%3Chttp%3A%2F%2Fstatistics.data.gov.uk%2Fid%2Fstatistical-geography%2FW06000009%3E%20%3Chttp%3A%2F%2Fstatistics.data.gov.uk%2Fid%2Fstatistical-geography%2FW06000010%3E%20%3Chttp%3A%2F%2Fstatistics.data.gov.uk%2Fid%2Fstatistical-geography%2FW06000011%3E%20%3Chttp%3A%2F%2Fstatistics.data.gov.uk%2Fid%2Fstatistical-geography%2FW06000012%3E%20%3Chttp%3A%2F%2Fstatistics.data.gov.uk%2Fid%2Fstatistical-geography%2FW06000013%3E%20%3Chttp%3A%2F%2Fstatistics.data.gov.uk%2Fid%2Fstatistical-geography%2FW06000014%3E%20%3Chttp%3A%2F%2Fstatistics.data.gov.uk%2Fid%2Fstatistical-geography%2FW06000015%3E%20%3Chttp%3A%2F%2Fstatistics.data.gov.uk%2Fid%2Fstatistical-geography%2FW06000016%3E%20%3Chttp%3A%2F%2Fstatistics.data.gov.uk%2Fid%2Fstatistical-geography%2FW06000018%3E%20%3Chttp%3A%2F%2Fstatistics.data.gov.uk%2Fid%2Fstatistical-geography%2FW06000019%3E%20%3Chttp%3A%2F%2Fstatistics.data.gov.uk%2Fid%2Fstatistical-geography%2FW06000020%3E%20%3Chttp%3A%2F%2Fstatistics.data.gov.uk%2Fid%2Fstatistical-geography%2FW06000021%3E%20%3Chttp%3A%2F%2Fstatistics.data.gov.uk%2Fid%2Fstatistical-geography%2FW06000022%3E%20%3Chttp%3A%2F%2Fstatistics.data.gov.uk%2Fid%2Fstatistical-geography%2FW06000023%3E%20%3Chttp%3A%2F%2Fstatistics.data.gov.uk%2Fid%2Fstatistical-geography%2FW06000001%3E%20%3Chttp%3A%2F%2Fstatistics.data.gov.uk%2Fid%2Fstatistical-geography%2FW06000024%3E%20%3Chttp%3A%2F%2Fstatistics.data.gov.uk%2Fid%2Fstatistical-geography%2FW06000002%3E%20%3Chttp%3A%2F%2Fstatistics.data.gov.uk%2Fid%2Fstatistical-geography%2FW06000003%3E%20%3Chttp%3A%2F%2Fstatistics.data.gov.uk%2Fid%2Fstatistical-geography%2FW06000004%3E%20%3Chttp%3A%2F%2Fstatistics.data.gov.uk%2Fid%2Fstatistical-geography%2FW06000005%3E%20%3Chttp%3A%2F%2Fstatistics.data.gov.uk%2Fid%2Fstatistical-geography%2FW06000006%3E%20%3Chttp%3A%2F%2Fstatistics.data.gov.uk%2Fid%2Fstatistical-geography%2FW06000008%3E%20%7D%0A%0A%20%20%3Furi%0A%20%20%20%20%3Chttp%3A%2F%2Fstatistics.data.gov.uk%2Fdef%2Fstatistical-geography%23officialname%3E%20%3Flabel%3B%0A%20%20%20%20%3Chttp%3A%2F%2Fwww.w3.org%2F2004%2F02%2Fskos%2Fcore%23notation%3E%20%3Fnotation%3B%0A%20%20%20%20.%0A%0A%20%20OPTIONAL%20%7B%0A%20%20%20%20%20%20%3Furi%20%3Chttp%3A%2F%2Fwww.opengis.net%2Font%2Fgeosparql%23hasGeometry%3E%2F%3Chttp%3A%2F%2Fwww.opengis.net%2Font%2Fgeosparql%23asWKT%3E%20%3Fboundary%3B%0A%20%20%20%20%7D%0A%0A%20%20OPTIONAL%20%7B%0A%20%20%20%20%3Furi%20%3Chttp%3A%2F%2Fstatistics.data.gov.uk%2Fdef%2Fstatistical-geography%23parentcode%3E%20%3Fparent%3B%0A%20%20%7D%0A%7D
     headers:
-      Content-Type: ''
+      Content-Type: application/x-www-form-urlencoded
       Accept: text/csv
   response:
     status:
@@ -16,7 +16,7 @@ http_interactions:
       message: 'Success: (200) OK'
     headers:
       server: nginx
-      date: Sat, 21 Nov 2020 17:39:58 GMT
+      date: Fri, 27 Nov 2020 09:01:45 GMT
       content-type: text/csv
       transfer-encoding: chunked
       connection: keep-alive
@@ -28,9 +28,9 @@ http_interactions:
       content-transfer-encoding: binary
       cache-control: no-cache
       etag: W/"5aad2fade33f7341fef8b722eabf6679"
-      x-request-id: e22426bb-304f-4b64-9839-35b197bebf91
-      x-runtime: '0.657866'
-      expires: Sat, 21 Nov 2020 17:39:57 GMT
+      x-request-id: b12db714-5601-4f22-95d1-a40de801b7de
+      x-runtime: '1.607581'
+      expires: Fri, 27 Nov 2020 09:01:44 GMT
       access-control-allow-origin: '*'
       access-control-allow-methods: GET, POST, OPTIONS
       access-control-allow-headers: DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type
@@ -33442,5 +33442,5 @@ http_interactions:
         -3.117199824830418 51.376696274062084, -3.1177992912819255 51.376532251464894,
         -3.1173504417902134 51.376333372255054, -3.118022812781486 51.37579729743379,
         -3.117556440077499 51.37546725043482)))\",http://statistics.data.gov.uk/id/statistical-geography/W92000004\r\n"
-  recorded_at: 2020-11-21 17:40:00 GMT
+  recorded_at: 2020-11-27 09:01:47 GMT
   recorded_with: vcr/0.5.4, webmockr/0.7.0

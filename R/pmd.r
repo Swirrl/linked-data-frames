@@ -20,7 +20,7 @@ query <- function(query_string, endpoint=default_endpoint(), format="csv") {
 
   response <- httr::POST(url=endpoint,
                          httr::accept(mime),
-                         query=list(query=query_string),
+                         body=list(query=query_string),
                          encode="form")
 
   if(format=="csv") {
