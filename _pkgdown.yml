@@ -44,7 +44,7 @@ articles:
     desc: Working with RDF resources in linked data frames
     navbar: Linked data frames
     contents:
-    - working-with-ldf-resources
+    - introduction-to-ldf
     - creating-ldf-resources
     - working-with-ldf-intervals
   - title: Data cubes

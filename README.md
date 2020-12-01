@@ -31,6 +31,12 @@ head(cube) %>% as_tibble()
 
 The cube is modelled as a tidy table of observations with a column for each component property. The columns whose values are RDF resources are given a special type: either `ldf_resource` or `ldf_interval`.
 
+For examples of how to work with data cubes please see the following vignettes:
+
+- `vignette("mapping-statistical-geography")`: explains how to download geographic resources and use them to plot a thematic map.
+- `vignette("tabulate-datacube")`: explains how to transform a tidy table of observations by cross-tabulating them back to format used in the original publication.
+- `vignette("merging-datacubes")`: explains how to combine data cubes together to enrich data and create novel analyses.
+
 ### Modelling RDF resources as vectors
 
 Resources in RDF are identified with URIs that are described with a set of statements. Each statement specifies the value of a given property for the resource. We can represent this in R using a character vector for the URIs together with a data frame for the descriptions. That data frame includes a "uri" column to identify the resource being described in each row.
@@ -56,10 +62,9 @@ food
 
 For a complete introduction to the LDF library please see the following vignettes:
 
-- `vignette("working-with-ldf-resources")`: explains how resources are represented and introduces the functions like `property()` and `curie()` that available for working with them;
+- `vignette("introduction-to-ldf")`: explains how resources are represented and introduces functions like `description()`, `property()` and `curie()` that are available for working with them;
 - `vignette("creating-ldf-resources")`: explains how to create resources from SPARQL queries or RDF files;
 - `vignette("working-with-ldf-intervals")`: explains how to create interval resources from URIs and use them to plot a time series chart;
-- `vignette("mapping-statistical-geography")`: explains how to download geographic resources and use them to plot a thematic map.
 
 ## Installation
 

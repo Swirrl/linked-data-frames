@@ -1,8 +1,8 @@
 ---
-title: "Working with LDF Resources"
+title: "Introduction to LDF"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Working with LDF Resources}
+  %\VignetteIndexEntry{Introduction to LDF}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -60,7 +60,13 @@ There's also the `curie()` function for retreiving URIs compacted with prefixes 
 curie(food, prefixes=c(food="http://example.net/id/"))
 ```
 
-In order to access properties from the resource's description, you can use `property()`:
+You can retrieve the descriptions with `description()`:
+
+```{r}
+description(food)
+```
+
+In order to access individual properties from the resource's description, you can use `property()`:
 
 ```{r}
 property(food, "label")
