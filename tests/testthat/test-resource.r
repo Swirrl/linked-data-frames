@@ -59,6 +59,12 @@ describe("resources can have arbitrary descriptions", {
     r <- resource("a", tibble::tibble(uri="a",label="A"))
     expect_equal(label(r), "A")
   })
+
+  test_that("description may be assigned", {
+    r <- resource("a")
+    description(r) <- tibble::tibble(uri="a",label="A")
+    expect_equal(label(r), "A")
+  })
 })
 
 describe("accessors", {

@@ -84,6 +84,22 @@ description <- function(resource) {
   attr(resource, "description")
 }
 
+#' Assign a description to a resource
+#'
+#' Replaces the existing description. To add properties to a description use in combination with
+#' [merge_description()].
+#'
+#' @param resource A vector of `ldf_resource`s
+#' @param value A new resource description
+#' @examples
+#' r <- resource("a")
+#' description(r) <- data.frame(uri="a",label="A")
+#' @export
+`description<-` <- function(resource, value) {
+  attr(resource, "description") <- value
+  resource
+}
+
 #' Extract a property value from a resource description
 #'
 #' @param resource A vector of `ldf_resource`s
@@ -194,6 +210,9 @@ format.ldf_resource <- function(x, ...) {
 #' @param x A resource description (inherits from data frame)
 #' @param y A resource description (inherits from data frame)
 #' @return A resource description (inherits from data frame)
+#' @examples
+#' a <- resource("a", data.frame(uri="a", label="A"))
+#' description(a) <- merge_description(description(a), data.frame(uri="a", vowel=TRUE))
 #' @export
 merge_description <- function(x, y) {
   if(!is.null(x)) {

@@ -15,8 +15,9 @@ reference:
   - curie
   - label
   - sort_priority
-  - validate_resource
+  - description<-
   - merge_description
+  - validate_resource
   - as_dataframe_of_labels
   - as_dataframe_of_resources
 - title: "Working with LDF intervals"

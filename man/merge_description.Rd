@@ -18,3 +18,7 @@ A resource description (inherits from data frame)
 Merges descriptions on URI, and attempts to merge columns from either description (filling with
 \code{NA} where the column exists only in one description).
 }
+\examples{
+a <- resource("a", data.frame(uri="a", label="A"))
+description(a) <- merge_description(description(a), data.frame(uri="a", vowel=TRUE))
+}
