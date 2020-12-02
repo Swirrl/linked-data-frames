@@ -1,0 +1,41 @@
+uri,label,subregion
+EU27_2020,European Union - 27 countries (from 2020),
+EU28,European Union - 28 countries (2013-2020),
+EU15,European Union - 15 countries (1995-2004),
+EA19,Euro area - 19 countries  (from 2015),
+BE,Belgium,Western
+BG,Bulgaria,Eastern
+CZ,Czechia,Eastern
+DK,Denmark,Northern
+DE,Germany (until 1990 former territory of the FRG),Western
+EE,Estonia,Northern
+IE,Ireland,Northern
+EL,Greece,Southern
+ES,Spain,Southern
+FR,France,Western
+FX,France (metropolitan),Western
+HR,Croatia,Southern
+IT,Italy,Southern
+CY,Cyprus,
+LV,Latvia,Northern
+LT,Lithuania,Northern
+LU,Luxembourg,Western
+HU,Hungary,Eastern
+MT,Malta,Southern
+NL,Netherlands,Western
+AT,Austria,Western
+PL,Poland,Eastern
+PT,Portugal,Southern
+RO,Romania,Eastern
+SI,Slovenia,Eastern
+SK,Slovakia,Eastern
+FI,Finland,Northern
+SE,Sweden,Northern
+UK,United Kingdom,Northern
+IS,Iceland,Northern
+NO,Norway,Northern
+CH,Switzerland,Western
+ME,Montenegro,Southern
+MK,North Macedonia,Southern
+RS,Serbia,Southern
+TR,Turkey,

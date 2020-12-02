@@ -267,14 +267,76 @@ If every dimension is common to both cube codes (or if it only a single value), 
 
 If these values are distinguished by dimension values, then they will be on different rows. Otherwise, the values could be put into different columns on the same rows. It's possible to transform the data between these two representations using the `tidyr` package as described in the [Tabulating DataCubes](tabulate-datacube.html) vignette. The longer (row bound) form is nicer for analysis (e.g. modelling or charting) whereas the wider (column bound) form is nicer for calculations that compare the values (e.g. denomination).
 
-```{r}
-# example of linear model + scatter plot from row-bound joined cube
+```{r echo=F}
+country_codes <- read.csv("country.csv")
 
-# X vs population for something
-# demonstrate that X is bigger if there are more people :D
-# calculate population-rate of X
+employment <- read.csv("employment.csv") %>% mutate(country=resource(country, country_codes))
+population <- read.csv("population.csv") %>% mutate(country=resource(country, country_codes))
 ```
 
+We'll use two tables from Eurostat for this example. The first describes the total number of people employed in each country (in thousands):
+
 ```{r}
-# example of tidy::spread() on above to calculate ratio
+kable(head(employment,3))
+```
+
+The second describes the economically active population of each country (in thousands):
+
+```{r}
+kable(head(population,3))
+```
+
+Both have a `country` dimension that uses the same codes. We can use them together to calculate the employment rate.
+
+If we combine them by column-binding we create a single, wider table:
+
+```{r}
+emp_pop_wide <- merge(employment, population)
+
+kable(head(emp_pop_wide))
+```
+
+This form is convenient where we want to address the two variables with metadata.
+
+For example, we can calculate the employment rate by referring to each variable:
+
+```{r}
+emp_pop_wide %>%
+   mutate(employment_rate = employment / population) %>%
+   arrange(-employment_rate) %>%
+   slice_head(n=5) %>%
+   kable()
+```
+
+Alternatively, we can row-bind the tables to form a single, longer table. We have to add another dimension - `variable` - to the table to distinguish the rows from each source. This allows us to combine the `employment` and `population` measures into a single measure which simply counts `people`.
+
+```{r}
+emp_pop_long <- rbind(
+   transmute(employment, country, indicator="Employment", people=employment),
+   transmute(population, country, indicator="Population", people=population)
+   )
+
+emp_pop_long %>%
+   arrange(country) %>%
+   slice_head(n=10) %>%
+   kable()
+```
+
+This form is convenient where we want to address the two variables as data.
+
+For example, we can plot employment against population:
+
+```{r, fig.height=7, fig.width=7}
+library(ggplot2)
+
+ggplot(filter(emp_pop_long, !country %in% c("EU27_2020","EU28","EU15","EA19")),
+       aes(label(country), people, fill=indicator)) + 
+   geom_col(position="dodge") + 
+   scale_fill_brewer() + 
+   theme_minimal() + 
+   coord_flip() +
+   labs(title="Demographics of European Countries",
+        x="Country",
+        y="Count of People (Thousands)",
+        fill="Indicator")
 ```
