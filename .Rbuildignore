@@ -7,3 +7,4 @@ readme.md
 ^docs$
 ^pkgdown$
 todo
+^\.travis\.yml$

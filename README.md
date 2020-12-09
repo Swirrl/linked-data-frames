@@ -1,5 +1,9 @@
 # Linked Data Frames (LDF) <img src="man/figures/logo.png" align="right" height="139" />
 
+<!-- badges: start -->
+[![Travis build status](https://travis-ci.com/Swirrl/linked-data-frames.svg?branch=master)](https://travis-ci.com/Swirrl/linked-data-frames)
+<!-- badges: end -->
+
 Work with linked-data idiomatically in R using data frames.
 
 Linked Data Frames have columns of RDF resources. These resources are expressed as S3 objects with rich descriptions.
