@@ -288,10 +288,12 @@ kable(head(population,3))
 
 Both have a `country` dimension that uses the same codes. We can use them together to calculate the employment rate.
 
-If we combine them by column-binding we create a single, wider table:
+If we combine them by column-binding we create a single, wider table [^3].
+
+[^3]: We use `dplyr::inner_join()` instead of `base::merge()` because this will ensure the resource descriptions also get joined (dplyr uses vctrs underneath). Merge will only retain the description of the left-hand data frame so it's safe to use `merge(all=F)` for inner-joins. For right- or full-joins you'll need to use dplyr instead of (or rebuild the description yourself with e.g. `merge_description()`).
 
 ```{r}
-emp_pop_wide <- merge(employment, population)
+emp_pop_wide <- dplyr::inner_join(employment, population, by="country")
 
 kable(head(emp_pop_wide))
 ```

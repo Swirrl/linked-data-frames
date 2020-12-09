@@ -110,6 +110,7 @@ describe("curie function", {
   test_that("default prefixes set in option", {
     withr::with_options(
       list(ldf_prefixes=c(eg="http://example.net/id/")),
+
       expect_equal(curie(r), c("eg:apple", "eg:banana", "eg:carrot"))
     )
   })
@@ -198,6 +199,51 @@ describe("combining", {
     d_b <- data.frame(x=b)
     d <- vec_rbind(d_a,d_b)
     expect_equal(description(d$x)$label, c("A","B"))
+  })
+
+  test_that("data frames may be joined with merge(all=F)", {
+    withr::local_options(stringsAsFactors = F)
+
+    d_l <- data.frame(r=resource(c("a","b"),
+                                 data.frame(uri=c("a","b"),
+                                            label=c("A","B"))),
+                      v=1:2)
+    d_r <- data.frame(r=resource(c("b","c"),
+                                 data.frame(uri=c("b","c"),
+                                            label=c("B","C"))),
+                      v=3:4)
+    d <- merge(d_l, d_r, by="r", all=F)
+
+    expect_equal(uri(d$r), "b")
+    expect_equal(label(d$r), "B")
+    expect_equal(d$v.x, 2)
+    expect_equal(d$v.y, 3)
+
+    # retains redundant description of "a" from d_l
+  })
+
+  test_that("data frames may be joined with dplyr", {
+    withr::local_options(stringsAsFactors = F)
+
+    d_l <- data.frame(r=resource(c("a","b"),
+                                 data.frame(uri=c("a","b"),
+                                            label=c("A","B"))),
+                      v=1:2)
+    d_r <- data.frame(r=resource(c("b","c"),
+                                 data.frame(uri=c("b","c"),
+                                            label=c("B","C"))),
+                      v=3:4)
+
+    # merge won't combine descriptions
+    # uris are correct, but the "C" label is missing from d$r
+    # d <- merge(d_l, d_r, by="r", all=T)
+
+    d <- dplyr::full_join(d_l, d_r, by="r")
+
+    expect_equal(uri(d$r), c("a", "b", "c"))
+    expect_equal(label(d$r), c("A", "B", "C"))
+    expect_equal(d$v.x, c(1, 2, NA))
+    expect_equal(d$v.y, c(NA, 3, 4))
   })
 })
 
