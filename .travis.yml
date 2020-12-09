@@ -6,3 +6,4 @@ cache: packages
 apt_packages:
   - libudunits2-dev
   - libgdal-dev
+  - librdf0-dev
