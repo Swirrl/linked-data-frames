@@ -3,10 +3,10 @@ pkgdown: 1.6.1
 pkgdown_sha: ~
 articles:
   creating-ldf-resources: creating-ldf-resources.html
+  introduction-to-ldf: introduction-to-ldf.html
   mapping-statistical-geography: mapping-statistical-geography.html
   merging-datacubes: merging-datacubes.html
   tabulate-datacube: tabulate-datacube.html
   working-with-ldf-intervals: working-with-ldf-intervals.html
-  working-with-ldf-resources: working-with-ldf-resources.html
-last_built: 2020-11-30T13:50Z
+last_built: 2020-12-09T13:26Z
 

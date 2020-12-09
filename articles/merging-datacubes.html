@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ldf</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
       </span>
     </div>
 
@@ -63,7 +63,7 @@
 <li class="divider">
     <li class="dropdown-header">Linked data frames</li>
     <li>
-      <a href="../articles/working-with-ldf-resources.html">Working with LDF Resources</a>
+      <a href="../articles/introduction-to-ldf.html">Introduction to LDF</a>
     </li>
     <li>
       <a href="../articles/creating-ldf-resources.html">Creating LDF Resources</a>
@@ -776,22 +776,244 @@ The following sections are a work in progress
 <p>If two cubes use the same codelist (or have dimensions with common patterns for URIs like intervals or geographies) then it’s possible to join them on that basis.</p>
 <p>If every dimension is common to both cube codes (or if it only a single value), then it’s possible to do a full join using all the dimensions. This will result in a combined cube with the same set of dimensions (which uniquely identify the rows) and two values - one from each of the original cubes.</p>
 <p>If these values are distinguished by dimension values, then they will be on different rows. Otherwise, the values could be put into different columns on the same rows. It’s possible to transform the data between these two representations using the <code>tidyr</code> package as described in the <a href="tabulate-datacube.html">Tabulating DataCubes</a> vignette. The longer (row bound) form is nicer for analysis (e.g. modelling or charting) whereas the wider (column bound) form is nicer for calculations that compare the values (e.g. denomination).</p>
+<p>We’ll use two tables from Eurostat for this example. The first describes the total number of people employed in each country (in thousands):</p>
 <div class="sourceCode" id="cb11"><pre class="downlit">
-<span class="co"># example of linear model + scatter plot from row-bound joined cube</span>
-
-<span class="co"># X vs population for something</span>
-<span class="co"># demonstrate that X is bigger if there are more people :D</span>
-<span class="co"># calculate population-rate of X</span>
+<span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span>(<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="kw">employment</span>,<span class="fl">3</span>))
 </pre></div>
+<table class="table">
+<thead><tr class="header">
+<th align="left">country</th>
+<th align="right">employment</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">Austria</td>
+<td align="right">4148</td>
+</tr>
+<tr class="even">
+<td align="left">Belgium</td>
+<td align="right">4708</td>
+</tr>
+<tr class="odd">
+<td align="left">Bulgaria</td>
+<td align="right">3121</td>
+</tr>
+</tbody>
+</table>
+<p>The second describes the economically active population of each country (in thousands):</p>
 <div class="sourceCode" id="cb12"><pre class="downlit">
-<span class="co"># example of tidy::spread() on above to calculate ratio</span>
+<span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span>(<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="kw">population</span>,<span class="fl">3</span>))
 </pre></div>
+<table class="table">
+<thead><tr class="header">
+<th align="left">country</th>
+<th align="right">population</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">Austria</td>
+<td align="right">4336</td>
+</tr>
+<tr class="even">
+<td align="left">Belgium</td>
+<td align="right">4969</td>
+</tr>
+<tr class="odd">
+<td align="left">Bulgaria</td>
+<td align="right">3258</td>
+</tr>
+</tbody>
+</table>
+<p>Both have a <code>country</code> dimension that uses the same codes. We can use them together to calculate the employment rate.</p>
+<p>If we combine them by column-binding we create a single, wider table <a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>.</p>
+<div class="sourceCode" id="cb13"><pre class="downlit">
+<span class="kw">emp_pop_wide</span> <span class="op">&lt;-</span> <span class="kw">dplyr</span>::<span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">inner_join</a></span>(<span class="kw">employment</span>, <span class="kw">population</span>, by=<span class="st">"country"</span>)
+
+<span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span>(<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="kw">emp_pop_wide</span>))
+</pre></div>
+<table class="table">
+<thead><tr class="header">
+<th align="left">country</th>
+<th align="right">employment</th>
+<th align="right">population</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">Austria</td>
+<td align="right">4148</td>
+<td align="right">4336</td>
+</tr>
+<tr class="even">
+<td align="left">Belgium</td>
+<td align="right">4708</td>
+<td align="right">4969</td>
+</tr>
+<tr class="odd">
+<td align="left">Bulgaria</td>
+<td align="right">3121</td>
+<td align="right">3258</td>
+</tr>
+<tr class="even">
+<td align="left">Switzerland</td>
+<td align="right">4321</td>
+<td align="right">4515</td>
+</tr>
+<tr class="odd">
+<td align="left">Cyprus</td>
+<td align="right">400</td>
+<td align="right">431</td>
+</tr>
+<tr class="even">
+<td align="left">Czechia</td>
+<td align="right">5126</td>
+<td align="right">5230</td>
+</tr>
+</tbody>
+</table>
+<p>This form is convenient where we want to address the two variables with metadata.</p>
+<p>For example, we can calculate the employment rate by referring to each variable:</p>
+<div class="sourceCode" id="cb14"><pre class="downlit">
+<span class="kw">emp_pop_wide</span> <span class="op">%&gt;%</span>
+   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(employment_rate = <span class="kw">employment</span> <span class="op">/</span> <span class="kw">population</span>) <span class="op">%&gt;%</span>
+   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span>(<span class="op">-</span><span class="kw">employment_rate</span>) <span class="op">%&gt;%</span>
+   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html">slice_head</a></span>(n=<span class="fl">5</span>) <span class="op">%&gt;%</span>
+   <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span>()
+</pre></div>
+<table class="table">
+<thead><tr class="header">
+<th align="left">country</th>
+<th align="right">employment</th>
+<th align="right">population</th>
+<th align="right">employment_rate</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">Czechia</td>
+<td align="right">5126</td>
+<td align="right">5230</td>
+<td align="right">0.9801147</td>
+</tr>
+<tr class="even">
+<td align="left">Netherlands</td>
+<td align="right">8077</td>
+<td align="right">8328</td>
+<td align="right">0.9698607</td>
+</tr>
+<tr class="odd">
+<td align="left">Germany (until 1990 former territory of the FRG)</td>
+<td align="right">39955</td>
+<td align="right">41234</td>
+<td align="right">0.9689819</td>
+</tr>
+<tr class="even">
+<td align="left">Malta</td>
+<td align="right">245</td>
+<td align="right">253</td>
+<td align="right">0.9683794</td>
+</tr>
+<tr class="odd">
+<td align="left">Iceland</td>
+<td align="right">180</td>
+<td align="right">186</td>
+<td align="right">0.9677419</td>
+</tr>
+</tbody>
+</table>
+<p>Alternatively, we can row-bind the tables to form a single, longer table. We have to add another dimension - <code>variable</code> - to the table to distinguish the rows from each source. This allows us to combine the <code>employment</code> and <code>population</code> measures into a single measure which simply counts <code>people</code>.</p>
+<div class="sourceCode" id="cb15"><pre class="downlit">
+<span class="kw">emp_pop_long</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">rbind</a></span>(
+   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">transmute</a></span>(<span class="kw">employment</span>, <span class="kw">country</span>, indicator=<span class="st">"Employment"</span>, people=<span class="kw">employment</span>),
+   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">transmute</a></span>(<span class="kw">population</span>, <span class="kw">country</span>, indicator=<span class="st">"Population"</span>, people=<span class="kw">population</span>)
+   )
+
+<span class="kw">emp_pop_long</span> <span class="op">%&gt;%</span>
+   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span>(<span class="kw">country</span>) <span class="op">%&gt;%</span>
+   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html">slice_head</a></span>(n=<span class="fl">10</span>) <span class="op">%&gt;%</span>
+   <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span>()
+</pre></div>
+<table class="table">
+<thead><tr class="header">
+<th align="left">country</th>
+<th align="left">indicator</th>
+<th align="right">people</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">Austria</td>
+<td align="left">Employment</td>
+<td align="right">4148</td>
+</tr>
+<tr class="even">
+<td align="left">Austria</td>
+<td align="left">Population</td>
+<td align="right">4336</td>
+</tr>
+<tr class="odd">
+<td align="left">Belgium</td>
+<td align="left">Employment</td>
+<td align="right">4708</td>
+</tr>
+<tr class="even">
+<td align="left">Belgium</td>
+<td align="left">Population</td>
+<td align="right">4969</td>
+</tr>
+<tr class="odd">
+<td align="left">Bulgaria</td>
+<td align="left">Employment</td>
+<td align="right">3121</td>
+</tr>
+<tr class="even">
+<td align="left">Bulgaria</td>
+<td align="left">Population</td>
+<td align="right">3258</td>
+</tr>
+<tr class="odd">
+<td align="left">Switzerland</td>
+<td align="left">Employment</td>
+<td align="right">4321</td>
+</tr>
+<tr class="even">
+<td align="left">Switzerland</td>
+<td align="left">Population</td>
+<td align="right">4515</td>
+</tr>
+<tr class="odd">
+<td align="left">Cyprus</td>
+<td align="left">Employment</td>
+<td align="right">400</td>
+</tr>
+<tr class="even">
+<td align="left">Cyprus</td>
+<td align="left">Population</td>
+<td align="right">431</td>
+</tr>
+</tbody>
+</table>
+<p>This form is convenient where we want to address the two variables as data.</p>
+<p>For example, we can plot employment against population:</p>
+<div class="sourceCode" id="cb16"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="http://ggplot2.tidyverse.org">ggplot2</a></span>)
+
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(<span class="kw">emp_pop_long</span>, <span class="op">!</span><span class="kw">country</span> <span class="op">%in%</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"EU27_2020"</span>,<span class="st">"EU28"</span>,<span class="st">"EU15"</span>,<span class="st">"EA19"</span>)),
+       <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="fu"><a href="../reference/label.html">label</a></span>(<span class="kw">country</span>), <span class="kw">people</span>, fill=<span class="kw">indicator</span>)) <span class="op">+</span> 
+   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_col</a></span>(position=<span class="st">"dodge"</span>) <span class="op">+</span> 
+   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_brewer.html">scale_fill_brewer</a></span>() <span class="op">+</span> 
+   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span>() <span class="op">+</span> 
+   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/coord_flip.html">coord_flip</a></span>() <span class="op">+</span>
+   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span>(title=<span class="st">"Demographics of European Countries"</span>,
+        x=<span class="st">"Country"</span>,
+        y=<span class="st">"Count of People (Thousands)"</span>,
+        fill=<span class="st">"Indicator"</span>)
+</pre></div>
+<p><img src="merging-datacubes_files/figure-html/unnamed-chunk-19-1.png" width="672"></p>
 </div>
 <div class="footnotes">
 <hr>
 <ol>
 <li id="fn1"><p>We’re not really “ignoring” the breakdown, so much as marginalising it by taking a value which effectively represents the integral over that dimension. In the case of counts, for example, this will be a sum. Picking an arbitrary value from the dimension would conditionalise the distribution upon it. Either way we’re removing a dimension from the cube.<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
 <li id="fn2"><p>Of course the observation URIs would still be distinct, but we didn’t return those from the query so they aren’t in the table. We could instead have had the query bind a <code>dataset</code> variable for the <code>qb:dataSet</code> property in each case (yielding each dataset’s URI), but doing it explicitly like this is hopefully more instructive.<a href="#fnref2" class="footnote-back">↩︎</a></p></li>
+<li id="fn3"><p>We use <code><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">dplyr::inner_join()</a></code> instead of <code><a href="https://rdrr.io/r/base/merge.html">base::merge()</a></code> because this will ensure the resource descriptions also get joined (dplyr uses vctrs underneath). Merge will only retain the description of the left-hand data frame so it’s safe to use <code><a href="https://rdrr.io/r/base/merge.html">merge(all=F)</a></code> for inner-joins. For right- or full-joins you’ll need to use dplyr instead of (or rebuild the description yourself with e.g. <code><a href="../reference/merge_description.html">merge_description()</a></code>).<a href="#fnref3" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
   </div>

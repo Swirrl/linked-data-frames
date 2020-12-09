@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Combine resource descriptions — merge_description • ldf</title>
+<title>Assign a description to a resource — description&lt;- • ldf</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,9 +46,9 @@
 
 
 
-<meta property="og:title" content="Combine resource descriptions — merge_description" />
-<meta property="og:description" content="Merges descriptions on URI, and attempts to merge columns from either description (filling with
-NA where the column exists only in one description)." />
+<meta property="og:title" content="Assign a description to a resource — description&lt;-" />
+<meta property="og:description" content="Replaces the existing description. To add properties to a description use in combination with
+merge_description()." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -148,38 +148,35 @@ NA where the column exists only in one description)." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Combine resource descriptions</h1>
+    <h1>Assign a description to a resource</h1>
     <small class="dont-index">Source: <a href='https://github.com/Swirrl/linked-data-frames/blob/master/R/resource.r'><code>R/resource.r</code></a></small>
-    <div class="hidden name"><code>merge_description.Rd</code></div>
+    <div class="hidden name"><code>description-set.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Merges descriptions on URI, and attempts to merge columns from either description (filling with
-<code>NA</code> where the column exists only in one description).</p>
+    <p>Replaces the existing description. To add properties to a description use in combination with
+<code><a href='merge_description.html'>merge_description()</a></code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>merge_description</span>(<span class='kw'>x</span>, <span class='kw'>y</span>)</pre>
+    <pre class="usage"><span class='fu'><a href='description.html'>description</a></span>(<span class='kw'>resource</span>) <span class='op'>&lt;-</span> <span class='kw'>value</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>x</th>
-      <td><p>A resource description (inherits from data frame)</p></td>
+      <th>resource</th>
+      <td><p>A vector of <code>ldf_resource</code>s</p></td>
     </tr>
     <tr>
-      <th>y</th>
-      <td><p>A resource description (inherits from data frame)</p></td>
+      <th>value</th>
+      <td><p>A new resource description</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>A resource description (inherits from data frame)</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>a</span> <span class='op'>&lt;-</span> <span class='fu'><a href='resource.html'>resource</a></span>(<span class='st'>"a"</span>, <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(uri=<span class='st'>"a"</span>, label=<span class='st'>"A"</span>))
-<span class='fu'><a href='description.html'>description</a></span>(<span class='kw'>a</span>) <span class='op'>&lt;-</span> <span class='fu'>merge_description</span>(<span class='fu'><a href='description.html'>description</a></span>(<span class='kw'>a</span>), <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(uri=<span class='st'>"a"</span>, vowel=<span class='fl'>TRUE</span>))
+    <pre class="examples"><div class='input'><span class='kw'>r</span> <span class='op'>&lt;-</span> <span class='fu'><a href='resource.html'>resource</a></span>(<span class='st'>"a"</span>)
+<span class='fu'><a href='description.html'>description</a></span>(<span class='kw'>r</span>) <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(uri=<span class='st'>"a"</span>,label=<span class='st'>"A"</span>)
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

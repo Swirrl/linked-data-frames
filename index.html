@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">ldf</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
       </span>
     </div>
 
@@ -63,7 +63,7 @@
 <li class="divider">
     <li class="dropdown-header">Linked data frames</li>
     <li>
-      <a href="articles/working-with-ldf-resources.html">Working with LDF Resources</a>
+      <a href="articles/introduction-to-ldf.html">Introduction to LDF</a>
     </li>
     <li>
       <a href="articles/creating-ldf-resources.html">Creating LDF Resources</a>
@@ -134,6 +134,15 @@
 <span class="co">#&gt; 6 Percent      2020-03-16 P7D   Flour                        100 Price Change Indice</span>
 </pre></div>
 <p>The cube is modelled as a tidy table of observations with a column for each component property. The columns whose values are RDF resources are given a special type: either <code>ldf_resource</code> or <code>ldf_interval</code>.</p>
+<p>For examples of how to work with data cubes please see the following vignettes:</p>
+<ul>
+<li>
+<code><a href="articles/mapping-statistical-geography.html">vignette("mapping-statistical-geography")</a></code>: explains how to download geographic resources and use them to plot a thematic map.</li>
+<li>
+<code><a href="articles/tabulate-datacube.html">vignette("tabulate-datacube")</a></code>: explains how to transform a tidy table of observations by cross-tabulating them back to format used in the original publication.</li>
+<li>
+<code><a href="articles/merging-datacubes.html">vignette("merging-datacubes")</a></code>: explains how to combine data cubes together to enrich data and create novel analyses.</li>
+</ul>
 </div>
 <div id="modelling-rdf-resources-as-vectors" class="section level3">
 <h3 class="hasAnchor">
@@ -158,13 +167,11 @@
 <p>For a complete introduction to the LDF library please see the following vignettes:</p>
 <ul>
 <li>
-<code><a href="articles/working-with-ldf-resources.html">vignette("working-with-ldf-resources")</a></code>: explains how resources are represented and introduces the functions like <code><a href="reference/property.html">property()</a></code> and <code><a href="reference/curie.html">curie()</a></code> that available for working with them;</li>
+<code><a href="articles/introduction-to-ldf.html">vignette("introduction-to-ldf")</a></code>: explains how resources are represented and introduces functions like <code><a href="reference/description.html">description()</a></code>, <code><a href="reference/property.html">property()</a></code> and <code><a href="reference/curie.html">curie()</a></code> that are available for working with them;</li>
 <li>
 <code><a href="articles/creating-ldf-resources.html">vignette("creating-ldf-resources")</a></code>: explains how to create resources from SPARQL queries or RDF files;</li>
 <li>
 <code><a href="articles/working-with-ldf-intervals.html">vignette("working-with-ldf-intervals")</a></code>: explains how to create interval resources from URIs and use them to plot a time series chart;</li>
-<li>
-<code><a href="articles/mapping-statistical-geography.html">vignette("mapping-statistical-geography")</a></code>: explains how to download geographic resources and use them to plot a thematic map.</li>
 </ul>
 </div>
 </div>
