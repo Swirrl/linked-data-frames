@@ -164,7 +164,20 @@ get_observations <- function(dataset_uri,
 
   query(q, endpoint)
 }
-
+#' Download a Codelist
+#'
+#' Returns a data frame with one observation per code and columns for the label, notation, and
+#' sort priority (if available).
+#'
+#' @param codelist_uri A string
+#' @param endpoint A string for the sparql endpoint
+#' @return A data frame
+#' @export
+#' @examples
+#' \dontrun{
+#' get_codelist("http://statistics.gov.scot/def/concept-scheme/ethnicity",
+#'              "https://statistics.gov.scot/sparql")
+#' }
 get_codelist <- function(codelist_uri, endpoint=default_endpoint()) {
   q <- stringr::str_interp(c(
     "PREFIX skos: <http://www.w3.org/2004/02/skos/core#>",

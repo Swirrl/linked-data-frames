@@ -30,6 +30,7 @@ reference:
   desc: Download resources from RDF Data Cubes available on PublishMyData platforms
   contents:
   - get_cube
+  - get_codelist
   - get_geography
   - get_label
   - get_dimensions
