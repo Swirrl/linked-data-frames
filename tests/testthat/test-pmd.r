@@ -15,11 +15,21 @@ test_that("query works", {
   expect_equal(nrow(spo), 2)
 })
 
-test_that("get_cube works", {
-  vcr::use_cassette("get_cube", {
-    cube <- get_cube("http://gss-data.org.uk/data/gss_data/covid-19/ons-online-price-changes-for-high-demand-products#dataset")
+describe("get_cube", {
+  test_that("works for gss-data", {
+    vcr::use_cassette("get_cube_gss_data", {
+      cube <- get_cube("http://gss-data.org.uk/data/gss_data/covid-19/ons-online-price-changes-for-high-demand-products#dataset")
+    })
+    expect_equal(dim(cube), c(572,5)) # this might change when new data is loaded
   })
-  expect_equal(dim(cube), c(572,5)) # this might change when new data is loaded
+
+  test_that("works for statistics.gov.scot", {
+    vcr::use_cassette("get_cube_scot", {
+      cube <- get_cube("http://statistics.gov.scot/data/population-estimates-dependency",
+                       endpoint="https://statistics.gov.scot/sparql")
+    })
+    expect_equal(dim(cube), c(846,5))
+  })
 })
 
 describe("get_dimensions", {

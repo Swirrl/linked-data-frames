@@ -24,8 +24,7 @@ Components may be dimensions, measures or attributes.
 Where the column represents an RDF Resource, it will have the type \code{ldf_resource} vector.
 
 If the cube uses the \code{sdmx:refArea} dimension, it's values will be described using \code{get_geography}.
-The descriptions will be retreived from \href{http://statistics.data.gov.uk/sparql}{statistics.data.gov.uk}
-instead of the specified endpoint.
+The descriptions will be retrieved from the same endpoint.
 
 If the cube users the \code{sdmx:refPeriod} dimension, it's values will be described using \code{interval}s.
 }

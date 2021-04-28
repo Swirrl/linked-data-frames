@@ -75,7 +75,7 @@ fish_table <- fish %>%
               names_glue="{label(measure_type)}_{label(reference_period)}",
               values_from=weight) %>%
   arrange(reference_area, vessel_length, species_group) %>%
-  mutate(change=(`Weight_2020-07`/`Weight_2019-07`)-1)
+  mutate(change=(`Weight_2020-11`/`Weight_2019`)-1)
 ```
 
 The first 10 rows of which look like:
@@ -88,9 +88,9 @@ We can produce something formatted like the original as follows:
 library(scales)
 
 fish_table %>% 
-  mutate(change=percent(change)) %>%
+  mutate(change=percent(change, accuracy=1)) %>%
   rename("Area"=reference_area, "Vessel Length"=vessel_length, "Species Group"=species_group,
-         "2019-07"=`Weight_2019-07`, "2020-07"=`Weight_2020-07`, "Change"=change) %>%
+         "2019"=`Weight_2019`, "2020"=`Weight_2020-11`, "Change"=change) %>%
   kbl(caption="Activity of the UK fishing fleet by country, vessel length and species group", escape=F) %>%
   kable_classic(full_width = F) %>%
   column_spec(6, extra_css = "text-align: right") %>%

@@ -164,6 +164,7 @@ get_observations <- function(dataset_uri,
 
   query(q, endpoint)
 }
+
 #' Download a Codelist
 #'
 #' Returns a data frame with one observation per code and columns for the label, notation, and
@@ -185,8 +186,10 @@ get_codelist <- function(codelist_uri, endpoint=default_endpoint()) {
 
     "SELECT * ",
     "WHERE {",
-    "  ?uri skos:inScheme <${codelist_uri}>;",
-    "    rdfs:label ?label .",
+    "  { ?uri skos:inScheme <${codelist_uri}> }",
+    "  UNION ",
+    "  { <${codelist_uri}> skos:member ?uri }",
+    "  ?uri rdfs:label ?label .",
     "  OPTIONAL { ?uri skos:notation ?notation }",
     "  OPTIONAL { ?uri <http://www.w3.org/ns/ui#sortPriority> ?sort_priority }",
     "}"
@@ -286,8 +289,7 @@ SELECT * WHERE {
 #' Where the column represents an RDF Resource, it will have the type `ldf_resource` vector.
 #'
 #' If the cube uses the `sdmx:refArea` dimension, it's values will be described using `get_geography`.
-#' The descriptions will be retreived from [statistics.data.gov.uk](http://statistics.data.gov.uk/sparql)
-#' instead of the specified endpoint.
+#' The descriptions will be retrieved from the same endpoint.
 #'
 #' If the cube users the `sdmx:refPeriod` dimension, it's values will be described using `interval`s.
 #'
@@ -326,12 +328,12 @@ get_cube <- function(dataset_uri, endpoint=default_endpoint(), include_geometry=
 
   # create intervals for reference period dimension
   ref_period <- as_variable_names(d[d$uri=="http://purl.org/linked-data/sdmx/2009/dimension#refPeriod", ] %>% dplyr::pull("label"))
-  observations[,ref_period] <- interval(dplyr::pull(observations,ref_period))
+  observations[,ref_period] <- interval(as.character(dplyr::pull(observations,ref_period)))
 
   ref_area <- as_variable_names(d[d$uri=="http://purl.org/linked-data/sdmx/2009/dimension#refArea", ] %>% dplyr::pull("label"))
   if(length(ref_area)==1) {
     areas <- dplyr::pull(observations,ref_area)
-    observations[,ref_area] <- resource(areas, get_geography(areas, "http://statistics.data.gov.uk/sparql", include_geometry))
+    observations[,ref_area] <- resource(areas, get_geography(areas, endpoint, include_geometry))
   }
 
   # attributes and any remaining dimensions should just have their values labelled if possible
