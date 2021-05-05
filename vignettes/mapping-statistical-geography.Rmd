@@ -22,7 +22,7 @@ library(ldf)
 
 ## What is a Statistical Geography?
 
-The ONS maintains a registry of Statistical Geographies. These are areas in the UK, as defined by various geographic hierarchies (e.g. Council areas in an Administrative hierarhcy or NHS Regions in the Health hierarchy). Each area is issued with a code and an official name along with other information (e.g. what the parent area is or the geometry of the boundary).
+The ONS maintains a registry of Statistical Geographies. These are areas in the UK, as defined by various geographic hierarchies (e.g. Council areas in an Administrative hierarchy or NHS Regions in the Health hierarchy). Each area is issued with a code and an official name along with other information (e.g. what the parent area is or the geometry of the boundary).
 
 The data comes from the [ONS Geoportal](https://geoportal.statistics.gov.uk/) which has an RDF representation available from [ONS Geography Linked Data](http://statistics.data.gov.uk/).
 
@@ -30,7 +30,7 @@ The data comes from the [ONS Geoportal](https://geoportal.statistics.gov.uk/) wh
 
 We'll start by downloading some data. We'll be looking at [deaths in Welsh care homes](https://staging.gss-data.org.uk/cube/explore?uri=http%3A%2F%2Fgss-data.org.uk%2Fdata%2Fgss_data%2Fcovid-19%2Fwg-notifications-of-deaths-of-residents-related-to-covid-19-in-adult-care-homes-catalog-entry).
 
-We're not going to use `get_cube()` but instead use SPARQL to extract a slice from the cube. Our query will filter the observations to find deaths by any cause and which took place in any location (i.e. in an Ambulance or Hospice etc). We'll use the `GROUP BY` clause to `SUM` the count of deaths. This gives us a total number of deaths amoung care home users in Wales since records began. 
+We're not going to use `get_cube()` but instead use SPARQL to extract a slice from the cube. Our query will filter the observations to find deaths by any cause and which took place in any location (i.e. in an Ambulance or Hospice etc). We'll use the `GROUP BY` clause to `SUM` the count of deaths. This gives us a total number of deaths among care home users in Wales since records began.
 
 ```{r}
 wales_ch_deaths <- "
