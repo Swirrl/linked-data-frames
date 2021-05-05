@@ -19,7 +19,7 @@
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script><meta property="og:title" content="Mapping Statistical Geography">
 <meta property="og:description" content="ldf">
-<meta property="og:image" content="/logo.png">
+<meta property="og:image" content="/logo.svg">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ldf</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.2</span>
       </span>
     </div>
 
@@ -46,7 +46,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -88,7 +88,7 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/Swirrl/linked-data-frames/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -102,8 +102,7 @@
 
       
 
-      </header><script src="mapping-statistical-geography_files/accessible-code-block-0.0.1/empty-anchor.js"></script><link href="mapping-statistical-geography_files/anchor-sections-1.0/anchor-sections.css" rel="stylesheet">
-<script src="mapping-statistical-geography_files/anchor-sections-1.0/anchor-sections.js"></script><div class="row">
+      </header><script src="mapping-statistical-geography_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Mapping Statistical Geography</h1>
@@ -123,14 +122,14 @@
 <div id="what-is-a-statistical-geography" class="section level2">
 <h2 class="hasAnchor">
 <a href="#what-is-a-statistical-geography" class="anchor"></a>What is a Statistical Geography?</h2>
-<p>The ONS maintains a registry of Statistical Geographies. These are areas in the UK, as defined by various geographic hierarchies (e.g. Council areas in an Administrative hierarhcy or NHS Regions in the Health hierarchy). Each area is issued with a code and an official name along with other information (e.g. what the parent area is or the geometry of the boundary).</p>
+<p>The ONS maintains a registry of Statistical Geographies. These are areas in the UK, as defined by various geographic hierarchies (e.g. Council areas in an Administrative hierarchy or NHS Regions in the Health hierarchy). Each area is issued with a code and an official name along with other information (e.g. what the parent area is or the geometry of the boundary).</p>
 <p>The data comes from the <a href="https://geoportal.statistics.gov.uk/">ONS Geoportal</a> which has an RDF representation available from <a href="http://statistics.data.gov.uk/">ONS Geography Linked Data</a>.</p>
 </div>
 <div id="downloading-data" class="section level2">
 <h2 class="hasAnchor">
 <a href="#downloading-data" class="anchor"></a>Downloading data</h2>
 <p>We’ll start by downloading some data. We’ll be looking at <a href="https://staging.gss-data.org.uk/cube/explore?uri=http%3A%2F%2Fgss-data.org.uk%2Fdata%2Fgss_data%2Fcovid-19%2Fwg-notifications-of-deaths-of-residents-related-to-covid-19-in-adult-care-homes-catalog-entry">deaths in Welsh care homes</a>.</p>
-<p>We’re not going to use <code><a href="../reference/get_cube.html">get_cube()</a></code> but instead use SPARQL to extract a slice from the cube. Our query will filter the observations to find deaths by any cause and which took place in any location (i.e. in an Ambulance or Hospice etc). We’ll use the <code>GROUP BY</code> clause to <code>SUM</code> the count of deaths. This gives us a total number of deaths amoung care home users in Wales since records began.</p>
+<p>We’re not going to use <code><a href="../reference/get_cube.html">get_cube()</a></code> but instead use SPARQL to extract a slice from the cube. Our query will filter the observations to find deaths by any cause and which took place in any location (i.e. in an Ambulance or Hospice etc). We’ll use the <code>GROUP BY</code> clause to <code>SUM</code> the count of deaths. This gives us a total number of deaths among care home users in Wales since records began.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit">
 <span class="kw">wales_ch_deaths</span> <span class="op">&lt;-</span> <span class="st">"
 PREFIX wgd: &lt;http://gss-data.org.uk/data/gss_data/covid-19/wg-notifications-of-deaths-of-residents-related-to-covid-19-in-adult-care-homes#dimension/&gt;
@@ -219,7 +218,7 @@ GROUP BY ?geo
 </pre></div>
 <p>Finally, we can use this <code>sf</code> object in <code>ggplot</code> to create a choropleth:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="http://ggplot2.tidyverse.org">ggplot2</a></span>)
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span>)
 
 <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">geo_sf</span>) <span class="op">+</span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf</a></span>(<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(fill=<span class="kw">total_deaths</span>), colour=<span class="st">"white"</span>) <span class="op">+</span> 

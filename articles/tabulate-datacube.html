@@ -19,7 +19,7 @@
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script><meta property="og:title" content="Tabulating DataCubes">
 <meta property="og:description" content="ldf">
-<meta property="og:image" content="/logo.png">
+<meta property="og:image" content="/logo.svg">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ldf</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.2</span>
       </span>
     </div>
 
@@ -46,7 +46,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -88,7 +88,7 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/Swirrl/linked-data-frames/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -102,8 +102,7 @@
 
       
 
-      </header><script src="tabulate-datacube_files/accessible-code-block-0.0.1/empty-anchor.js"></script><link href="tabulate-datacube_files/anchor-sections-1.0/anchor-sections.css" rel="stylesheet">
-<script src="tabulate-datacube_files/anchor-sections-1.0/anchor-sections.js"></script><script src="tabulate-datacube_files/kePrint-0.0.1/kePrint.js"></script><link href="tabulate-datacube_files/lightable-0.0.1/lightable.css" rel="stylesheet">
+      </header><script src="tabulate-datacube_files/accessible-code-block-0.0.1/empty-anchor.js"></script><script src="tabulate-datacube_files/kePrint-0.0.1/kePrint.js"></script><link href="tabulate-datacube_files/lightable-0.0.1/lightable.css" rel="stylesheet">
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
@@ -199,39 +198,10 @@ All
 All
 </td>
 <td style="text-align:left;">
-2019-07
+2019
 </td>
 <td style="text-align:right;">
-65751
-</td>
-<td style="text-align:left;">
-Tonnes
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-United Kingdom
-</td>
-<td style="text-align:left;">
-United Kingdom
-</td>
-<td style="text-align:left;">
-Weight
-</td>
-<td style="text-align:left;">
-All
-</td>
-<td style="text-align:left;">
-All
-</td>
-<td style="text-align:left;">
-2020-07
-</td>
-<td style="text-align:right;">
-68003
+70510
 </td>
 <td style="text-align:left;">
 Tonnes
@@ -257,39 +227,10 @@ All
 Under 10m
 </td>
 <td style="text-align:left;">
-2019-07
+2019
 </td>
 <td style="text-align:right;">
-3841
-</td>
-<td style="text-align:left;">
-Tonnes
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-United Kingdom
-</td>
-<td style="text-align:left;">
-United Kingdom
-</td>
-<td style="text-align:left;">
-Weight
-</td>
-<td style="text-align:left;">
-All
-</td>
-<td style="text-align:left;">
-Under 10m
-</td>
-<td style="text-align:left;">
-2020-07
-</td>
-<td style="text-align:right;">
-2829
+3394
 </td>
 <td style="text-align:left;">
 Tonnes
@@ -315,10 +256,10 @@ Demersal
 Under 10m
 </td>
 <td style="text-align:left;">
-2019-07
+2019
 </td>
 <td style="text-align:right;">
-385
+391
 </td>
 <td style="text-align:left;">
 Tonnes
@@ -338,16 +279,74 @@ United Kingdom
 Weight
 </td>
 <td style="text-align:left;">
-Demersal
+Pelagic
 </td>
 <td style="text-align:left;">
 Under 10m
 </td>
 <td style="text-align:left;">
-2020-07
+2019
 </td>
 <td style="text-align:right;">
-451
+187
+</td>
+<td style="text-align:left;">
+Tonnes
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+United Kingdom
+</td>
+<td style="text-align:left;">
+United Kingdom
+</td>
+<td style="text-align:left;">
+Weight
+</td>
+<td style="text-align:left;">
+Shellfish
+</td>
+<td style="text-align:left;">
+Under 10m
+</td>
+<td style="text-align:left;">
+2019
+</td>
+<td style="text-align:right;">
+2815
+</td>
+<td style="text-align:left;">
+Tonnes
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+United Kingdom
+</td>
+<td style="text-align:left;">
+United Kingdom
+</td>
+<td style="text-align:left;">
+Weight
+</td>
+<td style="text-align:left;">
+All
+</td>
+<td style="text-align:left;">
+10 to 12m
+</td>
+<td style="text-align:left;">
+2019
+</td>
+<td style="text-align:right;">
+2269
 </td>
 <td style="text-align:left;">
 Tonnes
@@ -369,7 +368,7 @@ NA
               names_glue=<span class="st">"{label(measure_type)}_{label(reference_period)}"</span>,
               values_from=<span class="kw">weight</span>) <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span>(<span class="kw">reference_area</span>, <span class="kw">vessel_length</span>, <span class="kw">species_group</span>) <span class="op">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(change=(<span class="kw">`Weight_2020-07`</span><span class="op">/</span><span class="kw">`Weight_2019-07`</span>)<span class="op">-</span><span class="fl">1</span>)
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(change=(<span class="kw">`Weight_2020-11`</span><span class="op">/</span><span class="kw">`Weight_2019`</span>)<span class="op">-</span><span class="fl">1</span>)
 </pre></div>
 <p>The first 10 rows of which look like:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit">
@@ -387,10 +386,10 @@ vessel_length
 species_group
 </th>
 <th style="text-align:right;">
-Weight_2019-07
+Weight_2019
 </th>
 <th style="text-align:right;">
-Weight_2020-07
+Weight_2020-11
 </th>
 <th style="text-align:right;">
 change
@@ -408,13 +407,13 @@ All
 All
 </td>
 <td style="text-align:right;">
-17635
+18172
 </td>
 <td style="text-align:right;">
-18316
+17889
 </td>
 <td style="text-align:right;">
-0.0386164
+-0.0155734
 </td>
 </tr>
 <tr>
@@ -428,13 +427,13 @@ Under 10m
 All
 </td>
 <td style="text-align:right;">
-1794
+1796
 </td>
 <td style="text-align:right;">
-1713
+1512
 </td>
 <td style="text-align:right;">
--0.0451505
+-0.1581292
 </td>
 </tr>
 <tr>
@@ -448,13 +447,13 @@ Under 10m
 Demersal
 </td>
 <td style="text-align:right;">
-330
+361
 </td>
 <td style="text-align:right;">
-406
+309
 </td>
 <td style="text-align:right;">
-0.2303030
+-0.1440443
 </td>
 </tr>
 <tr>
@@ -468,13 +467,13 @@ Under 10m
 Pelagic
 </td>
 <td style="text-align:right;">
-78
+183
 </td>
 <td style="text-align:right;">
-100
+177
 </td>
 <td style="text-align:right;">
-0.2820513
+-0.0327869
 </td>
 </tr>
 <tr>
@@ -488,13 +487,13 @@ Under 10m
 Shellfish
 </td>
 <td style="text-align:right;">
-1384
+1251
 </td>
 <td style="text-align:right;">
-1206
+1025
 </td>
 <td style="text-align:right;">
--0.1286127
+-0.1806555
 </td>
 </tr>
 <tr>
@@ -508,13 +507,13 @@ England
 All
 </td>
 <td style="text-align:right;">
-760
+1590
 </td>
 <td style="text-align:right;">
-1160
+1274
 </td>
 <td style="text-align:right;">
-0.5263158
+-0.1987421
 </td>
 </tr>
 </tbody>
@@ -524,9 +523,9 @@ All
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://scales.r-lib.org">scales</a></span>)
 
 <span class="kw">fish_table</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(change=<span class="fu"><a href="https://scales.r-lib.org//reference/label_percent.html">percent</a></span>(<span class="kw">change</span>)) <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(change=<span class="fu"><a href="https://scales.r-lib.org/reference/label_percent.html">percent</a></span>(<span class="kw">change</span>, accuracy=<span class="fl">1</span>)) <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span>(<span class="st">"Area"</span>=<span class="kw">reference_area</span>, <span class="st">"Vessel Length"</span>=<span class="kw">vessel_length</span>, <span class="st">"Species Group"</span>=<span class="kw">species_group</span>,
-         <span class="st">"2019-07"</span>=<span class="kw">`Weight_2019-07`</span>, <span class="st">"2020-07"</span>=<span class="kw">`Weight_2020-07`</span>, <span class="st">"Change"</span>=<span class="kw">change</span>) <span class="op">%&gt;%</span>
+         <span class="st">"2019"</span>=<span class="kw">`Weight_2019`</span>, <span class="st">"2020"</span>=<span class="kw">`Weight_2020-11`</span>, <span class="st">"Change"</span>=<span class="kw">change</span>) <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/kbl.html">kbl</a></span>(caption=<span class="st">"Activity of the UK fishing fleet by country, vessel length and species group"</span>, escape=<span class="kw">F</span>) <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/kable_classic.html">kable_classic</a></span>(full_width = <span class="kw">F</span>) <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/column_spec.html">column_spec</a></span>(<span class="fl">6</span>, extra_css = <span class="st">"text-align: right"</span>) <span class="op">%&gt;%</span>
@@ -558,10 +557,10 @@ Vessel Length
 Species Group
 </th>
 <th style="text-align:right;">
-2019-07
+2019
 </th>
 <th style="text-align:right;">
-2020-07
+2020
 </th>
 <th style="text-align:left;">
 Change
@@ -570,152 +569,200 @@ Change
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left;vertical-align: top !important;" rowspan="16">
+<td style="text-align:left;">
 England
 </td>
 <td style="text-align:left;">
 All
 </td>
-<td style="text-align:left;vertical-align: top !important;" rowspan="2">
+<td style="text-align:left;">
 All
 </td>
 <td style="text-align:right;">
-17635
+18172
 </td>
 <td style="text-align:right;">
-18316
+17889
 </td>
 <td style="text-align:left;text-align: right">
-4%
+-2%
 </td>
 </tr>
 <tr>
-<td style="text-align:left;vertical-align: top !important;" rowspan="4">
+<td style="text-align:left;">
+England
+</td>
+<td style="text-align:left;">
 Under 10m
 </td>
-<td style="text-align:right;">
-1794
+<td style="text-align:left;">
+All
 </td>
 <td style="text-align:right;">
-1713
+1796
+</td>
+<td style="text-align:right;">
+1512
 </td>
 <td style="text-align:left;text-align: right">
--5%
+-16%
 </td>
 </tr>
 <tr>
+<td style="text-align:left;">
+England
+</td>
+<td style="text-align:left;">
+Under 10m
+</td>
 <td style="text-align:left;">
 Demersal
 </td>
 <td style="text-align:right;">
-330
+361
 </td>
 <td style="text-align:right;">
-406
+309
 </td>
 <td style="text-align:left;text-align: right">
-23%
+-14%
 </td>
 </tr>
 <tr>
+<td style="text-align:left;">
+England
+</td>
+<td style="text-align:left;">
+Under 10m
+</td>
 <td style="text-align:left;">
 Pelagic
 </td>
 <td style="text-align:right;">
-78
+183
 </td>
 <td style="text-align:right;">
-100
+177
 </td>
 <td style="text-align:left;text-align: right">
-28%
+-3%
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
+England
+</td>
+<td style="text-align:left;">
+Under 10m
+</td>
+<td style="text-align:left;">
 Shellfish
 </td>
 <td style="text-align:right;">
-1384
+1251
 </td>
 <td style="text-align:right;">
-1206
+1025
 </td>
 <td style="text-align:left;text-align: right">
--13%
+-18%
 </td>
 </tr>
 <tr>
-<td style="text-align:left;vertical-align: top !important;" rowspan="4">
+<td style="text-align:left;">
+England
+</td>
+<td style="text-align:left;">
 10 to 12m
 </td>
 <td style="text-align:left;">
 All
 </td>
 <td style="text-align:right;">
-760
+1590
 </td>
 <td style="text-align:right;">
-1160
+1274
 </td>
 <td style="text-align:left;text-align: right">
-53%
+-20%
 </td>
 </tr>
 <tr>
+<td style="text-align:left;">
+England
+</td>
+<td style="text-align:left;">
+10 to 12m
+</td>
 <td style="text-align:left;">
 Demersal
 </td>
 <td style="text-align:right;">
-101
+155
 </td>
 <td style="text-align:right;">
-160
+121
 </td>
 <td style="text-align:left;text-align: right">
-58%
+-22%
 </td>
 </tr>
 <tr>
+<td style="text-align:left;">
+England
+</td>
+<td style="text-align:left;">
+10 to 12m
+</td>
 <td style="text-align:left;">
 Pelagic
 </td>
 <td style="text-align:right;">
-97
+882
 </td>
 <td style="text-align:right;">
-321
+724
 </td>
 <td style="text-align:left;text-align: right">
-231%
+-18%
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
+England
+</td>
+<td style="text-align:left;">
+10 to 12m
+</td>
+<td style="text-align:left;">
 Shellfish
 </td>
 <td style="text-align:right;">
-561
+552
 </td>
 <td style="text-align:right;">
-679
+428
 </td>
 <td style="text-align:left;text-align: right">
-21%
+-22%
 </td>
 </tr>
 <tr>
-<td style="text-align:left;vertical-align: top !important;" rowspan="4">
+<td style="text-align:left;">
+England
+</td>
+<td style="text-align:left;">
 Over 12m
 </td>
 <td style="text-align:left;">
 All
 </td>
 <td style="text-align:right;">
-15080
+14785
 </td>
 <td style="text-align:right;">
-15442
+15102
 </td>
 <td style="text-align:left;text-align: right">
 2%
@@ -723,117 +770,439 @@ All
 </tr>
 <tr>
 <td style="text-align:left;">
+England
+</td>
+<td style="text-align:left;">
+Over 12m
+</td>
+<td style="text-align:left;">
 Demersal
 </td>
 <td style="text-align:right;">
-3845
+4887
 </td>
 <td style="text-align:right;">
-3762
+3207
 </td>
 <td style="text-align:left;text-align: right">
--2%
+-34%
 </td>
 </tr>
 <tr>
+<td style="text-align:left;">
+England
+</td>
+<td style="text-align:left;">
+Over 12m
+</td>
 <td style="text-align:left;">
 Pelagic
 </td>
 <td style="text-align:right;">
-5662
+5889
 </td>
 <td style="text-align:right;">
-7061
+8845
 </td>
 <td style="text-align:left;text-align: right">
-25%
+50%
 </td>
 </tr>
 <tr>
+<td style="text-align:left;">
+England
+</td>
+<td style="text-align:left;">
+Over 12m
+</td>
 <td style="text-align:left;">
 Shellfish
 </td>
 <td style="text-align:right;">
-5572
+4008
 </td>
 <td style="text-align:right;">
-4618
+3049
 </td>
 <td style="text-align:left;text-align: right">
--17%
+-24%
 </td>
 </tr>
 <tr>
+<td style="text-align:left;">
+England
+</td>
+<td style="text-align:left;">
+All
+</td>
+<td style="text-align:left;">
+Demersal
+</td>
+<td style="text-align:right;">
+5403
+</td>
+<td style="text-align:right;">
+3638
+</td>
+<td style="text-align:left;text-align: right">
+-33%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+England
+</td>
+<td style="text-align:left;">
+All
+</td>
+<td style="text-align:left;">
+Pelagic
+</td>
+<td style="text-align:right;">
+6956
+</td>
+<td style="text-align:right;">
+9747
+</td>
+<td style="text-align:left;text-align: right">
+40%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+England
+</td>
+<td style="text-align:left;">
+All
+</td>
+<td style="text-align:left;">
+Shellfish
+</td>
+<td style="text-align:right;">
+5812
+</td>
+<td style="text-align:right;">
+4503
+</td>
+<td style="text-align:left;text-align: right">
+-23%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+England
+</td>
 <td style="text-align:left;">
 12 to 15m
 </td>
-<td style="text-align:left;vertical-align: top !important;" rowspan="5">
+<td style="text-align:left;">
 All
 </td>
 <td style="text-align:right;">
-5088
+3564
 </td>
 <td style="text-align:right;">
-5139
+2901
 </td>
 <td style="text-align:left;text-align: right">
-1%
+-19%
 </td>
 </tr>
 <tr>
+<td style="text-align:left;">
+England
+</td>
 <td style="text-align:left;">
 15 to 24m
 </td>
-<td style="text-align:right;">
-1677
+<td style="text-align:left;">
+All
 </td>
 <td style="text-align:right;">
-1599
+1778
+</td>
+<td style="text-align:right;">
+1424
 </td>
 <td style="text-align:left;text-align: right">
--5%
+-20%
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
+England
+</td>
+<td style="text-align:left;">
 Over 24m
 </td>
-<td style="text-align:right;">
-8314
+<td style="text-align:left;">
+All
 </td>
 <td style="text-align:right;">
-8703
+9442
+</td>
+<td style="text-align:right;">
+10776
 </td>
 <td style="text-align:left;text-align: right">
-5%
+14%
 </td>
 </tr>
 <tr>
-<td style="text-align:left;vertical-align: top !important;" rowspan="16">
+<td style="text-align:left;">
 United Kingdom
 </td>
 <td style="text-align:left;">
 All
 </td>
-<td style="text-align:right;">
-65751
+<td style="text-align:left;">
+All
 </td>
 <td style="text-align:right;">
-68003
+70510
+</td>
+<td style="text-align:right;">
+64626
 </td>
 <td style="text-align:left;text-align: right">
-3%
+-8%
 </td>
 </tr>
 <tr>
-<td style="text-align:left;vertical-align: top !important;" rowspan="4">
+<td style="text-align:left;">
+United Kingdom
+</td>
+<td style="text-align:left;">
 Under 10m
 </td>
-<td style="text-align:right;">
-3841
+<td style="text-align:left;">
+All
 </td>
 <td style="text-align:right;">
-2829
+3394
+</td>
+<td style="text-align:right;">
+2145
+</td>
+<td style="text-align:left;text-align: right">
+-37%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+United Kingdom
+</td>
+<td style="text-align:left;">
+Under 10m
+</td>
+<td style="text-align:left;">
+Demersal
+</td>
+<td style="text-align:right;">
+391
+</td>
+<td style="text-align:right;">
+320
+</td>
+<td style="text-align:left;text-align: right">
+-18%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+United Kingdom
+</td>
+<td style="text-align:left;">
+Under 10m
+</td>
+<td style="text-align:left;">
+Pelagic
+</td>
+<td style="text-align:right;">
+187
+</td>
+<td style="text-align:right;">
+226
+</td>
+<td style="text-align:left;text-align: right">
+21%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+United Kingdom
+</td>
+<td style="text-align:left;">
+Under 10m
+</td>
+<td style="text-align:left;">
+Shellfish
+</td>
+<td style="text-align:right;">
+2815
+</td>
+<td style="text-align:right;">
+1599
+</td>
+<td style="text-align:left;text-align: right">
+-43%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+United Kingdom
+</td>
+<td style="text-align:left;">
+10 to 12m
+</td>
+<td style="text-align:left;">
+All
+</td>
+<td style="text-align:right;">
+2269
+</td>
+<td style="text-align:right;">
+1549
+</td>
+<td style="text-align:left;text-align: right">
+-32%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+United Kingdom
+</td>
+<td style="text-align:left;">
+10 to 12m
+</td>
+<td style="text-align:left;">
+Demersal
+</td>
+<td style="text-align:right;">
+161
+</td>
+<td style="text-align:right;">
+122
+</td>
+<td style="text-align:left;text-align: right">
+-24%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+United Kingdom
+</td>
+<td style="text-align:left;">
+10 to 12m
+</td>
+<td style="text-align:left;">
+Pelagic
+</td>
+<td style="text-align:right;">
+882
+</td>
+<td style="text-align:right;">
+724
+</td>
+<td style="text-align:left;text-align: right">
+-18%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+United Kingdom
+</td>
+<td style="text-align:left;">
+10 to 12m
+</td>
+<td style="text-align:left;">
+Shellfish
+</td>
+<td style="text-align:right;">
+1225
+</td>
+<td style="text-align:right;">
+702
+</td>
+<td style="text-align:left;text-align: right">
+-43%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+United Kingdom
+</td>
+<td style="text-align:left;">
+Over 12m
+</td>
+<td style="text-align:left;">
+All
+</td>
+<td style="text-align:right;">
+64846
+</td>
+<td style="text-align:right;">
+60931
+</td>
+<td style="text-align:left;text-align: right">
+-6%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+United Kingdom
+</td>
+<td style="text-align:left;">
+Over 12m
+</td>
+<td style="text-align:left;">
+Demersal
+</td>
+<td style="text-align:right;">
+13671
+</td>
+<td style="text-align:right;">
+10557
+</td>
+<td style="text-align:left;text-align: right">
+-23%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+United Kingdom
+</td>
+<td style="text-align:left;">
+Over 12m
+</td>
+<td style="text-align:left;">
+Pelagic
+</td>
+<td style="text-align:right;">
+41636
+</td>
+<td style="text-align:right;">
+43358
+</td>
+<td style="text-align:left;text-align: right">
+4%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+United Kingdom
+</td>
+<td style="text-align:left;">
+Over 12m
+</td>
+<td style="text-align:left;">
+Shellfish
+</td>
+<td style="text-align:right;">
+9537
+</td>
+<td style="text-align:right;">
+7015
 </td>
 <td style="text-align:left;text-align: right">
 -26%
@@ -841,27 +1210,119 @@ Under 10m
 </tr>
 <tr>
 <td style="text-align:left;">
+United Kingdom
+</td>
+<td style="text-align:left;">
+All
+</td>
+<td style="text-align:left;">
 Demersal
 </td>
 <td style="text-align:right;">
-385
+14224
 </td>
 <td style="text-align:right;">
-451
+11000
 </td>
 <td style="text-align:left;text-align: right">
-17%
+-23%
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
+United Kingdom
+</td>
+<td style="text-align:left;">
+All
+</td>
+<td style="text-align:left;">
 Pelagic
 </td>
 <td style="text-align:right;">
-332
+42707
 </td>
 <td style="text-align:right;">
-325
+44308
+</td>
+<td style="text-align:left;text-align: right">
+4%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+United Kingdom
+</td>
+<td style="text-align:left;">
+All
+</td>
+<td style="text-align:left;">
+Shellfish
+</td>
+<td style="text-align:right;">
+13578
+</td>
+<td style="text-align:right;">
+9317
+</td>
+<td style="text-align:left;text-align: right">
+-31%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+United Kingdom
+</td>
+<td style="text-align:left;">
+12 to 15m
+</td>
+<td style="text-align:left;">
+All
+</td>
+<td style="text-align:right;">
+4231
+</td>
+<td style="text-align:right;">
+3370
+</td>
+<td style="text-align:left;text-align: right">
+-20%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+United Kingdom
+</td>
+<td style="text-align:left;">
+15 to 24m
+</td>
+<td style="text-align:left;">
+All
+</td>
+<td style="text-align:right;">
+8705
+</td>
+<td style="text-align:right;">
+6530
+</td>
+<td style="text-align:left;text-align: right">
+-25%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+United Kingdom
+</td>
+<td style="text-align:left;">
+Over 24m
+</td>
+<td style="text-align:left;">
+All
+</td>
+<td style="text-align:right;">
+51908
+</td>
+<td style="text-align:right;">
+51029
 </td>
 <td style="text-align:left;text-align: right">
 -2%
@@ -869,227 +1330,71 @@ Pelagic
 </tr>
 <tr>
 <td style="text-align:left;">
-Shellfish
-</td>
-<td style="text-align:right;">
-3123
-</td>
-<td style="text-align:right;">
-2051
-</td>
-<td style="text-align:left;text-align: right">
--34%
-</td>
-</tr>
-<tr>
-<td style="text-align:left;vertical-align: top !important;" rowspan="4">
-10 to 12m
-</td>
-<td style="text-align:left;">
-All
-</td>
-<td style="text-align:right;">
-1445
-</td>
-<td style="text-align:right;">
-1441
-</td>
-<td style="text-align:left;text-align: right">
-0%
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Demersal
-</td>
-<td style="text-align:right;">
-110
-</td>
-<td style="text-align:right;">
-164
-</td>
-<td style="text-align:left;text-align: right">
-49%
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Pelagic
-</td>
-<td style="text-align:right;">
-97
-</td>
-<td style="text-align:right;">
-321
-</td>
-<td style="text-align:left;text-align: right">
-231%
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Shellfish
-</td>
-<td style="text-align:right;">
-1237
-</td>
-<td style="text-align:right;">
-956
-</td>
-<td style="text-align:left;text-align: right">
--23%
-</td>
-</tr>
-<tr>
-<td style="text-align:left;vertical-align: top !important;" rowspan="4">
-Over 12m
-</td>
-<td style="text-align:left;">
-All
-</td>
-<td style="text-align:right;">
-60464
-</td>
-<td style="text-align:right;">
-63732
-</td>
-<td style="text-align:left;text-align: right">
-5%
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Demersal
-</td>
-<td style="text-align:right;">
-11994
-</td>
-<td style="text-align:right;">
-10847
-</td>
-<td style="text-align:left;text-align: right">
--10%
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Pelagic
-</td>
-<td style="text-align:right;">
-37955
-</td>
-<td style="text-align:right;">
-44106
-</td>
-<td style="text-align:left;text-align: right">
-16%
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Shellfish
-</td>
-<td style="text-align:right;">
-10514
-</td>
-<td style="text-align:right;">
-8778
-</td>
-<td style="text-align:left;text-align: right">
--17%
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-12 to 15m
-</td>
-<td style="text-align:left;vertical-align: top !important;" rowspan="5">
-All
-</td>
-<td style="text-align:right;">
-5796
-</td>
-<td style="text-align:right;">
-5554
-</td>
-<td style="text-align:left;text-align: right">
--4%
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-15 to 24m
-</td>
-<td style="text-align:right;">
-7447
-</td>
-<td style="text-align:right;">
-6806
-</td>
-<td style="text-align:left;text-align: right">
--9%
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Over 24m
-</td>
-<td style="text-align:right;">
-47220
-</td>
-<td style="text-align:right;">
-51371
-</td>
-<td style="text-align:left;text-align: right">
-9%
-</td>
-</tr>
-<tr>
-<td style="text-align:left;vertical-align: top !important;" rowspan="16">
 Northern Ireland
 </td>
 <td style="text-align:left;">
 All
 </td>
-<td style="text-align:right;">
-6651
+<td style="text-align:left;">
+All
 </td>
 <td style="text-align:right;">
-9561
+4239
+</td>
+<td style="text-align:right;">
+610
 </td>
 <td style="text-align:left;text-align: right">
-44%
-</td>
-</tr>
-<tr>
-<td style="text-align:left;vertical-align: top !important;" rowspan="4">
-Under 10m
-</td>
-<td style="text-align:right;">
-271
-</td>
-<td style="text-align:right;">
-95
-</td>
-<td style="text-align:left;text-align: right">
--65%
+-86%
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-Demersal
+Northern Ireland
+</td>
+<td style="text-align:left;">
+Under 10m
+</td>
+<td style="text-align:left;">
+All
 </td>
 <td style="text-align:right;">
-7
+162
 </td>
 <td style="text-align:right;">
-2
+53
 </td>
 <td style="text-align:left;text-align: right">
--71%
+-67%
 </td>
 </tr>
 <tr>
+<td style="text-align:left;">
+Northern Ireland
+</td>
+<td style="text-align:left;">
+Under 10m
+</td>
+<td style="text-align:left;">
+Demersal
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;text-align: right">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Northern Ireland
+</td>
+<td style="text-align:left;">
+Under 10m
+</td>
 <td style="text-align:left;">
 Pelagic
 </td>
@@ -1097,38 +1402,287 @@ Pelagic
 0
 </td>
 <td style="text-align:right;">
-8
+0
 </td>
 <td style="text-align:left;text-align: right">
-Inf
+NA
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
+Northern Ireland
+</td>
+<td style="text-align:left;">
+Under 10m
+</td>
+<td style="text-align:left;">
 Shellfish
 </td>
 <td style="text-align:right;">
-264
+161
 </td>
 <td style="text-align:right;">
-83
+53
 </td>
 <td style="text-align:left;text-align: right">
--69%
+-67%
 </td>
 </tr>
 <tr>
-<td style="text-align:left;vertical-align: top !important;" rowspan="4">
+<td style="text-align:left;">
+Northern Ireland
+</td>
+<td style="text-align:left;">
 10 to 12m
 </td>
 <td style="text-align:left;">
 All
 </td>
 <td style="text-align:right;">
-176
+113
 </td>
 <td style="text-align:right;">
-45
+88
+</td>
+<td style="text-align:left;text-align: right">
+-22%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Northern Ireland
+</td>
+<td style="text-align:left;">
+10 to 12m
+</td>
+<td style="text-align:left;">
+Demersal
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;text-align: right">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Northern Ireland
+</td>
+<td style="text-align:left;">
+10 to 12m
+</td>
+<td style="text-align:left;">
+Pelagic
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;text-align: right">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Northern Ireland
+</td>
+<td style="text-align:left;">
+10 to 12m
+</td>
+<td style="text-align:left;">
+Shellfish
+</td>
+<td style="text-align:right;">
+112
+</td>
+<td style="text-align:right;">
+88
+</td>
+<td style="text-align:left;text-align: right">
+-21%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Northern Ireland
+</td>
+<td style="text-align:left;">
+Over 12m
+</td>
+<td style="text-align:left;">
+All
+</td>
+<td style="text-align:right;">
+3963
+</td>
+<td style="text-align:right;">
+468
+</td>
+<td style="text-align:left;text-align: right">
+-88%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Northern Ireland
+</td>
+<td style="text-align:left;">
+Over 12m
+</td>
+<td style="text-align:left;">
+Demersal
+</td>
+<td style="text-align:right;">
+106
+</td>
+<td style="text-align:right;">
+50
+</td>
+<td style="text-align:left;text-align: right">
+-53%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Northern Ireland
+</td>
+<td style="text-align:left;">
+Over 12m
+</td>
+<td style="text-align:left;">
+Pelagic
+</td>
+<td style="text-align:right;">
+3190
+</td>
+<td style="text-align:right;">
+200
+</td>
+<td style="text-align:left;text-align: right">
+-94%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Northern Ireland
+</td>
+<td style="text-align:left;">
+Over 12m
+</td>
+<td style="text-align:left;">
+Shellfish
+</td>
+<td style="text-align:right;">
+667
+</td>
+<td style="text-align:right;">
+216
+</td>
+<td style="text-align:left;text-align: right">
+-68%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Northern Ireland
+</td>
+<td style="text-align:left;">
+All
+</td>
+<td style="text-align:left;">
+Demersal
+</td>
+<td style="text-align:right;">
+107
+</td>
+<td style="text-align:right;">
+51
+</td>
+<td style="text-align:left;text-align: right">
+-52%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Northern Ireland
+</td>
+<td style="text-align:left;">
+All
+</td>
+<td style="text-align:left;">
+Pelagic
+</td>
+<td style="text-align:right;">
+3190
+</td>
+<td style="text-align:right;">
+200
+</td>
+<td style="text-align:left;text-align: right">
+-94%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Northern Ireland
+</td>
+<td style="text-align:left;">
+All
+</td>
+<td style="text-align:left;">
+Shellfish
+</td>
+<td style="text-align:right;">
+941
+</td>
+<td style="text-align:right;">
+358
+</td>
+<td style="text-align:left;text-align: right">
+-62%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Northern Ireland
+</td>
+<td style="text-align:left;">
+12 to 15m
+</td>
+<td style="text-align:left;">
+All
+</td>
+<td style="text-align:right;">
+190
+</td>
+<td style="text-align:right;">
+103
+</td>
+<td style="text-align:left;text-align: right">
+-46%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Northern Ireland
+</td>
+<td style="text-align:left;">
+15 to 24m
+</td>
+<td style="text-align:left;">
+All
+</td>
+<td style="text-align:right;">
+545
+</td>
+<td style="text-align:right;">
+140
 </td>
 <td style="text-align:left;text-align: right">
 -74%
@@ -1136,10 +1690,536 @@ All
 </tr>
 <tr>
 <td style="text-align:left;">
+Northern Ireland
+</td>
+<td style="text-align:left;">
+Over 24m
+</td>
+<td style="text-align:left;">
+All
+</td>
+<td style="text-align:right;">
+3228
+</td>
+<td style="text-align:right;">
+224
+</td>
+<td style="text-align:left;text-align: right">
+-93%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Scotland
+</td>
+<td style="text-align:left;">
+All
+</td>
+<td style="text-align:left;">
+All
+</td>
+<td style="text-align:right;">
+47665
+</td>
+<td style="text-align:right;">
+45819
+</td>
+<td style="text-align:left;text-align: right">
+-4%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Scotland
+</td>
+<td style="text-align:left;">
+Under 10m
+</td>
+<td style="text-align:left;">
+All
+</td>
+<td style="text-align:right;">
+1306
+</td>
+<td style="text-align:right;">
+478
+</td>
+<td style="text-align:left;text-align: right">
+-63%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Scotland
+</td>
+<td style="text-align:left;">
+Under 10m
+</td>
+<td style="text-align:left;">
 Demersal
 </td>
 <td style="text-align:right;">
-1
+17
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:left;text-align: right">
+-65%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Scotland
+</td>
+<td style="text-align:left;">
+Under 10m
+</td>
+<td style="text-align:left;">
+Pelagic
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+48
+</td>
+<td style="text-align:left;text-align: right">
+1 500%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Scotland
+</td>
+<td style="text-align:left;">
+Under 10m
+</td>
+<td style="text-align:left;">
+Shellfish
+</td>
+<td style="text-align:right;">
+1284
+</td>
+<td style="text-align:right;">
+423
+</td>
+<td style="text-align:left;text-align: right">
+-67%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Scotland
+</td>
+<td style="text-align:left;">
+10 to 12m
+</td>
+<td style="text-align:left;">
+All
+</td>
+<td style="text-align:right;">
+457
+</td>
+<td style="text-align:right;">
+151
+</td>
+<td style="text-align:left;text-align: right">
+-67%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Scotland
+</td>
+<td style="text-align:left;">
+10 to 12m
+</td>
+<td style="text-align:left;">
+Demersal
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;text-align: right">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Scotland
+</td>
+<td style="text-align:left;">
+10 to 12m
+</td>
+<td style="text-align:left;">
+Pelagic
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;text-align: right">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Scotland
+</td>
+<td style="text-align:left;">
+10 to 12m
+</td>
+<td style="text-align:left;">
+Shellfish
+</td>
+<td style="text-align:right;">
+456
+</td>
+<td style="text-align:right;">
+150
+</td>
+<td style="text-align:left;text-align: right">
+-67%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Scotland
+</td>
+<td style="text-align:left;">
+Over 12m
+</td>
+<td style="text-align:left;">
+All
+</td>
+<td style="text-align:right;">
+45901
+</td>
+<td style="text-align:right;">
+45189
+</td>
+<td style="text-align:left;text-align: right">
+-2%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Scotland
+</td>
+<td style="text-align:left;">
+Over 12m
+</td>
+<td style="text-align:left;">
+Demersal
+</td>
+<td style="text-align:right;">
+8604
+</td>
+<td style="text-align:right;">
+7223
+</td>
+<td style="text-align:left;text-align: right">
+-16%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Scotland
+</td>
+<td style="text-align:left;">
+Over 12m
+</td>
+<td style="text-align:left;">
+Pelagic
+</td>
+<td style="text-align:right;">
+32557
+</td>
+<td style="text-align:right;">
+34311
+</td>
+<td style="text-align:left;text-align: right">
+5%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Scotland
+</td>
+<td style="text-align:left;">
+Over 12m
+</td>
+<td style="text-align:left;">
+Shellfish
+</td>
+<td style="text-align:right;">
+4740
+</td>
+<td style="text-align:right;">
+3654
+</td>
+<td style="text-align:left;text-align: right">
+-23%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Scotland
+</td>
+<td style="text-align:left;">
+All
+</td>
+<td style="text-align:left;">
+Demersal
+</td>
+<td style="text-align:right;">
+8623
+</td>
+<td style="text-align:right;">
+7230
+</td>
+<td style="text-align:left;text-align: right">
+-16%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Scotland
+</td>
+<td style="text-align:left;">
+All
+</td>
+<td style="text-align:left;">
+Pelagic
+</td>
+<td style="text-align:right;">
+32560
+</td>
+<td style="text-align:right;">
+34360
+</td>
+<td style="text-align:left;text-align: right">
+6%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Scotland
+</td>
+<td style="text-align:left;">
+All
+</td>
+<td style="text-align:left;">
+Shellfish
+</td>
+<td style="text-align:right;">
+6481
+</td>
+<td style="text-align:right;">
+4228
+</td>
+<td style="text-align:left;text-align: right">
+-35%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Scotland
+</td>
+<td style="text-align:left;">
+12 to 15m
+</td>
+<td style="text-align:left;">
+All
+</td>
+<td style="text-align:right;">
+392
+</td>
+<td style="text-align:right;">
+346
+</td>
+<td style="text-align:left;text-align: right">
+-12%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Scotland
+</td>
+<td style="text-align:left;">
+15 to 24m
+</td>
+<td style="text-align:left;">
+All
+</td>
+<td style="text-align:right;">
+6351
+</td>
+<td style="text-align:right;">
+4894
+</td>
+<td style="text-align:left;text-align: right">
+-23%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Scotland
+</td>
+<td style="text-align:left;">
+Over 24m
+</td>
+<td style="text-align:left;">
+All
+</td>
+<td style="text-align:right;">
+39157
+</td>
+<td style="text-align:right;">
+39949
+</td>
+<td style="text-align:left;text-align: right">
+2%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Wales
+</td>
+<td style="text-align:left;">
+All
+</td>
+<td style="text-align:left;">
+All
+</td>
+<td style="text-align:right;">
+433
+</td>
+<td style="text-align:right;">
+307
+</td>
+<td style="text-align:left;text-align: right">
+-29%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Wales
+</td>
+<td style="text-align:left;">
+Under 10m
+</td>
+<td style="text-align:left;">
+All
+</td>
+<td style="text-align:right;">
+129
+</td>
+<td style="text-align:right;">
+100
+</td>
+<td style="text-align:left;text-align: right">
+-22%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Wales
+</td>
+<td style="text-align:left;">
+Under 10m
+</td>
+<td style="text-align:left;">
+Demersal
+</td>
+<td style="text-align:right;">
+12
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:left;text-align: right">
+-67%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Wales
+</td>
+<td style="text-align:left;">
+Under 10m
+</td>
+<td style="text-align:left;">
+Pelagic
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;text-align: right">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Wales
+</td>
+<td style="text-align:left;">
+Under 10m
+</td>
+<td style="text-align:left;">
+Shellfish
+</td>
+<td style="text-align:right;">
+117
+</td>
+<td style="text-align:right;">
+96
+</td>
+<td style="text-align:left;text-align: right">
+-18%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Wales
+</td>
+<td style="text-align:left;">
+10 to 12m
+</td>
+<td style="text-align:left;">
+All
+</td>
+<td style="text-align:right;">
+108
+</td>
+<td style="text-align:right;">
+35
+</td>
+<td style="text-align:left;text-align: right">
+-68%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Wales
+</td>
+<td style="text-align:left;">
+10 to 12m
+</td>
+<td style="text-align:left;">
+Demersal
+</td>
+<td style="text-align:right;">
+4
 </td>
 <td style="text-align:right;">
 0
@@ -1150,242 +2230,12 @@ Demersal
 </tr>
 <tr>
 <td style="text-align:left;">
-Pelagic
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:left;text-align: right">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Shellfish
-</td>
-<td style="text-align:right;">
-175
-</td>
-<td style="text-align:right;">
-44
-</td>
-<td style="text-align:left;text-align: right">
--75%
-</td>
-</tr>
-<tr>
-<td style="text-align:left;vertical-align: top !important;" rowspan="4">
-Over 12m
+Wales
 </td>
 <td style="text-align:left;">
-All
-</td>
-<td style="text-align:right;">
-6203
-</td>
-<td style="text-align:right;">
-9420
-</td>
-<td style="text-align:left;text-align: right">
-52%
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Demersal
-</td>
-<td style="text-align:right;">
-291
-</td>
-<td style="text-align:right;">
-210
-</td>
-<td style="text-align:left;text-align: right">
--28%
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Pelagic
-</td>
-<td style="text-align:right;">
-5201
-</td>
-<td style="text-align:right;">
-8608
-</td>
-<td style="text-align:left;text-align: right">
-66%
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Shellfish
-</td>
-<td style="text-align:right;">
-710
-</td>
-<td style="text-align:right;">
-602
-</td>
-<td style="text-align:left;text-align: right">
--15%
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-12 to 15m
-</td>
-<td style="text-align:left;vertical-align: top !important;" rowspan="5">
-All
-</td>
-<td style="text-align:right;">
-223
-</td>
-<td style="text-align:right;">
-123
-</td>
-<td style="text-align:left;text-align: right">
--45%
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-15 to 24m
-</td>
-<td style="text-align:right;">
-698
-</td>
-<td style="text-align:right;">
-645
-</td>
-<td style="text-align:left;text-align: right">
--8%
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Over 24m
-</td>
-<td style="text-align:right;">
-5280
-</td>
-<td style="text-align:right;">
-8652
-</td>
-<td style="text-align:left;text-align: right">
-64%
-</td>
-</tr>
-<tr>
-<td style="text-align:left;vertical-align: top !important;" rowspan="16">
-Scotland
-</td>
-<td style="text-align:left;">
-All
-</td>
-<td style="text-align:right;">
-41184
-</td>
-<td style="text-align:right;">
-39713
-</td>
-<td style="text-align:left;text-align: right">
--4%
-</td>
-</tr>
-<tr>
-<td style="text-align:left;vertical-align: top !important;" rowspan="4">
-Under 10m
-</td>
-<td style="text-align:right;">
-1664
-</td>
-<td style="text-align:right;">
-887
-</td>
-<td style="text-align:left;text-align: right">
--47%
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Demersal
-</td>
-<td style="text-align:right;">
-33
-</td>
-<td style="text-align:right;">
-21
-</td>
-<td style="text-align:left;text-align: right">
--36%
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Pelagic
-</td>
-<td style="text-align:right;">
-253
-</td>
-<td style="text-align:right;">
-216
-</td>
-<td style="text-align:left;text-align: right">
--15%
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Shellfish
-</td>
-<td style="text-align:right;">
-1377
-</td>
-<td style="text-align:right;">
-650
-</td>
-<td style="text-align:left;text-align: right">
--53%
-</td>
-</tr>
-<tr>
-<td style="text-align:left;vertical-align: top !important;" rowspan="4">
 10 to 12m
 </td>
 <td style="text-align:left;">
-All
-</td>
-<td style="text-align:right;">
-428
-</td>
-<td style="text-align:right;">
-194
-</td>
-<td style="text-align:left;text-align: right">
--55%
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Demersal
-</td>
-<td style="text-align:right;">
-3
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:left;text-align: right">
--67%
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
 Pelagic
 </td>
 <td style="text-align:right;">
@@ -1400,44 +2250,39 @@ NA
 </tr>
 <tr>
 <td style="text-align:left;">
+Wales
+</td>
+<td style="text-align:left;">
+10 to 12m
+</td>
+<td style="text-align:left;">
 Shellfish
 </td>
 <td style="text-align:right;">
-425
+103
 </td>
 <td style="text-align:right;">
-193
+35
 </td>
 <td style="text-align:left;text-align: right">
--55%
+-66%
 </td>
 </tr>
 <tr>
-<td style="text-align:left;vertical-align: top !important;" rowspan="4">
+<td style="text-align:left;">
+Wales
+</td>
+<td style="text-align:left;">
 Over 12m
 </td>
 <td style="text-align:left;">
 All
 </td>
 <td style="text-align:right;">
-39091
+195
 </td>
 <td style="text-align:right;">
-38631
-</td>
-<td style="text-align:left;text-align: right">
--1%
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Demersal
-</td>
-<td style="text-align:right;">
-7833
-</td>
-<td style="text-align:right;">
-6792
+170
 </td>
 <td style="text-align:left;text-align: right">
 -13%
@@ -1445,241 +2290,91 @@ Demersal
 </tr>
 <tr>
 <td style="text-align:left;">
-Pelagic
+Wales
+</td>
+<td style="text-align:left;">
+Over 12m
+</td>
+<td style="text-align:left;">
+Demersal
 </td>
 <td style="text-align:right;">
-27091
+73
 </td>
 <td style="text-align:right;">
-28437
+75
 </td>
 <td style="text-align:left;text-align: right">
-5%
+3%
 </td>
 </tr>
 <tr>
+<td style="text-align:left;">
+Wales
+</td>
+<td style="text-align:left;">
+Over 12m
+</td>
+<td style="text-align:left;">
+Pelagic
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;text-align: right">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Wales
+</td>
+<td style="text-align:left;">
+Over 12m
+</td>
 <td style="text-align:left;">
 Shellfish
 </td>
 <td style="text-align:right;">
-4166
+121
 </td>
 <td style="text-align:right;">
-3401
+94
 </td>
 <td style="text-align:left;text-align: right">
--18%
+-22%
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-12 to 15m
-</td>
-<td style="text-align:left;vertical-align: top !important;" rowspan="5">
-All
-</td>
-<td style="text-align:right;">
-449
-</td>
-<td style="text-align:right;">
-286
-</td>
-<td style="text-align:left;text-align: right">
--36%
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-15 to 24m
-</td>
-<td style="text-align:right;">
-5032
-</td>
-<td style="text-align:right;">
-4504
-</td>
-<td style="text-align:left;text-align: right">
--10%
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Over 24m
-</td>
-<td style="text-align:right;">
-33609
-</td>
-<td style="text-align:right;">
-33840
-</td>
-<td style="text-align:left;text-align: right">
-1%
-</td>
-</tr>
-<tr>
-<td style="text-align:left;vertical-align: top !important;" rowspan="16">
 Wales
 </td>
 <td style="text-align:left;">
 All
 </td>
-<td style="text-align:right;">
-279
-</td>
-<td style="text-align:right;">
-411
-</td>
-<td style="text-align:left;text-align: right">
-47%
-</td>
-</tr>
-<tr>
-<td style="text-align:left;vertical-align: top !important;" rowspan="4">
-Under 10m
-</td>
-<td style="text-align:right;">
-111
-</td>
-<td style="text-align:right;">
-132
-</td>
-<td style="text-align:left;text-align: right">
-19%
-</td>
-</tr>
-<tr>
 <td style="text-align:left;">
 Demersal
 </td>
 <td style="text-align:right;">
-14
-</td>
-<td style="text-align:right;">
-21
-</td>
-<td style="text-align:left;text-align: right">
-50%
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Pelagic
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:left;text-align: right">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Shellfish
-</td>
-<td style="text-align:right;">
-97
-</td>
-<td style="text-align:right;">
-110
-</td>
-<td style="text-align:left;text-align: right">
-13%
-</td>
-</tr>
-<tr>
-<td style="text-align:left;vertical-align: top !important;" rowspan="4">
-10 to 12m
-</td>
-<td style="text-align:left;">
-All
+90
 </td>
 <td style="text-align:right;">
 79
 </td>
-<td style="text-align:right;">
-41
-</td>
 <td style="text-align:left;text-align: right">
--48%
+-12%
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-Demersal
-</td>
-<td style="text-align:right;">
-4
-</td>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:left;text-align: right">
--50%
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Pelagic
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:left;text-align: right">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Shellfish
-</td>
-<td style="text-align:right;">
-74
-</td>
-<td style="text-align:right;">
-38
-</td>
-<td style="text-align:left;text-align: right">
--49%
-</td>
-</tr>
-<tr>
-<td style="text-align:left;vertical-align: top !important;" rowspan="4">
-Over 12m
+Wales
 </td>
 <td style="text-align:left;">
 All
 </td>
-<td style="text-align:right;">
-89
-</td>
-<td style="text-align:right;">
-237
-</td>
-<td style="text-align:left;text-align: right">
-166%
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Demersal
-</td>
-<td style="text-align:right;">
-24
-</td>
-<td style="text-align:right;">
-81
-</td>
-<td style="text-align:left;text-align: right">
-238%
-</td>
-</tr>
-<tr>
 <td style="text-align:left;">
 Pelagic
 </td>
@@ -1695,61 +2390,82 @@ NA
 </tr>
 <tr>
 <td style="text-align:left;">
+Wales
+</td>
+<td style="text-align:left;">
+All
+</td>
+<td style="text-align:left;">
 Shellfish
 </td>
 <td style="text-align:right;">
-64
+342
 </td>
 <td style="text-align:right;">
-155
+227
 </td>
 <td style="text-align:left;text-align: right">
-142%
+-34%
 </td>
 </tr>
 <tr>
+<td style="text-align:left;">
+Wales
+</td>
 <td style="text-align:left;">
 12 to 15m
 </td>
-<td style="text-align:left;vertical-align: top !important;" rowspan="3">
+<td style="text-align:left;">
 All
 </td>
 <td style="text-align:right;">
-35
+84
 </td>
 <td style="text-align:right;">
-4
+19
 </td>
 <td style="text-align:left;text-align: right">
--89%
+-77%
 </td>
 </tr>
 <tr>
+<td style="text-align:left;">
+Wales
+</td>
 <td style="text-align:left;">
 15 to 24m
 </td>
-<td style="text-align:right;">
-38
+<td style="text-align:left;">
+All
 </td>
 <td style="text-align:right;">
-57
+30
+</td>
+<td style="text-align:right;">
+71
 </td>
 <td style="text-align:left;text-align: right">
-50%
+137%
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
+Wales
+</td>
+<td style="text-align:left;">
 Over 24m
 </td>
-<td style="text-align:right;">
-14
+<td style="text-align:left;">
+All
 </td>
 <td style="text-align:right;">
-175
+80
+</td>
+<td style="text-align:right;">
+80
 </td>
 <td style="text-align:left;text-align: right">
-1 150%
+0%
 </td>
 </tr>
 </tbody>
