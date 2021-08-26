@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-This vignette describes how to create ldf resources from SPARQL queries or RDF files. You might like to first read the [Working with LDF Resources](working-with-ldf-resources.html) vignette to understand how RDF resources are represented in LDF.
+This vignette describes how to create ldf resources from SPARQL queries or RDF files. You might like to first read the [introduction](introduction-to-ldf.html) vignette to understand how RDF resources are represented in LDF.
 
 ```{r setup}
 library(ldf)
@@ -78,7 +78,7 @@ music_genres[grep("dance", property(music_genres, "comment"))]
 
 We can create resources from serialised RDF files too.
 
-To read RDF into R we can use the [rdflib](https://cran.r-project.org/web/packages/rdflib/) package. This in turn uses the [redland](https://cran.r-project.org/web/packages/redland/) package to provide bindings to the C library of the same name, and the [jsonld](https://cran.r-project.org/web/packages/jsonld/) package for JSON-LD serialisations.
+To read RDF into R we can use the [rdflib](https://CRAN.R-project.org/package=rdflib) package. This in turn uses the [redland](https://CRAN.R-project.org/package=redland) package to provide bindings to the C library of the same name, and the [jsonld](https://CRAN.R-project.org/package=jsonld) package for JSON-LD serialisations.
 
 Let's load up an example from that package.
 
