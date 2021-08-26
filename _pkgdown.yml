@@ -38,6 +38,7 @@ reference:
   desc: Execute SPARQL queries and build them up from R objects
   contents:
   - query
+  - default_endpoint
   - predobj_binding
   - subpredobj_binding
 articles:
