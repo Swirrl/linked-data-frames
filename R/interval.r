@@ -24,6 +24,7 @@ NULL
 #' month <- interval("http://reference.data.gov.uk/id/month/2020-07")
 #' day <- interval("http://reference.data.gov.uk/id/day/2020-04-22")
 #' p7d <- interval("http://reference.data.gov.uk/id/gregorian-interval/2020-04-27T00:00:00/P7D")
+#' gov_year <- interval("http://reference.data.gov.uk/id/government-year/2019-2020")
 interval <- function(uri) {
   new_interval(uri)
 }
@@ -51,7 +52,8 @@ int_start <- function(int) {
             month = paste0(int_value(i),"-01"),
             year = paste0(int_value(i),"-01-01"),
             "gregorian-interval" = int_date(i),
-            stop("unknown interval type"))
+            "government-year" = paste0(substr(int_value(i),1,4),"-04-01"),
+            stop("unknown interval type: ", int_type(i)))
   })
   as.Date(date_strings)
 }
@@ -68,7 +70,8 @@ int_end <- function(int) {
       month = month_end(int_value(i)),
       year = paste0(int_value(i),"-12-31"),
       "gregorian-interval" = paste0(as.Date(int_date(i)) + int_duration_days(i)),
-      stop("unknown interval type")
+      "government-year" = paste0(substr(int_value(i),6,9),"-03-31"),
+      stop("unknown interval type: ", int_type(i))
     )
   })
   as.Date(date_strings)
@@ -106,7 +109,8 @@ label.ldf_interval <- function(x) {
             month = int_value(i),
             year = int_value(i),
             "gregorian-interval" = paste(as.Date(int_date(i)), int_duration(i), sep=" "),
-            stop("unknown interval type")
+            "government-year" = int_value(i),
+            stop("unknown interval type: ", int_type(i))
     )
   })
 }

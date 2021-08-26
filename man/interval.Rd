@@ -30,4 +30,5 @@ is_interval(year)
 month <- interval("http://reference.data.gov.uk/id/month/2020-07")
 day <- interval("http://reference.data.gov.uk/id/day/2020-04-22")
 p7d <- interval("http://reference.data.gov.uk/id/gregorian-interval/2020-04-27T00:00:00/P7D")
+gov_year <- interval("http://reference.data.gov.uk/id/government-year/2019-2020")
 }
