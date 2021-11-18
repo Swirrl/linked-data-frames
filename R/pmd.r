@@ -18,16 +18,20 @@ query <- function(query_string, endpoint=default_endpoint(), format="csv") {
                  json="application/json",
                  "text/csv")
 
+  progress_env <- new.env()
   response <- httr::POST(url=endpoint,
                          httr::accept(mime),
+                         httr::config(noprogress = FALSE,
+                                      progressfunction = download_progress(progress_env)),
                          body=list(query=query_string),
                          encode="form")
+  cli::cli_progress_done(.envir=progress_env)
 
   if(httr::http_error(response)) {
     stop(httr::http_status(response)$message, ": ", httr::content(response))
   } else {
     if(format=="csv") {
-      httr::content(response, encoding="UTF-8", col_types=readr::cols())
+      httr::content(response, encoding="UTF-8", col_types=readr::cols(), progress=FALSE)
     } else if (format=="json") {
       # TODO: use the binding type to parse the value - currently returns two columns for each binding
       parsed <- jsonlite::fromJSON(httr::content(response, encoding="UTF-8", "text"), simplifyVector = T)
@@ -337,7 +341,7 @@ get_cube <- function(dataset_uri, endpoint=default_endpoint(), include_geometry=
       codelist_uri <- d %>%
         dplyr::filter(as_variable_names(label)==dimension) %>%
         dplyr::select(codelist)
-      warning("Codelist empty or not found: ", codelist_uri)
+      cli::cli_alert_warning("Codelist empty or not found: {codelist_uri}")
     } else {
       observations[,dimension] <- resource(dplyr::pull(observations, dimension), codelist)
     }
@@ -365,6 +369,7 @@ get_cube <- function(dataset_uri, endpoint=default_endpoint(), include_geometry=
   remaining_d <- dplyr::filter(d, is.na(codelist) & !(as_variable_names(label) %in% c(ref_period, ref_area)))
 
   for (component in as_variable_names(c(a$label, remaining_d$label))) {
+    cli::cli_alert_warning("Component has no codelist (falling back to label search): {component}")
     component_values <- dplyr::pull(observations, component)
     description <- get_label(unique(component_values), endpoint)
     observations[, component] <- resource(component_values, description)
