@@ -12,13 +12,17 @@ get_dimensions(dataset_uri, endpoint = default_endpoint())
 \item{endpoint}{A string for the sparql endpoint}
 }
 \value{
-A data frame containing the dimension uris, labels and optionally codelists
+A data frame containing the dimension uris, labels and optionally codelists and parents
 }
 \description{
 Download dimension properties
 }
 \examples{
 \dontrun{
-get_cube("http://gss-data.org.uk/data/gss_data/covid-19/ons-online-price-changes-for-high-demand-products#dataset")
+# Long URI is split here for legibility
+base <- "http://gss-data.org.uk/data/gss_data/"
+cube_uri <- paste0(base,"covid-19/ons-online-price-changes-for-high-demand-products#dataset")
+
+get_cube(cube_uri)
 }
 }

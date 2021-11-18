@@ -97,24 +97,29 @@ subpredobj_binding <- function(subject, properties, optional=F) {
 #'
 #' @param dataset_uri A string
 #' @param endpoint A string for the sparql endpoint
-#' @return A data frame containing the dimension uris, labels and optionally codelists
+#' @return A data frame containing the dimension uris, labels and optionally codelists and parents
 #' @export
 #' @examples
 #' \dontrun{
-#' get_cube("http://gss-data.org.uk/data/gss_data/covid-19/ons-online-price-changes-for-high-demand-products#dataset")
+#' # Long URI is split here for legibility
+#' base <- "http://gss-data.org.uk/data/gss_data/"
+#' cube_uri <- paste0(base,"covid-19/ons-online-price-changes-for-high-demand-products#dataset")
+#'
+#' get_cube(cube_uri)
 #' }
 get_dimensions <- function(dataset_uri, endpoint=default_endpoint()) {
   q <- stringr::str_interp(c(
     "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>",
     "PREFIX qb: <http://purl.org/linked-data/cube#>",
     "",
-    "SELECT ?uri ?label ?codelist WHERE {",
+    "SELECT ?uri ?label ?codelist ?parent WHERE {",
     "  <${dataset_uri}> qb:structure/qb:component ?component .",
     "  ?component qb:dimension ?uri .",
     "  ?uri rdfs:label ?label .",
     "  OPTIONAL { ?uri qb:codeList ?codelist }",
     "  OPTIONAL { ?component qb:codeList ?codelist }",
     "  OPTIONAL { ?component <http://publishmydata.com/def/qb/codesUsed> ?codelist }",
+    "  OPTIONAL { ?uri rdfs:subPropertyOf ?parent }",
     "}"
   ))
   query(q, endpoint)
@@ -339,17 +344,26 @@ get_cube <- function(dataset_uri, endpoint=default_endpoint(), include_geometry=
   }
 
   # create intervals for reference period dimension
-  ref_period <- as_variable_names(d[d$uri=="http://purl.org/linked-data/sdmx/2009/dimension#refPeriod", ] %>% dplyr::pull("label"))
-  observations[,ref_period] <- interval(as.character(dplyr::pull(observations,ref_period)))
+  ref_period <- d %>%
+    dplyr::filter(uri=="http://purl.org/linked-data/sdmx/2009/dimension#refPeriod" |
+                    parent=="http://purl.org/linked-data/sdmx/2009/dimension#refPeriod") %>%
+    dplyr::pull("label") %>% as_variable_names()
+  if(length(ref_period)==1) {
+    observations[,ref_period] <- interval(as.character(dplyr::pull(observations,ref_period)))
+  }
 
-  ref_area <- as_variable_names(d[d$uri=="http://purl.org/linked-data/sdmx/2009/dimension#refArea", ] %>% dplyr::pull("label"))
+  ref_area <- d %>%
+    dplyr::filter(uri=="http://purl.org/linked-data/sdmx/2009/dimension#refArea" |
+                    parent=="http://purl.org/linked-data/sdmx/2009/dimension#refArea") %>%
+    dplyr::pull("label") %>% as_variable_names()
   if(length(ref_area)==1) {
     areas <- dplyr::pull(observations,ref_area)
     observations[,ref_area] <- resource(areas, get_geography(areas, endpoint, include_geometry))
   }
 
   # attributes and any remaining dimensions should just have their values labelled if possible
-  remaining_d <- dplyr::filter(d, is.na(codelist) & !(uri %in% c("http://purl.org/linked-data/sdmx/2009/dimension#refPeriod", "http://purl.org/linked-data/sdmx/2009/dimension#refArea")))
+  remaining_d <- dplyr::filter(d, is.na(codelist) & !(as_variable_names(label) %in% c(ref_period, ref_area)))
+
   for (component in as_variable_names(c(a$label, remaining_d$label))) {
     component_values <- dplyr::pull(observations, component)
     description <- get_label(unique(component_values), endpoint)

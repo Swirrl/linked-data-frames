@@ -1,0 +1,244 @@
+http_interactions:
+- request:
+    method: post
+    uri: https://staging.gss-data.org.uk/sparql
+    body:
+      encoding: ''
+      string: query=PREFIX%20rdfs%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3EPREFIX%20qb%3A%20%3Chttp%3A%2F%2Fpurl.org%2Flinked-data%2Fcube%23%3ESELECT%20%3Furi%20%3Flabel%20%3Fcodelist%20%3Fparent%20WHERE%20%7B%20%20%3Chttp%3A%2F%2Fgss-data.org.uk%2Fdata%2Fgss_data%2Fedvp%2Fofgem-warm-home-discount-scheme%2Fnationexpenditure%23dataset%3E%20qb%3Astructure%2Fqb%3Acomponent%20%3Fcomponent%20.%20%20%3Fcomponent%20qb%3Adimension%20%3Furi%20.%20%20%3Furi%20rdfs%3Alabel%20%3Flabel%20.%20%20OPTIONAL%20%7B%20%3Furi%20qb%3AcodeList%20%3Fcodelist%20%7D%20%20OPTIONAL%20%7B%20%3Fcomponent%20qb%3AcodeList%20%3Fcodelist%20%7D%20%20OPTIONAL%20%7B%20%3Fcomponent%20%3Chttp%3A%2F%2Fpublishmydata.com%2Fdef%2Fqb%2FcodesUsed%3E%20%3Fcodelist%20%7D%20%20OPTIONAL%20%7B%20%3Furi%20rdfs%3AsubPropertyOf%20%3Fparent%20%7D%7D
+    headers:
+      Content-Type: application/x-www-form-urlencoded
+      Accept: text/csv
+  response:
+    status:
+      status_code: 200
+      category: Success
+      reason: OK
+      message: 'Success: (200) OK'
+    headers:
+      server: nginx
+      date: Thu, 18 Nov 2021 15:56:55 GMT
+      content-type: text/csv
+      vary: Accept-Encoding
+      content-encoding: gzip
+      via: 1.1 google
+      alt-svc: clear
+      transfer-encoding: chunked
+    body:
+      encoding: UTF-8
+      file: no
+      string: "uri,label,codelist,parent\r\nhttp://purl.org/linked-data/cube#measureType,Measure
+        type,,\r\nhttp://gss-data.org.uk/data/gss_data/edvp/ofgem-warm-home-discount-scheme/nationexpenditure#dimension/period,Period,,http://purl.org/linked-data/sdmx/2009/dimension#refPeriod\r\nhttp://gss-data.org.uk/data/gss_data/edvp/ofgem-warm-home-discount-scheme/nationexpenditure#dimension/scheme-year,Scheme
+        Year,http://gss-data.org.uk/data/gss_data/edvp/ofgem-warm-home-discount-scheme#scheme/scheme-year,\r\nhttp://gss-data.org.uk/data/gss_data/edvp/ofgem-warm-home-discount-scheme/nationexpenditure#dimension/nation,Nation,,http://purl.org/linked-data/sdmx/2009/dimension#refArea\r\n"
+  recorded_at: 2021-11-18 15:56:58 GMT
+  recorded_with: vcr/1.0.2, webmockr/0.8.0
+- request:
+    method: post
+    uri: https://staging.gss-data.org.uk/sparql
+    body:
+      encoding: ''
+      string: query=PREFIX%20rdfs%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3EPREFIX%20qb%3A%20%3Chttp%3A%2F%2Fpurl.org%2Flinked-data%2Fcube%23%3ESELECT%20%3Furi%20%3Flabel%20WHERE%20%7B%20%20%3Chttp%3A%2F%2Fgss-data.org.uk%2Fdata%2Fgss_data%2Fedvp%2Fofgem-warm-home-discount-scheme%2Fnationexpenditure%23dataset%3E%20qb%3Astructure%2Fqb%3Acomponent%2Fqb%3Ameasure%20%3Furi%20.%20%20%3Furi%20rdfs%3Alabel%20%3Flabel%20.%7D
+    headers:
+      Content-Type: application/x-www-form-urlencoded
+      Accept: text/csv
+  response:
+    status:
+      status_code: 200
+      category: Success
+      reason: OK
+      message: 'Success: (200) OK'
+    headers:
+      server: nginx
+      date: Thu, 18 Nov 2021 15:56:56 GMT
+      content-type: text/csv
+      vary: Accept-Encoding
+      content-encoding: gzip
+      via: 1.1 google
+      alt-svc: clear
+      transfer-encoding: chunked
+    body:
+      encoding: UTF-8
+      file: no
+      string: "uri,label\r\nhttp://gss-data.org.uk/def/measure/expenditure,Expenditure\r\n"
+  recorded_at: 2021-11-18 15:56:58 GMT
+  recorded_with: vcr/1.0.2, webmockr/0.8.0
+- request:
+    method: post
+    uri: https://staging.gss-data.org.uk/sparql
+    body:
+      encoding: ''
+      string: query=PREFIX%20rdfs%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3EPREFIX%20qb%3A%20%3Chttp%3A%2F%2Fpurl.org%2Flinked-data%2Fcube%23%3ESELECT%20%3Furi%20%3Flabel%20WHERE%20%7B%20%20%3Chttp%3A%2F%2Fgss-data.org.uk%2Fdata%2Fgss_data%2Fedvp%2Fofgem-warm-home-discount-scheme%2Fnationexpenditure%23dataset%3E%20qb%3Astructure%2Fqb%3Acomponent%2Fqb%3Aattribute%20%3Furi%20.%20%20%3Furi%20rdfs%3Alabel%20%3Flabel%20.%7D
+    headers:
+      Content-Type: application/x-www-form-urlencoded
+      Accept: text/csv
+  response:
+    status:
+      status_code: 200
+      category: Success
+      reason: OK
+      message: 'Success: (200) OK'
+    headers:
+      server: nginx
+      date: Thu, 18 Nov 2021 15:56:56 GMT
+      content-type: text/csv
+      vary: Accept-Encoding
+      content-encoding: gzip
+      via: 1.1 google
+      alt-svc: clear
+      transfer-encoding: chunked
+    body:
+      encoding: UTF-8
+      file: no
+      string: "uri,label\r\nhttp://purl.org/linked-data/sdmx/2009/attribute#unitMeasure,Unit
+        of Measure\r\n"
+  recorded_at: 2021-11-18 15:56:58 GMT
+  recorded_with: vcr/1.0.2, webmockr/0.8.0
+- request:
+    method: post
+    uri: https://staging.gss-data.org.uk/sparql
+    body:
+      encoding: ''
+      string: query=PREFIX%20rdfs%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3EPREFIX%20qb%3A%20%3Chttp%3A%2F%2Fpurl.org%2Flinked-data%2Fcube%23%3ESELECT%20%2A%20WHERE%20%7B%20%20%3Furi%20qb%3AdataSet%20%3Chttp%3A%2F%2Fgss-data.org.uk%2Fdata%2Fgss_data%2Fedvp%2Fofgem-warm-home-discount-scheme%2Fnationexpenditure%23dataset%3E%3B%3Chttp%3A%2F%2Fpurl.org%2Flinked-data%2Fcube%23measureType%3E%20%3Fmeasure_type%3B%0A%3Chttp%3A%2F%2Fgss-data.org.uk%2Fdata%2Fgss_data%2Fedvp%2Fofgem-warm-home-discount-scheme%2Fnationexpenditure%23dimension%2Fperiod%3E%20%3Fperiod%3B%0A%3Chttp%3A%2F%2Fgss-data.org.uk%2Fdata%2Fgss_data%2Fedvp%2Fofgem-warm-home-discount-scheme%2Fnationexpenditure%23dimension%2Fscheme-year%3E%20%3Fscheme_year%3B%0A%3Chttp%3A%2F%2Fgss-data.org.uk%2Fdata%2Fgss_data%2Fedvp%2Fofgem-warm-home-discount-scheme%2Fnationexpenditure%23dimension%2Fnation%3E%20%3Fnation%3BOPTIONAL%20%7B%3Furi%20%3Chttp%3A%2F%2Fgss-data.org.uk%2Fdef%2Fmeasure%2Fexpenditure%3E%20%3Fexpenditure%3B%7D%0AOPTIONAL%20%7B%3Furi%20%3Chttp%3A%2F%2Fpurl.org%2Flinked-data%2Fsdmx%2F2009%2Fattribute%23unitMeasure%3E%20%3Funit_of_measure%3B%7D%7D
+    headers:
+      Content-Type: application/x-www-form-urlencoded
+      Accept: text/csv
+  response:
+    status:
+      status_code: 200
+      category: Success
+      reason: OK
+      message: 'Success: (200) OK'
+    headers:
+      server: nginx
+      date: Thu, 18 Nov 2021 15:56:56 GMT
+      content-type: text/csv
+      vary: Accept-Encoding
+      content-encoding: gzip
+      via: 1.1 google
+      alt-svc: clear
+      transfer-encoding: chunked
+    body:
+      encoding: UTF-8
+      file: no
+      string: "uri,measure_type,period,scheme_year,nation,expenditure,unit_of_measure\r\nhttp://gss-data.org.uk/data/gss_data/edvp/ofgem-warm-home-discount-scheme/nationexpenditure/gregorian-interval/2018-08-15T00:00:00/P228D/year-8/E92000001,http://gss-data.org.uk/def/measure/expenditure,http://reference.data.gov.uk/id/gregorian-interval/2018-08-15T00:00:00/P228D,http://gss-data.org.uk/data/gss_data/edvp/ofgem-warm-home-discount-scheme#concept/scheme-year/year-8,http://statistics.data.gov.uk/id/statistical-geography/E92000001,8.346E1,http://gss-data.org.uk/def/concept/measurement-units/percentage\r\nhttp://gss-data.org.uk/data/gss_data/edvp/ofgem-warm-home-discount-scheme/nationexpenditure/gregorian-interval/2018-08-15T00:00:00/P228D/year-8/S92000003,http://gss-data.org.uk/def/measure/expenditure,http://reference.data.gov.uk/id/gregorian-interval/2018-08-15T00:00:00/P228D,http://gss-data.org.uk/data/gss_data/edvp/ofgem-warm-home-discount-scheme#concept/scheme-year/year-8,http://statistics.data.gov.uk/id/statistical-geography/S92000003,1.011E1,http://gss-data.org.uk/def/concept/measurement-units/percentage\r\nhttp://gss-data.org.uk/data/gss_data/edvp/ofgem-warm-home-discount-scheme/nationexpenditure/gregorian-interval/2018-08-15T00:00:00/P228D/year-8/W92000004,http://gss-data.org.uk/def/measure/expenditure,http://reference.data.gov.uk/id/gregorian-interval/2018-08-15T00:00:00/P228D,http://gss-data.org.uk/data/gss_data/edvp/ofgem-warm-home-discount-scheme#concept/scheme-year/year-8,http://statistics.data.gov.uk/id/statistical-geography/W92000004,6.43E0,http://gss-data.org.uk/def/concept/measurement-units/percentage\r\n"
+  recorded_at: 2021-11-18 15:56:58 GMT
+  recorded_with: vcr/1.0.2, webmockr/0.8.0
+- request:
+    method: post
+    uri: https://staging.gss-data.org.uk/sparql
+    body:
+      encoding: ''
+      string: query=PREFIX%20skos%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2004%2F02%2Fskos%2Fcore%23%3EPREFIX%20rdfs%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3ESELECT%20%2A%20WHERE%20%7B%20%20%7B%20%3Furi%20skos%3AinScheme%20%3Chttp%3A%2F%2Fgss-data.org.uk%2Fdata%2Fgss_data%2Fedvp%2Fofgem-warm-home-discount-scheme%23scheme%2Fscheme-year%3E%20%7D%20%20UNION%20%20%20%7B%20%3Chttp%3A%2F%2Fgss-data.org.uk%2Fdata%2Fgss_data%2Fedvp%2Fofgem-warm-home-discount-scheme%23scheme%2Fscheme-year%3E%20skos%3Amember%20%3Furi%20%7D%20%20%3Furi%20rdfs%3Alabel%20%3Flabel%20.%20%20OPTIONAL%20%7B%20%3Furi%20skos%3Anotation%20%3Fnotation%20%7D%20%20OPTIONAL%20%7B%20%3Furi%20%3Chttp%3A%2F%2Fwww.w3.org%2Fns%2Fui%23sortPriority%3E%20%3Fsort_priority%20%7D%7D
+    headers:
+      Content-Type: application/x-www-form-urlencoded
+      Accept: text/csv
+  response:
+    status:
+      status_code: 200
+      category: Success
+      reason: OK
+      message: 'Success: (200) OK'
+    headers:
+      server: nginx
+      date: Thu, 18 Nov 2021 15:56:57 GMT
+      content-type: text/csv
+      vary: Accept-Encoding
+      content-encoding: gzip
+      via: 1.1 google
+      alt-svc: clear
+      transfer-encoding: chunked
+    body:
+      encoding: UTF-8
+      file: no
+      string: "uri,label,notation,sort_priority\r\nhttp://gss-data.org.uk/data/gss_data/edvp/ofgem-warm-home-discount-scheme#concept/scheme-year/year-1,1,year-1,1\r\nhttp://gss-data.org.uk/data/gss_data/edvp/ofgem-warm-home-discount-scheme#concept/scheme-year/year-2,2,year-2,2\r\nhttp://gss-data.org.uk/data/gss_data/edvp/ofgem-warm-home-discount-scheme#concept/scheme-year/year-3,3,year-3,3\r\nhttp://gss-data.org.uk/data/gss_data/edvp/ofgem-warm-home-discount-scheme#concept/scheme-year/year-4,4,year-4,4\r\nhttp://gss-data.org.uk/data/gss_data/edvp/ofgem-warm-home-discount-scheme#concept/scheme-year/year-5,5,year-5,5\r\nhttp://gss-data.org.uk/data/gss_data/edvp/ofgem-warm-home-discount-scheme#concept/scheme-year/year-6,6,year-6,6\r\nhttp://gss-data.org.uk/data/gss_data/edvp/ofgem-warm-home-discount-scheme#concept/scheme-year/year-7,7,year-7,7\r\nhttp://gss-data.org.uk/data/gss_data/edvp/ofgem-warm-home-discount-scheme#concept/scheme-year/year-8,8,year-8,8\r\nhttp://gss-data.org.uk/data/gss_data/edvp/ofgem-warm-home-discount-scheme#concept/scheme-year/year-9,9,year-9,9\r\n"
+  recorded_at: 2021-11-18 15:56:58 GMT
+  recorded_with: vcr/1.0.2, webmockr/0.8.0
+- request:
+    method: post
+    uri: https://staging.gss-data.org.uk/sparql
+    body:
+      encoding: ''
+      string: query=SELECT%20%2A%20WHERE%20%7B%0A%20%20VALUES%20%3Furi%20%7B%20%3Chttp%3A%2F%2Fstatistics.data.gov.uk%2Fid%2Fstatistical-geography%2FE92000001%3E%20%3Chttp%3A%2F%2Fstatistics.data.gov.uk%2Fid%2Fstatistical-geography%2FS92000003%3E%20%3Chttp%3A%2F%2Fstatistics.data.gov.uk%2Fid%2Fstatistical-geography%2FW92000004%3E%20%7D%0A%0A%20%20%3Furi%0A%20%20%20%20%3Chttp%3A%2F%2Fstatistics.data.gov.uk%2Fdef%2Fstatistical-geography%23officialname%3E%20%3Flabel%3B%0A%20%20%20%20%3Chttp%3A%2F%2Fwww.w3.org%2F2004%2F02%2Fskos%2Fcore%23notation%3E%20%3Fnotation%3B%0A%20%20%20%20.%0A%0A%20%20%0A%0A%20%20OPTIONAL%20%7B%0A%20%20%20%20%3Furi%20%3Chttp%3A%2F%2Fstatistics.data.gov.uk%2Fdef%2Fstatistical-geography%23parentcode%3E%20%3Fparent%3B%0A%20%20%7D%0A%7D
+    headers:
+      Content-Type: application/x-www-form-urlencoded
+      Accept: text/csv
+  response:
+    status:
+      status_code: 200
+      category: Success
+      reason: OK
+      message: 'Success: (200) OK'
+    headers:
+      server: nginx
+      date: Thu, 18 Nov 2021 15:56:57 GMT
+      content-type: text/csv
+      vary: Accept-Encoding
+      content-encoding: gzip
+      via: 1.1 google
+      alt-svc: clear
+      transfer-encoding: chunked
+    body:
+      encoding: UTF-8
+      file: no
+      string: "uri,label,notation,parent\r\nhttp://statistics.data.gov.uk/id/statistical-geography/E92000001,England,E92000001,\r\nhttp://statistics.data.gov.uk/id/statistical-geography/E92000001,England,E92000001,\r\nhttp://statistics.data.gov.uk/id/statistical-geography/W92000004,Wales,W92000004,\r\nhttp://statistics.data.gov.uk/id/statistical-geography/S92000003,Scotland,S92000003,\r\n"
+  recorded_at: 2021-11-18 15:56:58 GMT
+  recorded_with: vcr/1.0.2, webmockr/0.8.0
+- request:
+    method: post
+    uri: https://staging.gss-data.org.uk/sparql
+    body:
+      encoding: ''
+      string: query=PREFIX%20rdfs%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3ESELECT%20%2A%20WHERE%20%7B%20%20VALUES%20%3Furi%20%7B%20%3Chttp%3A%2F%2Fgss-data.org.uk%2Fdef%2Fconcept%2Fmeasurement-units%2Fpercentage%3E%20%7D%20%20%3Furi%20rdfs%3Alabel%20%3Flabel%20.%7D
+    headers:
+      Content-Type: application/x-www-form-urlencoded
+      Accept: text/csv
+  response:
+    status:
+      status_code: 200
+      category: Success
+      reason: OK
+      message: 'Success: (200) OK'
+    headers:
+      server: nginx
+      date: Thu, 18 Nov 2021 15:56:57 GMT
+      content-type: text/csv
+      vary: Accept-Encoding
+      content-encoding: gzip
+      via: 1.1 google
+      alt-svc: clear
+      transfer-encoding: chunked
+    body:
+      encoding: UTF-8
+      file: no
+      string: "uri,label\r\nhttp://gss-data.org.uk/def/concept/measurement-units/percentage,Percentage\r\n"
+  recorded_at: 2021-11-18 15:56:58 GMT
+  recorded_with: vcr/1.0.2, webmockr/0.8.0
+- request:
+    method: post
+    uri: https://staging.gss-data.org.uk/sparql
+    body:
+      encoding: ''
+      string: query=PREFIX%20rdfs%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3ESELECT%20%2A%20WHERE%20%7B%20%20VALUES%20%3Furi%20%7B%20%3Chttp%3A%2F%2Fgss-data.org.uk%2Fdef%2Fmeasure%2Fexpenditure%3E%20%7D%20%20%3Furi%20rdfs%3Alabel%20%3Flabel%20.%7D
+    headers:
+      Content-Type: application/x-www-form-urlencoded
+      Accept: text/csv
+  response:
+    status:
+      status_code: 200
+      category: Success
+      reason: OK
+      message: 'Success: (200) OK'
+    headers:
+      server: nginx
+      date: Thu, 18 Nov 2021 15:56:58 GMT
+      content-type: text/csv
+      vary: Accept-Encoding
+      content-encoding: gzip
+      via: 1.1 google
+      alt-svc: clear
+      transfer-encoding: chunked
+    body:
+      encoding: UTF-8
+      file: no
+      string: "uri,label\r\nhttp://gss-data.org.uk/def/measure/expenditure,Expenditure\r\n"
+  recorded_at: 2021-11-18 15:56:58 GMT
+  recorded_with: vcr/1.0.2, webmockr/0.8.0

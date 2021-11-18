@@ -16,11 +16,25 @@ test_that("query works", {
 })
 
 describe("get_cube", {
-  test_that("works for gss-data", {
-    vcr::use_cassette("get_cube_gss_data", {
-      cube <- get_cube("http://gss-data.org.uk/data/gss_data/covid-19/ons-online-price-changes-for-high-demand-products#dataset")
+  describe("works for gss-data", {
+    test_that("a basic cube", {
+      vcr::use_cassette("get_cube_gss_data", {
+        cube <- get_cube("http://gss-data.org.uk/data/gss_data/covid-19/ons-online-price-changes-for-high-demand-products#dataset")
+      })
+      expect_equal(dim(cube), c(572,5)) # this might change when new data is loaded
     })
-    expect_equal(dim(cube), c(572,5)) # this might change when new data is loaded
+
+    test_that("a cube with sub-properties of sdmxd:refPeriod and sdmxd:refArea", {
+      vcr::use_cassette("get_cube_gss_subproperties", {
+        cube <- get_cube("http://gss-data.org.uk/data/gss_data/edvp/ofgem-warm-home-discount-scheme/nationexpenditure#dataset")
+      })
+      expect_equal(dim(cube), c(3, 6))
+      # should be able to find intervals from sub-properties of sdmxd:refPeriod
+      expect_s3_class(cube$period, "ldf_interval")
+      # should be able to find geographies from sub-properties of sdmxd:refArea
+      # nb: we can use this to tell it's a geography as it gets an official name instead of the rdfs:label with the GSS code
+      expect_equal(sort(label(cube$nation)), c("England","Scotland","Wales"))
+    })
   })
 
   test_that("works for statistics.gov.scot", {
@@ -28,7 +42,7 @@ describe("get_cube", {
       cube <- get_cube("http://statistics.gov.scot/data/population-estimates-dependency",
                        endpoint="https://statistics.gov.scot/sparql")
     })
-    expect_equal(dim(cube), c(846,5))
+    expect_equal(dim(cube), c(940,5))
   })
 })
 
