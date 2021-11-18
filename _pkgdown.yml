@@ -29,6 +29,7 @@ reference:
 - title: "Downloading DataCubes"
   desc: Download resources from RDF Data Cubes available on PublishMyData platforms
   contents:
+  - list_cubes
   - get_cube
   - get_codelist
   - get_geography

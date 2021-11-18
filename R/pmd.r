@@ -358,3 +358,29 @@ get_cube <- function(dataset_uri, endpoint=default_endpoint(), include_geometry=
 
   observations %>% dplyr::select(!uri)
 }
+
+#' List all DataCubes
+#'
+#' Returns a data frame of cubes.
+#'
+#' @param endpoint A string for the sparql endpoint (defaults to the value of `default_endpoint`)
+#' @return A data frame
+#' @export
+#' @examples
+#' \dontrun{
+#' # e.g. find datasets with "trade" in their label
+#' subset(list_cubes(), grepl("trade", label, ignore.case=T))
+#' }
+list_cubes <- function(endpoint=default_endpoint()) {
+  query(stringr::str_interp(c(
+    "PREFIX qb: <http://purl.org/linked-data/cube#>",
+    "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>",
+    "SELECT ?cube ?label WHERE {",
+    "  ?cube a qb:DataSet .",
+    "  { ?cube rdfs:label ?label }",
+    "  UNION",
+    "  { ?dataset <http://publishmydata.com/pmdcat#datasetContents> ?cube;",
+    "      rdfs:label ?label . }",
+    "}"
+  )))
+}
