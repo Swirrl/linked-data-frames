@@ -7,7 +7,7 @@
 default_endpoint()
 }
 \value{
-returns the value of \code{default_endpoint} option,
+returns the value of \code{ldf.default_endpoint} option,
 defaulting to \verb{https://staging.gss-data.org.uk/sparql}
 }
 \description{
@@ -17,7 +17,7 @@ Retrieve the default sparql endpoint from configuration
 \dontrun{
 default_endpoint() # returns default
 
-options(default_endpoint="https://beta.gss-data.org.uk/sparql")
+options(ldf.default_endpoint="https://beta.gss-data.org.uk/sparql")
 default_endpoint()
 }
 }

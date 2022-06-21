@@ -42,13 +42,13 @@ query <- function(query_string, endpoint=default_endpoint(), format="csv") {
 
 #' Retrieve the default sparql endpoint from configuration
 #'
-#' @return returns the value of `default_endpoint` option,
+#' @return returns the value of `ldf.default_endpoint` option,
 #' defaulting to `https://staging.gss-data.org.uk/sparql`
 #' @examples
 #' \dontrun{
 #' default_endpoint() # returns default
 #'
-#' options(default_endpoint="https://beta.gss-data.org.uk/sparql")
+#' options(ldf.default_endpoint="https://beta.gss-data.org.uk/sparql")
 #' default_endpoint()
 #' }
 #' @export
