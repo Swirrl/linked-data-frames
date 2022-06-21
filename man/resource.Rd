@@ -5,7 +5,11 @@
 \alias{is_resource}
 \title{\code{resource} vector}
 \usage{
-resource(uri = character(), description = data.frame(uri = unique(uri)))
+resource(
+  uri = character(),
+  description = data.frame(uri = unique(uri)),
+  fill_missing = FALSE
+)
 
 is_resource(x)
 }
@@ -13,6 +17,9 @@ is_resource(x)
 \item{uri}{A character vector of URIs}
 
 \item{description}{A data frame of descriptions (must have a \code{uri} column)}
+
+\item{fill_missing}{A boolean specifying whether rows be added to the
+description for missing URIs (defaults to \code{FALSE})}
 
 \item{x}{Any vector}
 }

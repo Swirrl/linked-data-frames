@@ -14,6 +14,8 @@ NULL
 #'
 #' @param uri A character vector of URIs
 #' @param description A data frame of descriptions (must have a `uri` column)
+#' @param fill_missing A boolean specifying whether rows be added to the
+#' description for missing URIs (defaults to `FALSE`)
 #' @param x Any vector
 #' @return An S3 vector of class `ldf_resource`.
 #' @export
@@ -26,8 +28,9 @@ NULL
 #' labels <- c("Apple","Banana","Carrot")
 #' description <- data.frame(uri=uris, label=labels)
 #' r <- resource(uris, description)
-resource <- function(uri=character(), description=data.frame(uri=unique(uri))) {
+resource <- function(uri=character(), description=data.frame(uri=unique(uri)), fill_missing=FALSE) {
   uri <- vec_cast(uri, character())
+  if(fill_missing) { description <- fill_missing(description, uri) }
   validate_resource(new_resource(uri, description))
 }
 
@@ -221,6 +224,19 @@ merge_description <- function(x, y) {
   } else {
     y
   }
+}
+
+#' Add rows to description for missing URIs
+#'
+#' The missing URIs will only be described with their URI
+#'
+#' @param description A resource description (inherits from data frame)
+#' @param uri A character vector of URIs
+#' @return A resource description with all URIs included
+fill_missing <- function(description, uri) {
+  missing <- setdiff(uri, description$uri)
+
+  dplyr::bind_rows(description, data.frame(uri=missing))
 }
 
 #' @export

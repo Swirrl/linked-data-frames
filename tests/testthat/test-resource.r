@@ -50,6 +50,11 @@ describe("resources can have arbitrary descriptions", {
     expect_error(resource(uris, description=data.frame(uri=uris[1:2])))
   })
 
+  test_that("description can be filled-in for missing uris", {
+    r <- resource(uris, description=data.frame(uri=uris[1:2]), fill_missing=TRUE)
+    expect_equal(uri(r[3]), uris[3])
+  })
+
   test_that("description doesn't need to contain entry for NA uris", {
     r <- resource(NA, description=data.frame(uri=uris[1:2]))
     expect_equal(uri(r), NA_character_) # i.e. no error raised
@@ -62,7 +67,7 @@ describe("resources can have arbitrary descriptions", {
 
   test_that("description may be assigned", {
     r <- resource("a")
-    description(r) <- tibble::tibble(uri="a",label="A")
+    description(r) <- tibble::tibble(uri="a",label="A") # should re-validate
     expect_equal(label(r), "A")
   })
 })

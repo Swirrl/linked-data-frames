@@ -364,7 +364,9 @@ get_cube <- function(dataset_uri, endpoint=default_endpoint(), include_geometry=
     dplyr::pull("label") %>% as_variable_names()
   if(length(ref_area)==1) {
     areas <- dplyr::pull(observations,ref_area)
-    observations[,ref_area] <- resource(areas, get_geography(areas, endpoint, include_geometry))
+    observations[,ref_area] <- resource(areas,
+                                        get_geography(areas, endpoint, include_geometry),
+                                        fill_missing = TRUE)
   }
 
   # attributes and any remaining dimensions should just have their values labelled if possible
