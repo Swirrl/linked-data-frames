@@ -57,7 +57,9 @@ default_endpoint <- function() {
 }
 
 as_variable_names <- function(x) {
-  gsub(" ", "_", tolower(x))
+  tolower(x) %>%
+    gsub(" ", "_", .) %>%
+    gsub("-", "_", .)
 }
 
 #' Create bindings for a labelled property

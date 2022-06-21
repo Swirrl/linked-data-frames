@@ -91,3 +91,8 @@ test_that("get_label works", {
   expect_equal(mt$label, "Measure type")
 })
 
+test_that("as_variable_names is SPARQL compliant", {
+  expect_equal(as_variable_names(c("sub-sector",
+                                   "SUB SECTOR")),
+               c("sub_sector", "sub_sector"))
+})
