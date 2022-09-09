@@ -6,6 +6,7 @@ describe("intervals", {
   day <- interval("http://reference.data.gov.uk/id/day/2020-04-22")
   p7d <- interval("http://reference.data.gov.uk/id/gregorian-interval/2020-04-27T00:00:00/P7D")
   gov_year <- interval("http://reference.data.gov.uk/id/government-year/2019-2020")
+  gov_quarter <- interval("http://reference.data.gov.uk/id/government-quarter/2015-2016/Q4")
 
   test_that("types", {
     expect_equal(int_type(year), "year")
@@ -13,6 +14,7 @@ describe("intervals", {
     expect_equal(int_type(day), "day")
     expect_equal(int_type(p7d), "gregorian-interval")
     expect_equal(int_type(gov_year), "government-year")
+    expect_equal(int_type(gov_quarter), "government-quarter")
   })
 
   test_that("labels", {
@@ -21,6 +23,7 @@ describe("intervals", {
     expect_equal(label(day), "2020-04-22")
     expect_equal(label(p7d), "2020-04-27 P7D")
     expect_equal(label(gov_year), "2019-2020")
+    expect_equal(label(gov_quarter), "2015-2016/Q4")
   })
 
   test_that("start and end datetimes", {
@@ -38,6 +41,9 @@ describe("intervals", {
 
     expect_equal(int_start(gov_year), as.Date("2019-04-01"))
     expect_equal(int_end(gov_year), as.Date("2020-03-31"))
+
+    # expect_equal(int_start(gov_quarter), as.Date("2016-01-01"))
+    # expect_equal(int_end(gov_quarter), as.Date("2016-04-01"))
   })
 
   test_that("casting is possible", {

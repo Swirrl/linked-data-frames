@@ -110,6 +110,7 @@ label.ldf_interval <- function(x) {
             year = int_value(i),
             "gregorian-interval" = paste(as.Date(int_date(i)), int_duration(i), sep=" "),
             "government-year" = int_value(i),
+            "government-quarter" = int_value(i),
             stop("unknown interval type: ", int_type(i))
     )
   })
