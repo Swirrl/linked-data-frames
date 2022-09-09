@@ -214,6 +214,7 @@ get_codelist <- function(codelist_uri, endpoint=default_endpoint()) {
     "  { <${codelist_uri}> skos:member ?uri }",
     "  ?uri rdfs:label ?label .",
     "  OPTIONAL { ?uri skos:notation ?notation }",
+    "  OPTIONAL { ?uri skos:broader ?broader }",
     "  OPTIONAL { ?uri <http://www.w3.org/ns/ui#sortPriority> ?sort_priority }",
     "}"
   ))
